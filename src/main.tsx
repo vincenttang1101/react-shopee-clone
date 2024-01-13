@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
+import { Layout } from './components'
 import { Login, ProductList, Register } from './pages'
 import './index.css'
 
@@ -12,15 +13,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <ProductList />
+        element: (
+          <Layout>
+            <ProductList />
+          </Layout>
+        )
       },
       {
         path: '/register',
-        element: <Register />
+        element: (
+          <Layout type='register'>
+            <Register />
+          </Layout>
+        )
       },
       {
         path: '/login',
-        element: <Login />
+        element: (
+          <Layout type='login'>
+            <Login />
+          </Layout>
+        )
       }
     ]
   }

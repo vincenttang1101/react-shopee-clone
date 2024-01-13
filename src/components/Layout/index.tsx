@@ -1,10 +1,15 @@
 /* eslint-disable import/no-unresolved */
 import { Footer, Header } from '@components'
 
-export default function Layout({ children }) {
+interface ILayout {
+  children: React.ReactNode
+  type?: string
+}
+
+export default function Layout({ children, type }: ILayout) {
   return (
     <div>
-      <Header />
+      <Header type={type} />
       {children}
       <Footer />
     </div>
