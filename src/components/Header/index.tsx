@@ -1,3 +1,5 @@
+import { HomeHeader, RegisterHeader } from '@components'
+
 interface IHeader {
   type?: string
 }
@@ -7,11 +9,11 @@ export default function Header({ type }: IHeader) {
     switch (type) {
       case 'register':
       case 'login':
-        return <>Sign up/in</>
+        return <RegisterHeader />
       default:
-        return <>Home</>
+        return <HomeHeader />
     }
   }
 
-  return <>{renderHeader(type)}</>
+  return <header className='py-[30px]'>{renderHeader(type)}</header>
 }
