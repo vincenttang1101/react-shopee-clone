@@ -15,5 +15,5 @@ export default function Header({ type }: IHeader) {
     }
   }
 
-  return <header className='py-[30px]'>{renderHeader(type)}</header>
+  return <header>{renderHeader(type)}</header>
 }
