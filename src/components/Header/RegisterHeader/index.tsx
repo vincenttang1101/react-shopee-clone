@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 export default function RegisterHeader() {
   return (
     <div className='py-[30px]'>
-      <div className='containerWidth'>
+      {/* Container */}
+      <div className='container'>
         {/* Body */}
         <div className='flex justify-between items-center'>
           {/* Row Left */}

@@ -20,7 +20,9 @@
       "@components/*": ["./components/*"],
       "@components": ["./components"],
       "@pages/*": ["./pages/*"],
-      "@pages": ["./pages"]
+      "@pages": ["./pages"],
+      "@assets/*": ["./assets/*"],
+      "@assets": ["./assets"]
     },
 
     /* Linting */

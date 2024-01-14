@@ -13,7 +13,7 @@ export default {
   plugins: [
     plugin(function ({ addComponents }) {
       addComponents({
-        '.containerWidth': {
+        '.container': {
           margin: '0 auto',
           width: '1170px',
           maxWidth: 'calc(100% - 48px)'
