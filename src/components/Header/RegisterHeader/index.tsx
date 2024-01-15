@@ -22,7 +22,7 @@ export default function RegisterHeader() {
           {/* Row Right */}
           <div>
             <Link to='#!'>
-              <p className='text-primaryColor'>Bạn cần giúp đỡ?</p>
+              <p className='text-[1.4rem] text-primaryColor'>Bạn cần giúp đỡ?</p>
             </Link>
           </div>
         </div>
