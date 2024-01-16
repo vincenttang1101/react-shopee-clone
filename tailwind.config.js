@@ -5,10 +5,11 @@ const plugin = require('tailwindcss/plugin')
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    colors: {
-      primaryColor: '#ee4d2d'
-    },
-    extend: {}
+    extend: {
+      colors: {
+        primaryColor: '#ee4d2d'
+      }
+    }
   },
   plugins: [
     plugin(function ({ addComponents }) {

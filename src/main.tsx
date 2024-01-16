@@ -4,7 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from '@src/App'
 import { Layout } from '@components'
 import { Login, ProductList, Register } from '@pages'
-import './index.css'
+import '@assets/styles/reset.css'
+import '@assets/styles/common.css'
 
 const router = createBrowserRouter([
   {
