@@ -7,7 +7,7 @@ export default function RegisterHeader() {
       <div className='container'>
         {/* Body */}
         <div className='flex justify-between items-center'>
-          {/* Row Left */}
+          {/* Row left */}
           <div className='flex gap-5 items-center'>
             <Link to='#!' className='flex items-end h-[32px]'>
               <svg viewBox='0 0 192 65' className='w-[122px] h-auto fill-primaryColor'>
@@ -19,7 +19,7 @@ export default function RegisterHeader() {
             <p className='text-[24px]'>Đăng ký</p>
           </div>
 
-          {/* Row Right */}
+          {/* Row right */}
           <div>
             <Link to='#!'>
               <p className='text-[1.4rem] text-primaryColor'>Bạn cần giúp đỡ?</p>
