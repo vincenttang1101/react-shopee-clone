@@ -1,0 +1,8 @@
+export { default as Payment1 } from '@assets/images/payment-1.png'
+export { default as Payment2 } from '@assets/images/payment-2.png'
+export { default as Payment3 } from '@assets/images/payment-3.png'
+export { default as Payment4 } from '@assets/images/payment-4.png'
+export { default as Payment5 } from '@assets/images/payment-5.png'
+export { default as Payment6 } from '@assets/images/payment-6.png'
+export { default as Payment7 } from '@assets/images/payment-7.png'
+export { default as Payment8 } from '@assets/images/payment-8.png'

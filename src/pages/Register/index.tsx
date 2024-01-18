@@ -1,7 +1,7 @@
-import Hero from '@assets/images/register-hero.png'
-import Facebook from '@assets/icons/facebook.svg'
-import Google from '@assets/icons/google.svg'
 import { Link } from 'react-router-dom'
+import Google from '@assets/icons/google.svg'
+import Facebook from '@assets/icons/facebook.svg'
+import Hero from '@assets/images/register-hero.png'
 
 export default function Register() {
   return (
