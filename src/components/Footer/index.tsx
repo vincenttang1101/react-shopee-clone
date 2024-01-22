@@ -1,9 +1,29 @@
 import { Link } from 'react-router-dom'
-import { Payment1, Payment2, Payment3, Payment4, Payment5, Payment6, Payment7, Payment8 } from '@assets/images'
+import {
+  Payment1,
+  Payment2,
+  Payment3,
+  Payment4,
+  Payment5,
+  Payment6,
+  Payment7,
+  Payment8,
+  Carrier1,
+  Carrier2,
+  Carrier3,
+  Carrier4,
+  Carrier5,
+  Carrier6,
+  Carrier7,
+  Carrier8,
+  Carrier9,
+  Carrier10,
+  Carrier11
+} from '@assets/images'
 
 export default function Footer() {
   return (
-    <footer className='mt-[50px]'>
+    <footer className='pt-[50px] bg-[#f5f5f5]'>
       <div className='container'>
         <div className='grid grid-cols-5'>
           {/* Column item 1 */}
@@ -90,51 +110,68 @@ export default function Footer() {
             </div>
 
             {/* Row 2 */}
-            <div className=''>
+            <div>
               <p className='font-bold text-[1.2rem] uppercase'>ĐƠN VỊ VẬN CHUYỂN</p>
               <ul className='mt-5 flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment1} alt='Payment' />
+                    <img src={Carrier1} alt='Carrier' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment2} alt='Payment' />
+                    <img src={Carrier2} alt='Carrier' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment3} alt='Payment' />
+                    <img src={Carrier3} alt='Carrier' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment4} alt='Payment' />
+                    <img src={Carrier4} alt='Carrier' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment5} alt='Payment' />
+                    <img src={Carrier5} alt='Carrier' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment6} alt='Payment' />
+                    <img src={Carrier6} alt='Carrier' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment7} alt='Payment' />
+                    <img src={Carrier7} alt='Carrier' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment8} alt='Payment' />
+                    <img src={Carrier8} alt='Carrier' />
+                  </Link>
+                </li>
+                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                  <Link to='#!'>
+                    <img src={Carrier9} alt='Carrier' />
+                  </Link>
+                </li>
+                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                  <Link to='#!'>
+                    <img src={Carrier10} alt='Carrier' />
+                  </Link>
+                </li>
+                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                  <Link to='#!'>
+                    <img src={Carrier11} alt='Carrier' />
                   </Link>
                 </li>
               </ul>
             </div>
+
+            {/* Row 3 */}
           </div>
         </div>
       </div>
