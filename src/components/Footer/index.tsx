@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { FaFacebook, FaLinkedin, FaGithub } from 'react-icons/fa'
 import {
   Payment1,
   Payment2,
@@ -18,7 +19,11 @@ import {
   Carrier8,
   Carrier9,
   Carrier10,
-  Carrier11
+  Carrier11,
+  App1,
+  App2,
+  App3,
+  App4
 } from '@assets/images'
 
 export default function Footer() {
@@ -28,7 +33,7 @@ export default function Footer() {
         <div className='grid grid-cols-5'>
           {/* Column item 1 */}
           <div>
-            <p className='font-bold text-[1.2rem] uppercase'>CHĂM SÓC KHÁCH HÀNG</p>
+            <p className='font-bold text-[1.1rem] uppercase'>CHĂM SÓC KHÁCH HÀNG</p>
             <ul className='mt-5 flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
               <li>Trung Tâm Trợ Giúp</li>
               <li>IShopee Blog</li>
@@ -46,7 +51,7 @@ export default function Footer() {
 
           {/* Column item 2 */}
           <div>
-            <p className='font-bold text-[1.2rem] uppercase'>VỀ SHOPEE</p>
+            <p className='font-bold text-[1.1rem] uppercase'>VỀ SHOPEE</p>
             <ul className='mt-5 flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
               <li>Giới Thiệu Về Shopee Việt Nam</li>
               <li>Tuyển Dụng</li>
@@ -64,46 +69,46 @@ export default function Footer() {
           <div className='flex flex-col gap-y-10'>
             {/* Row 1 */}
             <div>
-              <p className='font-bold text-[1.2rem] uppercase'>THANH TOÁN</p>
+              <p className='font-bold text-[1.1rem] uppercase'>THANH TOÁN</p>
               <ul className='mt-5 flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment1} alt='Payment' />
+                    <img src={Payment1} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment2} alt='Payment' />
+                    <img src={Payment2} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment3} alt='Payment' />
+                    <img src={Payment3} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment4} alt='Payment' />
+                    <img src={Payment4} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment5} alt='Payment' />
+                    <img src={Payment5} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment6} alt='Payment' />
+                    <img src={Payment6} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment7} alt='Payment' />
+                    <img src={Payment7} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Payment8} alt='Payment' />
+                    <img src={Payment8} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
               </ul>
@@ -115,63 +120,105 @@ export default function Footer() {
               <ul className='mt-5 flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier1} alt='Carrier' />
+                    <img src={Carrier1} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier2} alt='Carrier' />
+                    <img src={Carrier2} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier3} alt='Carrier' />
+                    <img src={Carrier3} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier4} alt='Carrier' />
+                    <img src={Carrier4} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier5} alt='Carrier' />
+                    <img src={Carrier5} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier6} alt='Carrier' />
+                    <img src={Carrier6} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier7} alt='Carrier' />
+                    <img src={Carrier7} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier8} alt='Carrier' />
+                    <img src={Carrier8} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier9} alt='Carrier' />
+                    <img src={Carrier9} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier10} alt='Carrier' />
+                    <img src={Carrier10} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
-                    <img src={Carrier11} alt='Carrier' />
+                    <img src={Carrier11} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
               </ul>
             </div>
+          </div>
 
-            {/* Row 3 */}
+          {/* Column item 4 */}
+          <div>
+            <p className='font-bold text-[1.1rem] uppercase'>THEO DÕI CHÚNG TÔI TRÊN</p>
+            <ul className='mt-5 flex flex-col gap-3 text-[#000000a6] text-[1.2rem]'>
+              <li>
+                <Link to='https://www.facebook.com/vincenttang1101/' className='flex gap-3 items-center '>
+                  <FaFacebook className='text-[1.6rem]' />
+                  <span className='hover:text-[#ee4d2d]'>Facebook</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='https://www.linkedin.com/in/quang-tang-955a17183/' className='flex gap-3 items-center'>
+                  <FaLinkedin className='text-[1.6rem]' />
+                  <span className='hover:text-[#ee4d2d]'>Linkedin</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='https://github.com/vincenttang1101' className='flex gap-3 items-center'>
+                  <FaGithub className='text-[1.6rem]' />
+                  <span className='hover:text-[#ee4d2d]'>Github</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column item 5 */}
+          <div>
+            <p className='font-bold text-[1.1rem] uppercase'>TẢI ỨNG DỤNG SHOPEE NGAY THÔI</p>
+            <div className='mt-5 flex gap-4'>
+              <div>
+                <img
+                  src={App1}
+                  alt='Download App'
+                  className='p-2 h-full object-cover [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'
+                />
+              </div>
+              <div className='flex flex-col gap-4'>
+                <img src={App2} alt='Download App' className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white' />
+                <img src={App3} alt='Download App' className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white' />
+                <img src={App4} alt='Download App' className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white' />
+              </div>
+            </div>
           </div>
         </div>
       </div>

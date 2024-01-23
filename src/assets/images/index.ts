@@ -18,3 +18,8 @@ export { default as Carrier8 } from '@assets/images/carrier-8.png'
 export { default as Carrier9 } from '@assets/images/carrier-9.png'
 export { default as Carrier10 } from '@assets/images/carrier-10.png'
 export { default as Carrier11 } from '@assets/images/carrier-11.png'
+
+export { default as App1 } from '@assets/images/app-1.png'
+export { default as App2 } from '@assets/images/app-2.png'
+export { default as App3 } from '@assets/images/app-3.png'
+export { default as App4 } from '@assets/images/app-4.png'
