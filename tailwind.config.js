@@ -16,7 +16,7 @@ export default {
       addComponents({
         '.container': {
           margin: '0 auto',
-          width: '1170px',
+          width: '1210px',
           maxWidth: 'calc(100% - 48px)'
         }
       })

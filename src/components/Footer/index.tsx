@@ -28,9 +28,10 @@ import {
 
 export default function Footer() {
   return (
-    <footer className='pt-[50px] bg-[#f5f5f5]'>
+    <footer className='py-[35px] bg-[#f5f5f5]'>
       <div className='container'>
-        <div className='grid grid-cols-5'>
+        {/* Row item 1 */}
+        <div className='pb-16 grid grid-cols-5 border-b border-solid border-b-[#0000001a]'>
           {/* Column item 1 */}
           <div>
             <p className='font-bold text-[1.1rem] uppercase'>CHĂM SÓC KHÁCH HÀNG</p>
@@ -220,6 +221,45 @@ export default function Footer() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Row item 2 */}
+        <div className='pt-[35px] flex justify-between text-[1.4rem] text-[#0000008a]'>
+          {/* Column item 1 */}
+          <span>© 2024 Shopee. Tất cả các quyền được bảo lưu.</span>
+          <div>
+            <span>Quốc gia & Khu vực:</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Singapore</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Indonesia</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Thái Lan</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Malaysia</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Việt Nam</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Philippines</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Brazil</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>México</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Colombia</span>
+            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Chile</span>
+            <span className='pl-2'>Đài Loan</span>
+          </div>
+        </div>
+
+        {/* Row item 3 */}
+        <div className='mt-20 flex justify-center text-[1.1rem] text-[#0000008a] uppercase'>
+          <span className='px-7 border-r border-solid border-r-[#00000017]'>CHÍNH SÁCH BẢO MẬT</span>
+          <span className='px-7 border-r border-solid border-r-[#00000017]'>QUY CHẾ HOẠT ĐỘNG</span>
+          <span className='px-7 border-r border-solid border-r-[#00000017]'>CHÍNH SÁCH VẬN CHUYỂN</span>
+          <span className='pl-7'>CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</span>
+        </div>
+
+        {/* Row item 5 */}
+        <div className='mt-10 text-center text-[1.1rem] text-[#000000a6]'>
+          <p>
+            Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành
+            phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn
+          </p>
+          <p>Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại liên hệ: 024 73081221 (ext 4678)</p>
+          <p>Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu ngày 10/02/2015</p>
+          <p>© 2015 - Bản quyền thuộc về Công ty TNHH Shopee</p>
         </div>
       </div>
     </footer>
