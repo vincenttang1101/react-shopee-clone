@@ -8,12 +8,13 @@ export default function Register() {
     <div className='bg-primaryColor'>
       {/* container */}
       <div className='container'>
-        {/* Body */}
-        <div className='relative'>
-          {/* Hero Image */}
-          <img className='object-cover' src={Hero} alt='Shopee Sale' />
+        <div
+          className='flex h-screen w-full items-center justify-center bg-contain bg-no-repeat bg-center'
+          style={{ backgroundImage: `url(${Hero})` }}
+        >
           {/* Register Form */}
-          <div className='absolute top-60 right-0 flex flex-col w-[400px] px-12 py-10 bg-[#fff]'>
+          <div className='h-full ml-[50%]'></div>
+          <div className='flex flex-col w-[400px] px-12 py-10 rounded-[4px] shadow-md bg-[#fff]'>
             <p className='text-[2rem]'>Đăng ký</p>
             <input
               className='mt-10 px-6 py-4 border border-groove border-[#00000024] rounded-[2px] focus:outline-none'
