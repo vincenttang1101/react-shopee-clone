@@ -1,28 +1,34 @@
 import { Link } from 'react-router-dom'
 import Google from '@assets/icons/google.svg'
 import Facebook from '@assets/icons/facebook.svg'
-import Hero from '@assets/images/register-hero.png'
 
 export default function Register() {
   return (
     <div className='bg-primaryColor'>
       {/* container */}
       <div className='container'>
-        <div
-          className='flex h-screen w-full items-center justify-center bg-contain bg-no-repeat bg-center'
-          style={{ backgroundImage: `url(${Hero})` }}
-        >
+        <div className='flex h-screen w-full items-center justify-center bg-contain bg-no-repeat bg-center lg:bg-hero'>
           {/* Register Form */}
-          <div className='h-full ml-[50%]'></div>
+          <div className='h-full ml-[50%] lg:block sm:hidden'></div>
           <div className='flex flex-col w-[400px] px-12 py-10 rounded-[4px] shadow-md bg-[#fff]'>
             <p className='text-[2rem]'>Đăng ký</p>
             <input
-              className='mt-10 px-6 py-4 border border-groove border-[#00000024] rounded-[2px] focus:outline-none'
-              type='phone'
-              placeholder='Số điện thoại'
+              className='mt-10 px-6 py-4 border border-[#00000024] rounded-[2px] focus:outline-none focus:border-[#000000de] focus:shadow-md'
+              type='text'
+              placeholder='Email'
             />
-            <button className='mt-10 py-[11px] rounded-[2px] opacity-[0.7] text-[#fff] text-[1.5rem] uppercase bg-primaryColor cursor-not-allowed'>
-              TIẾP THEO
+            <input
+              className='mt-10 px-6 py-4 border border-[#00000024] rounded-[2px] focus:outline-none focus:border-[#000000de] focus:shadow-md'
+              type='text'
+              placeholder='Mật khẩu'
+            />
+            <input
+              className='mt-10 px-6 py-4 border border-[#00000024] rounded-[2px] focus:outline-none focus:border-[#000000de] focus:shadow-md'
+              type='text'
+              placeholder='Nhập Mật khẩu'
+            />
+            <button className='mt-10 py-[11px] rounded-[2px] text-[#fff] text-[1.5rem] uppercase bg-primaryColor'>
+              Đăng ký
             </button>
             <span
               className='mt-10 flex gap-[15px] justify-between items-center text-[1.3rem] uppercase text-[#ccc]

@@ -8,6 +8,12 @@ export default {
     extend: {
       colors: {
         primaryColor: '#ee4d2d'
+      },
+      backgroundImage: {
+        hero: "url('./src/assets/images/register-hero.png')"
+      },
+      screens: {
+        sm: '320px'
       }
     }
   },
