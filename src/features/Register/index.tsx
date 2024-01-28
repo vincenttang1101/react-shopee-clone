@@ -9,7 +9,7 @@ export default function Register() {
       <div className='container'>
         <div className='flex h-screen w-full items-center justify-center bg-contain bg-no-repeat bg-center lg:bg-hero'>
           {/* Register Form */}
-          <div className='h-full ml-[50%] lg:block sm:hidden'></div>
+          <div className='h-full ml-[50%] lg:block xs:hidden'></div>
           <div className='flex flex-col w-[400px] px-12 py-10 rounded-[4px] shadow-md bg-[#fff]'>
             <p className='text-[2rem]'>Đăng ký</p>
             <input

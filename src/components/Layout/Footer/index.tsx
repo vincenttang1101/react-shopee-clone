@@ -28,7 +28,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className='py-[35px] bg-[#f5f5f5] lg:block sm:hidden'>
+    <footer className='py-[35px] bg-[#f5f5f5] lg:block xs:hidden'>
       <div className='container'>
         {/* Row item 1 */}
         <div className='pb-16 grid grid-cols-5 border-b border-solid border-b-[#0000001a]'>
