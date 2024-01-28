@@ -34,8 +34,8 @@ export default function Footer() {
         <div className='pb-16 grid grid-cols-5 border-b border-solid border-b-[#0000001a]'>
           {/* Column item 1 */}
           <div>
-            <p className='font-bold text-[1.1rem] uppercase'>CHĂM SÓC KHÁCH HÀNG</p>
-            <ul className='mt-5 flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
+            <p className='footerTitle'>CHĂM SÓC KHÁCH HÀNG</p>
+            <ul className='flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
               <li>Trung Tâm Trợ Giúp</li>
               <li>IShopee Blog</li>
               <li>Shopee Mall</li>
@@ -52,8 +52,8 @@ export default function Footer() {
 
           {/* Column item 2 */}
           <div>
-            <p className='font-bold text-[1.1rem] uppercase'>VỀ SHOPEE</p>
-            <ul className='mt-5 flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
+            <p className='footerTitle'>VỀ SHOPEE</p>
+            <ul className='flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
               <li>Giới Thiệu Về Shopee Việt Nam</li>
               <li>Tuyển Dụng</li>
               <li>Điều Khoản Shopee</li>
@@ -70,8 +70,8 @@ export default function Footer() {
           <div className='flex flex-col gap-y-10'>
             {/* Row 1 */}
             <div>
-              <p className='font-bold text-[1.1rem] uppercase'>THANH TOÁN</p>
-              <ul className='mt-5 flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
+              <p className='footerTitle'>THANH TOÁN</p>
+              <ul className='flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
                     <img src={Payment1} alt='Payment' className='object-cover' />
@@ -117,8 +117,8 @@ export default function Footer() {
 
             {/* Row 2 */}
             <div>
-              <p className='font-bold text-[1.2rem] uppercase'>ĐƠN VỊ VẬN CHUYỂN</p>
-              <ul className='mt-5 flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
+              <p className='footerTitle'>ĐƠN VỊ VẬN CHUYỂN</p>
+              <ul className='flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
                 <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
                   <Link to='#!'>
                     <img src={Carrier1} alt='Carrier' className='object-cover' />
@@ -180,8 +180,8 @@ export default function Footer() {
 
           {/* Column item 4 */}
           <div>
-            <p className='font-bold text-[1.1rem] uppercase'>THEO DÕI CHÚNG TÔI TRÊN</p>
-            <ul className='mt-5 flex flex-col gap-3 text-[#000000a6] text-[1.2rem]'>
+            <p className='footerTitle'>THEO DÕI CHÚNG TÔI TRÊN</p>
+            <ul className='flex flex-col gap-3 text-[#000000a6] text-[1.2rem]'>
               <li>
                 <Link to='https://www.facebook.com/vincenttang1101/' className='flex gap-3 items-center '>
                   <FaFacebook className='text-[1.6rem]' />
@@ -205,8 +205,8 @@ export default function Footer() {
 
           {/* Column item 5 */}
           <div>
-            <p className='font-bold text-[1.1rem] uppercase'>TẢI ỨNG DỤNG SHOPEE NGAY THÔI</p>
-            <div className='mt-5 flex gap-4'>
+            <p className='footerTitle'>TẢI ỨNG DỤNG SHOPEE NGAY THÔI</p>
+            <div className='flex gap-4'>
               <div>
                 <img
                   src={App1}

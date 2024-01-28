@@ -13,7 +13,7 @@ export default {
         hero: "url('./src/assets/images/register-hero.png')"
       },
       screens: {
-        sm: '320px'
+        xs: '320px'
       }
     }
   },
@@ -21,9 +21,15 @@ export default {
     plugin(function ({ addComponents }) {
       addComponents({
         '.container': {
-          margin: '0 auto',
           width: '1210px',
-          maxWidth: 'calc(100% - 48px)'
+          maxWidth: 'calc(100% - 48px)',
+          marginInline: 'auto'
+        },
+        '.footerTitle': {
+          marginBottom: '13px',
+          fontSize: '1.1rem',
+          fontWeight: '700',
+          textTransform: 'uppercase'
         }
       })
     })
