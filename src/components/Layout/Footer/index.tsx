@@ -28,14 +28,15 @@ import {
 
 export default function Footer() {
   return (
-    <footer className='py-[35px] bg-[#f5f5f5] lg:block xs:hidden'>
+    <footer className='bg-[#f5f5f5] py-[35px] xs:hidden lg:block'>
+      {/* Container */}
       <div className='container'>
-        {/* Row item 1 */}
-        <div className='pb-16 grid grid-cols-5 border-b border-solid border-b-[#0000001a]'>
-          {/* Column item 1 */}
+        {/* Row item 01 */}
+        <div className='grid grid-cols-5 border-b border-solid border-b-[#0000001a] pb-16'>
+          {/* Column item 01 */}
           <div>
             <p className='footerTitle'>CHĂM SÓC KHÁCH HÀNG</p>
-            <ul className='flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
+            <ul className='flex flex-col gap-3 text-[1.2rem] text-[rgba(0,0,0,.65)]'>
               <li>Trung Tâm Trợ Giúp</li>
               <li>IShopee Blog</li>
               <li>Shopee Mall</li>
@@ -50,10 +51,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column item 2 */}
+          {/* Column item 02 */}
           <div>
             <p className='footerTitle'>VỀ SHOPEE</p>
-            <ul className='flex flex-col gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
+            <ul className='flex flex-col gap-3 text-[1.2rem] text-[rgba(0,0,0,.65)]'>
               <li>Giới Thiệu Về Shopee Việt Nam</li>
               <li>Tuyển Dụng</li>
               <li>Điều Khoản Shopee</li>
@@ -66,48 +67,48 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column item 3 */}
+          {/* Column item 03 */}
           <div className='flex flex-col gap-y-10'>
-            {/* Row 1 */}
+            {/* Row 01 */}
             <div>
               <p className='footerTitle'>THANH TOÁN</p>
-              <ul className='flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+              <ul className='flex flex-wrap gap-3 text-[1.2rem] text-[rgba(0,0,0,.65)]'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment1} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment2} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment3} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment4} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment5} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment6} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment7} alt='Payment' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Payment8} alt='Payment' className='object-cover' />
                   </Link>
@@ -115,61 +116,61 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Row 2 */}
+            {/* Row 02 */}
             <div>
               <p className='footerTitle'>ĐƠN VỊ VẬN CHUYỂN</p>
-              <ul className='flex flex-wrap gap-3 text-[rgba(0,0,0,.65)] text-[1.2rem]'>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+              <ul className='flex flex-wrap gap-3 text-[1.2rem] text-[rgba(0,0,0,.65)]'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier1} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier2} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier3} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier4} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier5} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier6} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier7} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier8} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier9} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier10} alt='Carrier' className='object-cover' />
                   </Link>
                 </li>
-                <li className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'>
+                <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
                     <img src={Carrier11} alt='Carrier' className='object-cover' />
                   </Link>
@@ -178,24 +179,24 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column item 4 */}
+          {/* Column item 04 */}
           <div>
             <p className='footerTitle'>THEO DÕI CHÚNG TÔI TRÊN</p>
-            <ul className='flex flex-col gap-3 text-[#000000a6] text-[1.2rem]'>
+            <ul className='flex flex-col gap-3 text-[1.2rem] text-[#000000a6]'>
               <li>
-                <Link to='https://www.facebook.com/vincenttang1101/' className='flex gap-3 items-center '>
+                <Link to='https://www.facebook.com/vincenttang1101/' className='flex items-center gap-3 '>
                   <FaFacebook className='text-[1.6rem]' />
                   <span className='hover:text-[#ee4d2d]'>Facebook</span>
                 </Link>
               </li>
               <li>
-                <Link to='https://www.linkedin.com/in/quang-tang-955a17183/' className='flex gap-3 items-center'>
+                <Link to='https://www.linkedin.com/in/quang-tang-955a17183/' className='flex items-center gap-3'>
                   <FaLinkedin className='text-[1.6rem]' />
                   <span className='hover:text-[#ee4d2d]'>Linkedin</span>
                 </Link>
               </li>
               <li>
-                <Link to='https://github.com/vincenttang1101' className='flex gap-3 items-center'>
+                <Link to='https://github.com/vincenttang1101' className='flex items-center gap-3'>
                   <FaGithub className='text-[1.6rem]' />
                   <span className='hover:text-[#ee4d2d]'>Github</span>
                 </Link>
@@ -203,7 +204,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column item 5 */}
+          {/* Column item 05 */}
           <div>
             <p className='footerTitle'>TẢI ỨNG DỤNG SHOPEE NGAY THÔI</p>
             <div className='flex gap-4'>
@@ -211,47 +212,47 @@ export default function Footer() {
                 <img
                   src={App1}
                   alt='Download App'
-                  className='p-2 h-full object-cover [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white'
+                  className='h-full bg-white object-cover p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'
                 />
               </div>
               <div className='flex flex-col gap-4'>
-                <img src={App2} alt='Download App' className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white' />
-                <img src={App3} alt='Download App' className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white' />
-                <img src={App4} alt='Download App' className='p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)] bg-white' />
+                <img src={App2} alt='Download App' className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]' />
+                <img src={App3} alt='Download App' className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]' />
+                <img src={App4} alt='Download App' className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]' />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Row item 2 */}
-        <div className='pt-[35px] flex justify-between text-[1.4rem] text-[#0000008a]'>
-          {/* Column item 1 */}
+        {/* Row item 02 */}
+        <div className='flex justify-between pt-[35px] text-[1.4rem] text-[#0000008a]'>
+          {/* Column item 01 */}
           <span>© 2024 Shopee. Tất cả các quyền được bảo lưu.</span>
           <div>
             <span>Quốc gia & Khu vực:</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Singapore</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Indonesia</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Thái Lan</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Malaysia</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Việt Nam</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Philippines</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Brazil</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>México</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Colombia</span>
-            <span className='px-2 border-r border-solid border-r-[#0000008a]'>Chile</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Singapore</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Indonesia</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Thái Lan</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Malaysia</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Việt Nam</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Philippines</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Brazil</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>México</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Colombia</span>
+            <span className='border-r border-solid border-r-[#0000008a] px-2'>Chile</span>
             <span className='pl-2'>Đài Loan</span>
           </div>
         </div>
 
-        {/* Row item 3 */}
-        <div className='mt-20 flex justify-center text-[1.1rem] text-[#0000008a] uppercase'>
-          <span className='px-7 border-r border-solid border-r-[#00000017]'>CHÍNH SÁCH BẢO MẬT</span>
-          <span className='px-7 border-r border-solid border-r-[#00000017]'>QUY CHẾ HOẠT ĐỘNG</span>
-          <span className='px-7 border-r border-solid border-r-[#00000017]'>CHÍNH SÁCH VẬN CHUYỂN</span>
+        {/* Row item 03 */}
+        <div className='mt-20 flex justify-center text-[1.1rem] uppercase text-[#0000008a]'>
+          <span className='border-r border-solid border-r-[#00000017] px-7'>CHÍNH SÁCH BẢO MẬT</span>
+          <span className='border-r border-solid border-r-[#00000017] px-7'>QUY CHẾ HOẠT ĐỘNG</span>
+          <span className='border-r border-solid border-r-[#00000017] px-7'>CHÍNH SÁCH VẬN CHUYỂN</span>
           <span className='pl-7'>CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</span>
         </div>
 
-        {/* Row item 5 */}
+        {/* Row item 04 */}
         <div className='mt-10 text-center text-[1.1rem] text-[#000000a6]'>
           <p>
             Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành

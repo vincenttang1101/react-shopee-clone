@@ -1,72 +1,78 @@
 import { Link } from 'react-router-dom'
-import Google from '@assets/icons/google.svg'
-import Facebook from '@assets/icons/facebook.svg'
+import { Google, Facebook } from '@assets/icons'
 
 export default function Register() {
   return (
     <div className='bg-primaryColor'>
-      {/* container */}
+      {/* Container */}
       <div className='container'>
-        <div className='flex h-screen w-full items-center justify-center bg-contain bg-no-repeat bg-center lg:bg-hero'>
+        <div className='flex h-screen w-full items-center justify-center bg-contain bg-center bg-no-repeat lg:bg-hero'>
           {/* Register Form */}
-          <div className='h-full ml-[50%] lg:block xs:hidden'></div>
-          <div className='flex flex-col w-[400px] px-12 py-10 rounded-[4px] shadow-md bg-[#fff]'>
+          <div className='ml-[50%] h-full xs:hidden lg:block'></div>
+          <div className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'>
             <p className='text-[2rem]'>Đăng ký</p>
+            <div>
+              <input
+                className='mt-10 w-full rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
+                type='text'
+                placeholder='Email'
+              />
+            </div>
+            <div>
+              <input
+                className='mt-10 w-full rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
+                type='text'
+                placeholder='Mật khẩu'
+              />
+            </div>
             <input
-              className='mt-10 px-6 py-4 border border-[#00000024] rounded-[2px] focus:outline-none focus:border-[#000000de] focus:shadow-md'
+              className='mt-10 rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
               type='text'
-              placeholder='Email'
+              placeholder='Xác nhận mật khẩu'
             />
-            <input
-              className='mt-10 px-6 py-4 border border-[#00000024] rounded-[2px] focus:outline-none focus:border-[#000000de] focus:shadow-md'
-              type='text'
-              placeholder='Mật khẩu'
-            />
-            <input
-              className='mt-10 px-6 py-4 border border-[#00000024] rounded-[2px] focus:outline-none focus:border-[#000000de] focus:shadow-md'
-              type='text'
-              placeholder='Nhập Mật khẩu'
-            />
-            <button className='mt-10 py-[11px] rounded-[2px] text-[#fff] text-[1.5rem] uppercase bg-primaryColor'>
+            <button className='mt-10 rounded-[2px] bg-primaryColor py-[11px] text-[1.5rem] uppercase text-[#fff] hover:opacity-90'>
               Đăng ký
             </button>
             <span
-              className='mt-10 flex gap-[15px] justify-between items-center text-[1.3rem] uppercase text-[#ccc]
-                        before:content-[""] before:inline-block before:w-full before:h-[1px] before:bg-[#dbdbdb]
-                        after:content-[""] after:inline-block after:w-full after:h-[1px] after:bg-[#dbdbdb]'
+              className='mt-10 flex items-center justify-between gap-[15px] text-[1.3rem] uppercase text-[#ccc]
+                        before:inline-block before:h-[1px] before:w-full before:bg-[#dbdbdb] before:content-[""]
+                        after:inline-block after:h-[1px] after:w-full after:bg-[#dbdbdb] after:content-[""]'
             >
               Hoặc
             </span>
 
-            {/* OAuth List */}
+            {/* OAuth list */}
             <div className='mt-6 flex gap-4'>
-              {/* OAuth Item 1 */}
-              <Link to='#!' className='flex-1'>
-                <div className='px-14 py-3 flex items-center gap-2 border border-solid border-[rgba(0,0,0,.26)]'>
-                  <img className='w-[24px] h-[24px]' src={Facebook} alt='Facebook' />
+              {/* OAuth item 01 */}
+              <Link to='#!' className='flex-1 hover:bg-[#00000005]'>
+                <div className='flex items-center gap-2 border border-solid border-[rgba(0,0,0,.26)] px-14 py-3'>
+                  <img className='h-[24px] w-[24px]' src={Facebook} alt='Facebook' />
                   <span className='text-[1.4rem]'>Facebook</span>
                 </div>
               </Link>
 
-              {/* OAuth Item 2 */}
-              <Link to='#!' className='flex-1'>
-                <div className='px-14 py-3 flex items-center gap-2 border border-solid border-[rgba(0,0,0,.26)]'>
-                  <img className='w-[24px] h-[24px]' src={Google} alt='Google' />
+              {/* OAuth item 02 */}
+              <Link to='#!' className='flex-1 hover:bg-[#00000005]'>
+                <div className='flex items-center gap-2 border border-solid border-[rgba(0,0,0,.26)] px-14 py-3'>
+                  <img className='h-[24px] w-[24px]' src={Google} alt='Google' />
                   <span className='text-[1.4rem]'>Google</span>
                 </div>
               </Link>
             </div>
 
             {/* Legal */}
-            <div className='mt-8 mx-auto text-[1.2rem] text-center max-w-[283px]'>
+            <div className='mx-auto mt-8 max-w-[283px] text-center text-[1.2rem]'>
               Bằng việc đăng kí, bạn đã đồng ý với Shopee về{' '}
               <span className='text-primaryColor'>Điều khoản dịch vụ</span> &{' '}
               <span className='text-primaryColor'>Chính sách và bảo mật</span>
             </div>
 
-            {/* Account Link */}
-            <div className='mt-8 text-[1.4rem] text-center text-[rgba(0,0,0,.26)]'>
-              Bạn đã có tài khoản? <span className='text-primaryColor'>Đăng nhập </span>
+            {/* Account link */}
+            <div className='mt-8 text-center text-[1.4rem] text-[rgba(0,0,0,.26)]'>
+              Bạn đã có tài khoản?{' '}
+              <Link to='/login' className='text-primaryColor'>
+                Đăng nhập
+              </Link>
             </div>
           </div>
         </div>
