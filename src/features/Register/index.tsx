@@ -1,7 +1,21 @@
 import { Link } from 'react-router-dom'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { Google, Facebook } from '@assets/icons'
 
+interface IFormInput {
+  email: string
+  password: string
+  confirm_password: string
+}
 export default function Register() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IFormInput>()
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
+
   return (
     <div className='bg-primaryColor'>
       {/* Container */}
@@ -9,28 +23,47 @@ export default function Register() {
         <div className='flex h-screen w-full items-center justify-center bg-contain bg-center bg-no-repeat lg:bg-hero'>
           {/* Register Form */}
           <div className='ml-[50%] h-full xs:hidden lg:block'></div>
-          <div className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'>
+          <form
+            className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <p className='text-[2rem]'>Đăng ký</p>
             <div>
               <input
-                className='mt-10 w-full rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
-                type='text'
+                className='mt-6 w-full rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
+                type='email'
                 placeholder='Email'
+                {...register('email', {
+                  required: true
+                })}
               />
+              <p className='min-h-[3rem]'> {errors.email && 'Email is required !'}</p>
             </div>
             <div>
               <input
-                className='mt-10 w-full rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
+                className='mt-6 w-full rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
                 type='text'
                 placeholder='Mật khẩu'
+                {...register('password', {
+                  required: true
+                })}
               />
+              <p className='min-h-[3rem]'> {errors.password && 'Password is required !'}</p>
             </div>
             <input
-              className='mt-10 rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
+              className='mt-6 rounded-[2px] border border-[#00000024] px-6 py-4 focus:border-[#000000de] focus:shadow-md focus:outline-none'
               type='text'
               placeholder='Xác nhận mật khẩu'
+              {...register('confirm_password', {
+                required: true
+              })}
             />
-            <button className='mt-10 rounded-[2px] bg-primaryColor py-[11px] text-[1.5rem] uppercase text-[#fff] hover:opacity-90'>
+            <p className='min-h-[3rem]'> {errors.email && 'Email is required !'}</p>
+
+            <button
+              className='mt-10 rounded-[2px] bg-primaryColor py-[11px] text-[1.5rem] uppercase text-[#fff] hover:opacity-90'
+              type='submit'
+            >
               Đăng ký
             </button>
             <span
@@ -74,7 +107,7 @@ export default function Register() {
                 Đăng nhập
               </Link>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
