@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from '@src/App'
 import { Layout } from '@components'
-import { Login, ProductList, Register } from '@features'
+import { Auth, ProductList } from '@features'
 import '@assets/styles/reset.css'
 import '@assets/styles/common.css'
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         path: '/register',
         element: (
           <Layout type='register'>
-            <Register />
+            <Auth type='register' />
           </Layout>
         )
       },
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         path: '/login',
         element: (
           <Layout type='login'>
-            <Login />
+            <Auth type='login' />
           </Layout>
         )
       }

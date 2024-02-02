@@ -22,7 +22,9 @@
       "@features/*": ["./features/*"],
       "@features": ["./features"],
       "@src/*": ["./*"],
-      "@src": ["./"]
+      "@src": ["./"],
+      "@utils/*": ["./utils/*"],
+      "@utils": ["./utils"]
     },
 
     /* Linting */
