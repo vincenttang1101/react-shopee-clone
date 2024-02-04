@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom'
 import { FaArrowLeftLong } from 'react-icons/fa6'
 
-export default function RegisterHeader() {
+interface IAuthHeader {
+  type: string
+}
+
+enum AuthHeaderEnum {
+  register = 'register',
+  login = 'login'
+}
+
+export default function AuthHeader({ type }: IAuthHeader) {
   return (
     <div className='py-[30px]'>
       {/* Container */}
@@ -17,7 +26,7 @@ export default function RegisterHeader() {
                 </g>
               </svg>
             </Link>
-            <p className='text-[2.4rem]'>Đăng ký</p>
+            <p className='text-[2.4rem]'>{type === AuthHeaderEnum.register ? 'Đăng ký' : 'Đăng nhập'}</p>
           </div>
 
           <div className='xs:hidden md:block'>

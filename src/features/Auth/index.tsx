@@ -6,10 +6,11 @@ import { rules } from '@utils'
 
 type AuthType = 'register' | 'login'
 
-enum AuthEnum {
+enum EAuthHeader {
   register = 'register',
   login = 'login'
 }
+
 interface IAuth {
   type: AuthType
 }
@@ -41,7 +42,7 @@ export default function Auth({ type }: IAuth) {
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
-            <p className='text-[2rem]'>{type === AuthEnum.register ? 'Đăng ký' : 'Đăng Nhập'}</p>
+            <p className='text-[2rem]'>{type === EAuthHeader.register ? 'Đăng ký' : 'Đăng Nhập'}</p>
             <div className='mt-10'>
               <input
                 className={`w-full rounded-[2px]
@@ -70,7 +71,7 @@ export default function Auth({ type }: IAuth) {
               />
               <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
             </div>
-            {type === AuthEnum.register && (
+            {type === EAuthHeader.register && (
               <div className='mt-2'>
                 <input
                   className={`w-full rounded-[2px] border border-[${
@@ -89,7 +90,7 @@ export default function Auth({ type }: IAuth) {
               className='mt-4 rounded-[2px] bg-primaryColor py-[11px] text-[1.4rem] uppercase text-[#fff] hover:opacity-90'
               type='submit'
             >
-              {type === AuthEnum.register ? 'Đăng ký' : 'Đăng nhập'}
+              {type === EAuthHeader.register ? 'Đăng ký' : 'Đăng nhập'}
             </button>
             <span
               className='mt-10 flex items-center justify-between gap-[15px] text-[1.3rem] uppercase text-[#ccc]
@@ -119,7 +120,7 @@ export default function Auth({ type }: IAuth) {
             </div>
 
             {/* Legal */}
-            {type === AuthEnum.register && (
+            {type === EAuthHeader.register && (
               <div className='mx-auto mt-8 max-w-[283px] text-center text-[1.2rem]'>
                 Bằng việc đăng kí, bạn đã đồng ý với Shopee về{' '}
                 <span className='text-primaryColor'>Điều khoản dịch vụ</span> &{' '}
@@ -129,9 +130,9 @@ export default function Auth({ type }: IAuth) {
 
             {/* Account link */}
             <div className='mt-8 text-center text-[1.4rem] text-[rgba(0,0,0,.26)]'>
-              {type === AuthEnum.register ? 'Bạn đã có tài khoản? ' : 'Bạn mới biết đến Shopee? '}
-              <Link to={type === AuthEnum.register ? '/login' : '/register'} className='text-primaryColor'>
-                {type === AuthEnum.register ? 'Đăng nhập' : 'Đăng ký'}
+              {type === EAuthHeader.register ? 'Bạn đã có tài khoản? ' : 'Bạn mới biết đến Shopee? '}
+              <Link to={type === EAuthHeader.register ? '/login' : '/register'} className='text-primaryColor'>
+                {type === EAuthHeader.register ? 'Đăng nhập' : 'Đăng ký'}
               </Link>
             </div>
           </form>

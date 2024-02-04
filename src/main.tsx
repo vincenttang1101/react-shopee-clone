@@ -7,6 +7,11 @@ import { Auth, ProductList } from '@features'
 import '@assets/styles/reset.css'
 import '@assets/styles/common.css'
 
+enum EAuthHeader {
+  register = 'register',
+  login = 'login'
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,16 +28,16 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: (
-          <Layout type='register'>
-            <Auth type='register' />
+          <Layout type={EAuthHeader.register}>
+            <Auth type={EAuthHeader.register} />
           </Layout>
         )
       },
       {
         path: '/login',
         element: (
-          <Layout type='login'>
-            <Auth type='login' />
+          <Layout type={EAuthHeader.login}>
+            <Auth type={EAuthHeader.login} />
           </Layout>
         )
       }
