@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Google, Facebook } from '@assets/icons'
 // eslint-disable-next-line import/no-unresolved
-import { rules } from '@utils'
+import { getRules } from '@utils'
 
 type AuthType = 'register' | 'login'
 
@@ -25,10 +25,13 @@ export default function Auth({ type }: IAuth) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    getValues
   } = useForm<IFormInput>()
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
+
+  const rules = getRules(getValues)
 
   return (
     <div className='bg-primaryColor'>
@@ -40,6 +43,7 @@ export default function Auth({ type }: IAuth) {
           <form
             className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'
             onSubmit={handleSubmit(onSubmit)}
+            autoComplete='off'
             noValidate
           >
             <p className='text-[2rem]'>{type === EAuthHeader.register ? 'Đăng ký' : 'Đăng Nhập'}</p>
@@ -65,7 +69,7 @@ export default function Auth({ type }: IAuth) {
                 }] px-6 py-4 text-[1.5rem] focus:border-[${
                   errors.password?.message ? '#ff424f' : '#000000de'
                 }] focus:shadow-md focus:outline-none bg-[${errors.password?.message ? '#fff6f7' : `#fff`}]`}
-                type='text'
+                type='password'
                 placeholder='Password'
                 {...register('password', rules.password)}
               />
@@ -79,7 +83,7 @@ export default function Auth({ type }: IAuth) {
                   }] px-6 py-4 text-[1.5rem] focus:border-[${
                     errors.confirm_password?.message ? '#ff424f' : '#000000de'
                   }] focus:shadow-md focus:outline-none bg-[${errors.confirm_password?.message ? '#fff6f7' : `#fff`}]`}
-                  type='text'
+                  type='password'
                   placeholder='Xác nhận password'
                   {...register('confirm_password', rules.confirm_password)}
                 />
