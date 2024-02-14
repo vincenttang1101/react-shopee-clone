@@ -24,7 +24,7 @@ import {
   App2,
   App3,
   App4
-} from '@assets/images'
+} from '@/assets/images'
 
 export default function Footer() {
   return (

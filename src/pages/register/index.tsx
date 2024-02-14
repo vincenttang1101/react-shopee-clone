@@ -1,19 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { Google, Facebook } from '@assets/icons'
-// eslint-disable-next-line import/no-unresolved
-import { getRules } from '@utils'
-
-type AuthType = 'register' | 'login'
-
-enum EAuthHeader {
-  register = 'register',
-  login = 'login'
-}
-
-interface IAuth {
-  type: AuthType
-}
+import { Google, Facebook } from '@/assets/icons'
+import { getRules } from '@/utils'
 
 interface IFormInput {
   email: string
@@ -21,7 +9,7 @@ interface IFormInput {
   confirm_password: string
 }
 
-export default function Auth({ type }: IAuth) {
+export default function Register() {
   const {
     register,
     handleSubmit,
@@ -46,7 +34,7 @@ export default function Auth({ type }: IAuth) {
             autoComplete='off'
             noValidate
           >
-            <p className='text-[2rem]'>{type === EAuthHeader.register ? 'Đăng ký' : 'Đăng Nhập'}</p>
+            <p className='text-[2rem]'>Đăng ký</p>
             <div className='mt-10'>
               <input
                 className={`w-full rounded-[2px]
@@ -75,26 +63,26 @@ export default function Auth({ type }: IAuth) {
               />
               <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
             </div>
-            {type === EAuthHeader.register && (
-              <div className='mt-2'>
-                <input
-                  className={`w-full rounded-[2px] border border-[${
-                    errors.confirm_password?.message ? '#ff424f' : '#00000024'
-                  }] px-6 py-4 text-[1.5rem] focus:border-[${
-                    errors.confirm_password?.message ? '#ff424f' : '#000000de'
-                  }] focus:shadow-md focus:outline-none bg-[${errors.confirm_password?.message ? '#fff6f7' : `#fff`}]`}
-                  type='password'
-                  placeholder='Xác nhận password'
-                  {...register('confirm_password', rules.confirm_password)}
-                />
-                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.confirm_password?.message}</p>
-              </div>
-            )}
+
+            <div className='mt-2'>
+              <input
+                className={`w-full rounded-[2px] border border-[${
+                  errors.confirm_password?.message ? '#ff424f' : '#00000024'
+                }] px-6 py-4 text-[1.5rem] focus:border-[${
+                  errors.confirm_password?.message ? '#ff424f' : '#000000de'
+                }] focus:shadow-md focus:outline-none bg-[${errors.confirm_password?.message ? '#fff6f7' : `#fff`}]`}
+                type='password'
+                placeholder='Xác nhận password'
+                {...register('confirm_password', rules.confirm_password)}
+              />
+              <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.confirm_password?.message}</p>
+            </div>
+
             <button
               className='mt-4 rounded-[2px] bg-primaryColor py-[11px] text-[1.4rem] uppercase text-[#fff] hover:opacity-90'
               type='submit'
             >
-              {type === EAuthHeader.register ? 'Đăng ký' : 'Đăng nhập'}
+              Đăng ký
             </button>
             <span
               className='mt-10 flex items-center justify-between gap-[15px] text-[1.3rem] uppercase text-[#ccc]
@@ -124,19 +112,17 @@ export default function Auth({ type }: IAuth) {
             </div>
 
             {/* Legal */}
-            {type === EAuthHeader.register && (
-              <div className='mx-auto mt-8 max-w-[283px] text-center text-[1.2rem]'>
-                Bằng việc đăng kí, bạn đã đồng ý với Shopee về{' '}
-                <span className='text-primaryColor'>Điều khoản dịch vụ</span> &{' '}
-                <span className='text-primaryColor'>Chính sách và bảo mật</span>
-              </div>
-            )}
+            <div className='mx-auto mt-8 max-w-[283px] text-center text-[1.2rem]'>
+              Bằng việc đăng kí, bạn đã đồng ý với Shopee về{' '}
+              <span className='text-primaryColor'>Điều khoản dịch vụ</span> &{' '}
+              <span className='text-primaryColor'>Chính sách và bảo mật</span>
+            </div>
 
             {/* Account link */}
             <div className='mt-8 text-center text-[1.4rem] text-[rgba(0,0,0,.26)]'>
-              {type === EAuthHeader.register ? 'Bạn đã có tài khoản? ' : 'Bạn mới biết đến Shopee? '}
-              <Link to={type === EAuthHeader.register ? '/login' : '/register'} className='text-primaryColor'>
-                {type === EAuthHeader.register ? 'Đăng nhập' : 'Đăng ký'}
+              Bạn đã có tài khoản?{' '}
+              <Link to='/login' className='text-primaryColor'>
+                Đăng nhập
               </Link>
             </div>
           </form>

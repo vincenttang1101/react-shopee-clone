@@ -1,4 +1,4 @@
-import { HomeHeader, AuthHeader } from '@components'
+import { MainHeader, AuthHeader } from '@/components'
 
 interface IHeader {
   type?: string
@@ -17,7 +17,7 @@ export default function Header({ type }: IHeader) {
       case AuthHeaderEnum.login:
         return <AuthHeader type={AuthHeaderEnum.login} />
       default:
-        return <HomeHeader />
+        return <MainHeader />
     }
   }
 

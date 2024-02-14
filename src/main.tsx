@@ -1,16 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import App from '@src/App'
-import { Layout } from '@components'
-import { Auth, ProductList } from '@features'
-import '@assets/styles/reset.css'
-import '@assets/styles/common.css'
 
-enum EAuthHeader {
-  register = 'register',
-  login = 'login'
-}
+import { Login, ProductList, Register } from '@/pages'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import App from '@/App'
+import ReactDOM from 'react-dom/client'
+
+import { AuthLayout, MainLayout } from '@/layouts'
+import '@/assets/styles/reset.css'
+import '@/assets/styles/global.css'
 
 const router = createBrowserRouter([
   {
@@ -20,25 +18,25 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: (
-          <Layout>
+          <MainLayout>
             <ProductList />
-          </Layout>
+          </MainLayout>
         )
       },
       {
         path: '/register',
         element: (
-          <Layout type={EAuthHeader.register}>
-            <Auth type={EAuthHeader.register} />
-          </Layout>
+          <AuthLayout type='register'>
+            <Register />
+          </AuthLayout>
         )
       },
       {
         path: '/login',
         element: (
-          <Layout type={EAuthHeader.login}>
-            <Auth type={EAuthHeader.login} />
-          </Layout>
+          <AuthLayout type='login'>
+            <Login />
+          </AuthLayout>
         )
       }
     ]

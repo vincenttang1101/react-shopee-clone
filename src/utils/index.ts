@@ -1,1 +1,1 @@
-export * from '@utils/rules'
+export * from '@/utils/rules'

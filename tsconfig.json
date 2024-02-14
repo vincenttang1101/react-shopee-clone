@@ -13,18 +13,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@assets/*": ["./assets/*"],
-      "@assets": ["./assets"],
-      "@components/*": ["./components/*"],
-      "@components": ["./components"],
-      "@features/*": ["./features/*"],
-      "@features": ["./features"],
-      "@src/*": ["./*"],
-      "@src": ["./"],
-      "@utils/*": ["./utils/*"],
-      "@utils": ["./utils"]
+      "@/*": ["./src/*"]
     },
 
     /* Linting */

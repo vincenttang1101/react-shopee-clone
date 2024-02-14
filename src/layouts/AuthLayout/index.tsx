@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import { Footer, Header } from '@/components'
 
 interface ILayout {
@@ -6,7 +6,7 @@ interface ILayout {
   type?: string
 }
 
-export default function Layout({ children, type }: ILayout) {
+export default function AuthLayout({ children, type }: ILayout) {
   return (
     <div>
       <Header type={type} />
