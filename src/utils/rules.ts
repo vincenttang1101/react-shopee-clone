@@ -33,6 +33,7 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
     }
   },
   confirm_password: {
+    required: 'Vui lòng xác nhận password',
     validate:
       typeof getValues === 'function' ? (value) => getValues('password') === value || 'Password không khớp' : undefined
   }

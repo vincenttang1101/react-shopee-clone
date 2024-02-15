@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import styled from 'styled-components'
 import { Google, Facebook } from '@/assets/icons'
 import { getRules } from '@/utils'
 
@@ -8,6 +9,29 @@ interface IFormInput {
   password: string
   confirm_password: string
 }
+
+const Input = styled.input<{ $hasError?: string }>`
+  width: 100%;
+  border-radius: 2px;
+  font-size: 1.5rem;
+  padding: 12px;
+
+  border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : '#00000024')};
+  background: ${(props) => (props.$hasError ? '#fff6f7' : '#fff')};
+  box-shadow: ${(props) =>
+    props.$hasError ? '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' : 'none'};
+
+  &:focus {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    outline: none;
+    border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : 'rgba(0, 0, 0, 0.5)')};
+  }
+  &::placeholder {
+    padding-inline: 3px;
+  }
+`
 
 export default function Register() {
   const {
@@ -26,7 +50,7 @@ export default function Register() {
       {/* Container */}
       <div className='container'>
         <div className='flex h-screen w-full items-center justify-center bg-contain bg-center bg-no-repeat lg:bg-hero'>
-          {/* Register Form */}
+          {/* Register form */}
           <div className='ml-[50%] h-full xs:hidden lg:block'></div>
           <form
             className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'
@@ -35,47 +59,37 @@ export default function Register() {
             noValidate
           >
             <p className='text-[2rem]'>Đăng ký</p>
-            <div className='mt-10'>
-              <input
-                className={`w-full rounded-[2px]
-                  px-6 py-4 text-[1.5rem] focus:border-[${
-                    errors.email?.message ? '#ff424f' : '#000000de'
-                  }] focus:shadow-md focus:outline-none bg-[${errors.email?.message ? '#fff6f7' : `#fff`}]`}
-                style={{
-                  border: `1px solid ${errors.email?.message ? '#ff424f' : '#00000024'}`
-                }}
-                type='email'
-                placeholder='Email'
-                {...register('email', rules.email)}
-              />
-              <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.email?.message}</p>
-            </div>
-            <div className='mt-2'>
-              <input
-                className={`w-full rounded-[2px] border border-[${
-                  errors.password?.message ? '#ff424f' : '#00000024'
-                }] px-6 py-4 text-[1.5rem] focus:border-[${
-                  errors.password?.message ? '#ff424f' : '#000000de'
-                }] focus:shadow-md focus:outline-none bg-[${errors.password?.message ? '#fff6f7' : `#fff`}]`}
-                type='password'
-                placeholder='Password'
-                {...register('password', rules.password)}
-              />
-              <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
-            </div>
+            {/* Input form */}
+            <div className='mt-8'>
+              <div className='mt-4'>
+                <Input
+                  type='email'
+                  placeholder='Email'
+                  $hasError={errors.email?.message}
+                  {...register('email', rules.email)}
+                />
+                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.email?.message}</p>
+              </div>
 
-            <div className='mt-2'>
-              <input
-                className={`w-full rounded-[2px] border border-[${
-                  errors.confirm_password?.message ? '#ff424f' : '#00000024'
-                }] px-6 py-4 text-[1.5rem] focus:border-[${
-                  errors.confirm_password?.message ? '#ff424f' : '#000000de'
-                }] focus:shadow-md focus:outline-none bg-[${errors.confirm_password?.message ? '#fff6f7' : `#fff`}]`}
-                type='password'
-                placeholder='Xác nhận password'
-                {...register('confirm_password', rules.confirm_password)}
-              />
-              <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.confirm_password?.message}</p>
+              <div className='mt-4'>
+                <Input
+                  type='password'
+                  placeholder='Password'
+                  $hasError={errors.password?.message}
+                  {...register('password', rules.password)}
+                />
+                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
+              </div>
+
+              <div className='mt-4'>
+                <Input
+                  type='password'
+                  placeholder='Xác nhận password'
+                  $hasError={errors.confirm_password?.message}
+                  {...register('confirm_password', rules.confirm_password)}
+                />
+                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.confirm_password?.message}</p>
+              </div>
             </div>
 
             <button
@@ -84,13 +98,13 @@ export default function Register() {
             >
               Đăng ký
             </button>
-            <span
+            <div
               className='mt-10 flex items-center justify-between gap-[15px] text-[1.3rem] uppercase text-[#ccc]
                         before:inline-block before:h-[1px] before:w-full before:bg-[#dbdbdb] before:content-[""]
                         after:inline-block after:h-[1px] after:w-full after:bg-[#dbdbdb] after:content-[""]'
             >
               Hoặc
-            </span>
+            </div>
 
             {/* OAuth list */}
             <div className='mt-6 flex gap-4'>

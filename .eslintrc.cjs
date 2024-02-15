@@ -7,7 +7,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:import/recommended',
+    // 'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
@@ -53,7 +53,6 @@ module.exports = {
         printWidth: 120,
         jsxSingleQuote: true
       }
-    ],
-    'import/no-unresolved': 'off'
+    ]
   }
 }
