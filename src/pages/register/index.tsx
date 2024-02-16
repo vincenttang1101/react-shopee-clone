@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import styled from 'styled-components'
 import { Google, Facebook } from '@/assets/icons'
-import { getRules } from '@/utils'
-
-interface IFormInput {
-  email: string
-  password: string
-  confirm_password: string
-}
+import { IRegisterSchema, registerSchema } from '@/utils/rules'
 
 const Input = styled.input<{ $hasError?: string }>`
   width: 100%;
@@ -37,13 +32,12 @@ export default function Register() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    getValues
-  } = useForm<IFormInput>()
+    formState: { errors }
+  } = useForm<IRegisterSchema>({
+    resolver: yupResolver(registerSchema)
+  })
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
-
-  const rules = getRules(getValues)
+  const onSubmit: SubmitHandler<IRegisterSchema> = (data) => console.log(data)
 
   return (
     <div className='bg-primaryColor'>
@@ -62,12 +56,7 @@ export default function Register() {
             {/* Input form */}
             <div className='mt-8'>
               <div className='mt-4'>
-                <Input
-                  type='email'
-                  placeholder='Email'
-                  $hasError={errors.email?.message}
-                  {...register('email', rules.email)}
-                />
+                <Input type='email' placeholder='Email' $hasError={errors.email?.message} {...register('email')} />
                 <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.email?.message}</p>
               </div>
 
@@ -76,7 +65,7 @@ export default function Register() {
                   type='password'
                   placeholder='Password'
                   $hasError={errors.password?.message}
-                  {...register('password', rules.password)}
+                  {...register('password')}
                 />
                 <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
               </div>
@@ -86,7 +75,7 @@ export default function Register() {
                   type='password'
                   placeholder='Xác nhận password'
                   $hasError={errors.confirm_password?.message}
-                  {...register('confirm_password', rules.confirm_password)}
+                  {...register('confirm_password')}
                 />
                 <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.confirm_password?.message}</p>
               </div>

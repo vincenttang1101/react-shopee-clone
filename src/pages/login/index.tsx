@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import styled from 'styled-components'
 import { Google, Facebook } from '@/assets/icons'
-import { getRules } from '@/utils'
-
-interface IFormInput {
-  email: string
-  password: string
-  confirm_password: string
-}
+import { ILoginSchema, loginSchema } from '@/utils/rules'
 
 const Input = styled.input<{ $hasError?: string }>`
   width: 100%;
@@ -37,13 +32,12 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    getValues
-  } = useForm<IFormInput>()
+    formState: { errors }
+  } = useForm<ILoginSchema>({
+    resolver: yupResolver(loginSchema)
+  })
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
-
-  const rules = getRules(getValues)
+  const onSubmit: SubmitHandler<ILoginSchema> = (data) => console.log(data)
 
   return (
     <div className='bg-primaryColor'>
@@ -61,12 +55,7 @@ export default function Login() {
             <p className='text-[2rem]'>Đăng Nhập</p>
             <div className='mt-8'>
               <div className='mt-4'>
-                <Input
-                  type='email'
-                  placeholder='Email'
-                  $hasError={errors.email?.message}
-                  {...register('email', rules.email)}
-                />
+                <Input type='email' placeholder='Email' $hasError={errors.email?.message} {...register('email')} />
                 <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.email?.message}</p>
               </div>
               <div className='mt-4'>
@@ -74,7 +63,7 @@ export default function Login() {
                   type='password'
                   placeholder='Password'
                   $hasError={errors.password?.message}
-                  {...register('password', rules.password)}
+                  {...register('password')}
                 />
                 <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
               </div>
