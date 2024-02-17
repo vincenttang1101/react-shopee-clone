@@ -1,32 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import styled from 'styled-components'
 import { Google, Facebook } from '@/assets/icons'
-import { ILoginSchema, loginSchema } from '@/utils/rules'
+import { IAuthSchema, authSchema } from '@/utils/rules'
+import { InputField } from '@/components'
 
-const Input = styled.input<{ $hasError?: string }>`
-  width: 100%;
-  border-radius: 2px;
-  font-size: 1.5rem;
-  padding: 12px;
-
-  border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : '#00000024')};
-  background: ${(props) => (props.$hasError ? '#fff6f7' : '#fff')};
-  box-shadow: ${(props) =>
-    props.$hasError ? '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' : 'none'};
-
-  &:focus {
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1);
-    outline: none;
-    border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : 'rgba(0, 0, 0, 0.5)')};
-  }
-  &::placeholder {
-    padding-inline: 3px;
-  }
-`
+type ILoginSchema = Omit<IAuthSchema, 'confirm_password'>
+const loginSchema = authSchema.pick(['email', 'password'])
 
 export default function Login() {
   const {
@@ -55,17 +35,22 @@ export default function Login() {
             <p className='text-[2rem]'>Đăng Nhập</p>
             <div className='mt-8'>
               <div className='mt-4'>
-                <Input type='email' placeholder='Email' $hasError={errors.email?.message} {...register('email')} />
-                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.email?.message}</p>
+                <InputField
+                  name='email'
+                  errorMessage={errors.email?.message}
+                  register={register}
+                  type='email'
+                  placeholder='Email'
+                />
               </div>
               <div className='mt-4'>
-                <Input
+                <InputField
+                  name='email'
+                  errorMessage={errors.password?.message}
+                  register={register}
                   type='password'
-                  placeholder='Password'
-                  $hasError={errors.password?.message}
-                  {...register('password')}
+                  placeholder='Mật khẩu'
                 />
-                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
               </div>
             </div>
             <button

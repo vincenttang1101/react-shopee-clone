@@ -40,20 +40,17 @@ export const getRules = (getValues?: UseFormGetValues<Rules>): Rules => ({
   }
 })
 
-export const registerSchema = yup.object({
+export const authSchema = yup.object({
   email: yup.string().required('Vui lòng nhập email').email('Email không đúng định dạng'),
   password: yup
     .string()
-    .required('Vui lòng nhập password')
-    .min(6, 'Độ dài password phải từ 6 - 160 kí tự')
-    .max(160, 'Độ dài password phải từ 6 - 160 kí tự'),
+    .required('Vui lòng nhập mật khẩu')
+    .min(6, 'Độ dài mật khẩu phải từ 6 - 160 kí tự')
+    .max(160, 'Độ dài mật khẩu phải từ 6 - 160 kí tự'),
   confirm_password: yup
     .string()
-    .required('Vui lòng nhập lại password')
-    .oneOf([yup.ref('password')], 'Password không khớp')
+    .required('Vui lòng nhập lại mật khẩu')
+    .oneOf([yup.ref('password')], 'Mật khẩu không khớp')
 })
 
-export const loginSchema = registerSchema.omit(['confirm_password'])
-
-export type IRegisterSchema = yup.InferType<typeof registerSchema>
-export type ILoginSchema = yup.InferType<typeof loginSchema>
+export type IAuthSchema = yup.InferType<typeof authSchema>

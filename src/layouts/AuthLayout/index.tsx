@@ -1,15 +1,14 @@
-// eslint-disable-next-line import/no-unresolved
-import { Footer, Header } from '@/components'
+import { Footer, AuthHeader } from '@/components'
 
 interface ILayout {
   children: React.ReactNode
   type?: string
 }
 
-export default function AuthLayout({ children, type }: ILayout) {
+export default function AuthLayout({ children }: ILayout) {
   return (
     <div>
-      <Header type={type} />
+      <AuthHeader />
       {children}
       <Footer />
     </div>

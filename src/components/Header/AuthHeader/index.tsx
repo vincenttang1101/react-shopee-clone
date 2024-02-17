@@ -1,16 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FaArrowLeftLong } from 'react-icons/fa6'
 
-interface IAuthHeader {
-  type: string
-}
-
 enum AuthHeaderEnum {
-  register = 'register',
-  login = 'login'
+  register = '/register',
+  login = '/login'
 }
 
-export default function AuthHeader({ type }: IAuthHeader) {
+export default function AuthHeader() {
+  const { pathname } = useLocation()
+
   return (
     <div className='py-[30px]'>
       {/* Container */}
@@ -26,7 +24,7 @@ export default function AuthHeader({ type }: IAuthHeader) {
                 </g>
               </svg>
             </Link>
-            <p className='text-[2.4rem]'>{type === AuthHeaderEnum.register ? 'Đăng ký' : 'Đăng nhập'}</p>
+            <p className='text-[2.4rem]'>{pathname === AuthHeaderEnum.register ? 'Đăng ký' : 'Đăng nhập'}</p>
           </div>
 
           <div className='xs:hidden md:block'>

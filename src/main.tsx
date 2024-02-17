@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: (
-          <AuthLayout type='register'>
+          <AuthLayout>
             <Register />
           </AuthLayout>
         )
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: (
-          <AuthLayout type='login'>
+          <AuthLayout>
             <Login />
           </AuthLayout>
         )

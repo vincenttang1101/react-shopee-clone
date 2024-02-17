@@ -1,43 +1,20 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import styled from 'styled-components'
 import { Google, Facebook } from '@/assets/icons'
-import { IRegisterSchema, registerSchema } from '@/utils/rules'
-
-const Input = styled.input<{ $hasError?: string }>`
-  width: 100%;
-  border-radius: 2px;
-  font-size: 1.5rem;
-  padding: 12px;
-
-  border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : '#00000024')};
-  background: ${(props) => (props.$hasError ? '#fff6f7' : '#fff')};
-  box-shadow: ${(props) =>
-    props.$hasError ? '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' : 'none'};
-
-  &:focus {
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1);
-    outline: none;
-    border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : 'rgba(0, 0, 0, 0.5)')};
-  }
-  &::placeholder {
-    padding-inline: 3px;
-  }
-`
+import { IAuthSchema, authSchema } from '@/utils/rules'
+import { InputField } from '@/components'
 
 export default function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<IRegisterSchema>({
-    resolver: yupResolver(registerSchema)
+  } = useForm<IAuthSchema>({
+    resolver: yupResolver(authSchema)
   })
 
-  const onSubmit: SubmitHandler<IRegisterSchema> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<IAuthSchema> = (data) => console.log(data)
 
   return (
     <div className='bg-primaryColor'>
@@ -56,28 +33,33 @@ export default function Register() {
             {/* Input form */}
             <div className='mt-8'>
               <div className='mt-4'>
-                <Input type='email' placeholder='Email' $hasError={errors.email?.message} {...register('email')} />
-                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.email?.message}</p>
+                <InputField
+                  name='email'
+                  errorMessage={errors.email?.message}
+                  register={register}
+                  type='email'
+                  placeholder='Email'
+                />
               </div>
 
               <div className='mt-4'>
-                <Input
+                <InputField
+                  name='password'
+                  errorMessage={errors.password?.message}
+                  register={register}
                   type='password'
-                  placeholder='Password'
-                  $hasError={errors.password?.message}
-                  {...register('password')}
+                  placeholder='Mật khẩu'
                 />
-                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.password?.message}</p>
               </div>
 
               <div className='mt-4'>
-                <Input
+                <InputField
+                  name='confirm_password'
+                  errorMessage={errors.confirm_password?.message}
+                  register={register}
                   type='password'
-                  placeholder='Xác nhận password'
-                  $hasError={errors.confirm_password?.message}
-                  {...register('confirm_password')}
+                  placeholder='Xác nhận mật khẩu'
                 />
-                <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errors.confirm_password?.message}</p>
               </div>
             </div>
 
