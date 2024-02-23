@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { omit } from 'lodash'
 import { Google, Facebook } from '@/assets/icons'
 import { IAuthSchema, authSchema } from '@/utils/rules'
 import { InputField } from '@/components'
+import { authApi } from '@/apis/auth.api'
 
 export default function Register() {
   const {
@@ -14,7 +17,18 @@ export default function Register() {
     resolver: yupResolver(authSchema)
   })
 
-  const onSubmit: SubmitHandler<IAuthSchema> = (data) => console.log(data)
+  const registerMutation = useMutation({
+    mutationFn: (body: Omit<IAuthSchema, 'confirm_password'>) => authApi.register(body)
+  })
+
+  const onSubmit: SubmitHandler<IAuthSchema> = (data) => {
+    const body = omit(data, ['confirm_password'])
+    registerMutation.mutate(body, {
+      onSuccess: (data) => {
+        console.log(data)
+      }
+    })
+  }
 
   return (
     <div className='bg-primaryColor'>
