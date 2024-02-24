@@ -1,7 +1,11 @@
-import { ResponseApi } from '@/types/utils.type'
 import { User } from '@/types/user.type'
 
-export type AuthResponse = ResponseApi<{
+export interface ResponseData<Data> {
+  message: string
+  data?: Data
+}
+
+export type AuthResponse = ResponseData<{
   access_token: string
   expires: number
   refresh_token: string

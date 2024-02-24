@@ -4,9 +4,9 @@ import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { omit } from 'lodash'
 import { Google, Facebook } from '@/assets/icons'
-import { IAuthSchema, authSchema } from '@/utils/rules'
+import { IAuthSchema, authSchema } from '@/utils'
 import { InputField } from '@/components'
-import { authApi } from '@/apis/auth.api'
+import { authApi } from '@/apis'
 
 export default function Register() {
   const {
