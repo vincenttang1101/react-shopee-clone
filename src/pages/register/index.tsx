@@ -2,16 +2,19 @@ import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { omit } from 'lodash'
+import { Omit, omit } from 'lodash'
 import { Google, Facebook } from '@/assets/icons'
 import { IAuthSchema, authSchema } from '@/utils'
 import { InputField } from '@/components'
 import { authApi } from '@/apis'
+import { isAxiosUnprocessableEntityError } from '@/utils'
+import { ResponseData } from '@/types'
 
 export default function Register() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm<IAuthSchema>({
     resolver: yupResolver(authSchema)
@@ -26,6 +29,20 @@ export default function Register() {
     registerMutation.mutate(body, {
       onSuccess: (data) => {
         console.log(data)
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ResponseData<Omit<IAuthSchema, 'confirm_password'>>>(error)) {
+          const formError = error.response?.data.data
+
+          if (formError) {
+            Object.keys(formError).forEach((field) => {
+              setError(field as keyof Omit<IAuthSchema, 'confirm_password'>, {
+                type: 'server',
+                message: formError[field as keyof Omit<IAuthSchema, 'confirm_password'>]
+              })
+            })
+          }
+        }
       }
     })
   }
@@ -63,6 +80,7 @@ export default function Register() {
                   register={register}
                   type='password'
                   placeholder='Mật khẩu'
+                  autoComplete='off'
                 />
               </div>
 
@@ -73,6 +91,7 @@ export default function Register() {
                   register={register}
                   type='password'
                   placeholder='Xác nhận mật khẩu'
+                  autoComplete='off'
                 />
               </div>
             </div>

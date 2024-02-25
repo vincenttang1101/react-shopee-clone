@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Google, Facebook } from '@/assets/icons'
-import { IAuthSchema, authSchema } from '@/utils/rules'
+import { IAuthSchema, authSchema } from '@/utils/rules.util'
 import { InputField } from '@/components'
 
 type ILoginSchema = Omit<IAuthSchema, 'confirm_password'>
