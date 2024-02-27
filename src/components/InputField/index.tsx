@@ -34,7 +34,7 @@ const Input = styled.input<{ $hasError?: string }>`
 export default function InputField({ name, errorMessage, register, ...rest }: IInputField) {
   return (
     <>
-      <Input className={name} $hasError={errorMessage} {...register(name)} {...rest} />
+      <Input className={name} $hasError={errorMessage} {...register(name)} autoComplete='off' {...rest} />
       <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errorMessage}</p>
     </>
   )

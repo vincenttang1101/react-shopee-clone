@@ -57,7 +57,6 @@ export default function Register() {
           <form
             className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'
             onSubmit={handleSubmit(onSubmit)}
-            autoComplete='off'
             noValidate
           >
             <p className='text-[2rem]'>Đăng ký</p>
@@ -80,7 +79,6 @@ export default function Register() {
                   register={register}
                   type='password'
                   placeholder='Mật khẩu'
-                  autoComplete='off'
                 />
               </div>
 
@@ -91,7 +89,6 @@ export default function Register() {
                   register={register}
                   type='password'
                   placeholder='Xác nhận mật khẩu'
-                  autoComplete='off'
                 />
               </div>
             </div>

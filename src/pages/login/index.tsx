@@ -1,24 +1,52 @@
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
 import { Google, Facebook } from '@/assets/icons'
 import { IAuthSchema, authSchema } from '@/utils/rules.util'
 import { InputField } from '@/components'
+import { authApi } from '@/apis'
+import { isAxiosUnprocessableEntityError } from '@/utils'
+import { ResponseData } from '@/types'
 
 type ILoginSchema = Omit<IAuthSchema, 'confirm_password'>
-const loginSchema = authSchema.pick(['email', 'password'])
+const loginSchema = authSchema.omit(['confirm_password'])
 
 export default function Login() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm<ILoginSchema>({
     resolver: yupResolver(loginSchema)
   })
 
-  const onSubmit: SubmitHandler<ILoginSchema> = (data) => console.log(data)
+  const loginMutation = useMutation({
+    mutationFn: (body: ILoginSchema) => authApi.login(body)
+  })
 
+  const onSubmit: SubmitHandler<ILoginSchema> = (data) => {
+    loginMutation.mutate(data, {
+      onSuccess: (data) => {
+        console.log(data)
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ResponseData<ILoginSchema>>(error)) {
+          const formError = error.response?.data.data
+
+          if (formError) {
+            Object.keys(formError).forEach((field) => {
+              setError(field as keyof ILoginSchema, {
+                type: 'server',
+                message: formError[field as keyof ILoginSchema]
+              })
+            })
+          }
+        }
+      }
+    })
+  }
   return (
     <div className='bg-primaryColor'>
       {/* Container */}
@@ -29,7 +57,6 @@ export default function Login() {
           <form
             className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'
             onSubmit={handleSubmit(onSubmit)}
-            autoComplete='off'
             noValidate
           >
             <p className='text-[2rem]'>Đăng Nhập</p>
@@ -45,7 +72,7 @@ export default function Login() {
               </div>
               <div className='mt-4'>
                 <InputField
-                  name='email'
+                  name='password'
                   errorMessage={errors.password?.message}
                   register={register}
                   type='password'
