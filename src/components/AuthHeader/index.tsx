@@ -10,7 +10,7 @@ export default function AuthHeader() {
   const { pathname } = useLocation()
 
   return (
-    <div className='py-[30px]'>
+    <header className='py-[30px]'>
       {/* Container */}
       <div className='container'>
         {/* Inner */}
@@ -34,6 +34,6 @@ export default function AuthHeader() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   )
 }
