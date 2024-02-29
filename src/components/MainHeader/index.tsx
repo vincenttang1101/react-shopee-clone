@@ -1,9 +1,26 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useFloating } from '@floating-ui/react'
+import { FloatingPortal } from '@floating-ui/react'
 import { IoSearch } from 'react-icons/io5'
-import { FaFacebook } from 'react-icons/fa'
+import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
 
 export default function MainHeader() {
+  const [isOpen, setIsOpen] = useState(false)
+  const { refs, floatingStyles } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen
+  })
+
+  const showPopover = () => {
+    setIsOpen(true)
+  }
+
+  const hidePopover = () => {
+    setIsOpen(false)
+  }
+
   return (
     <header className='bg-primaryColor'>
       <div className='container'>
@@ -43,8 +60,26 @@ export default function MainHeader() {
               <li>
                 <Link to='/#!'>Hỗ Trợ</Link>
               </li>
-              <li>
-                <Link to='/#!'>Tiếng Việt</Link>
+              <li
+                className='flex cursor-pointer items-center gap-x-2'
+                ref={refs.setReference}
+                onMouseEnter={showPopover}
+                onMouseLeave={hidePopover}
+              >
+                <span>Tiếng Việt</span>
+                <FaChevronDown />
+                {isOpen && (
+                  <FloatingPortal>
+                    <div
+                      ref={refs.setFloating}
+                      className='flex flex-col gap-y-7 rounded-sm bg-white px-10 py-6'
+                      style={floatingStyles}
+                    >
+                      <button className='hover:text-primaryColor'>Tiếng Việt</button>
+                      <button className='hover:text-primaryColor'>Tiếng Anh</button>
+                    </div>
+                  </FloatingPortal>
+                )}
               </li>
               <li>
                 <Link to='/#!'>Đăng Ký</Link>
