@@ -1,24 +1,30 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useFloating } from '@floating-ui/react'
-import { FloatingPortal } from '@floating-ui/react'
+import { FloatingPortal, arrow } from '@floating-ui/react'
 import { IoSearch } from 'react-icons/io5'
 import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
 
 export default function MainHeader() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { refs, floatingStyles } = useFloating({
+  const [isOpen, setIsOpen] = useState(true)
+  const arrowRef = useRef(null)
+  const { refs, floatingStyles, middlewareData } = useFloating({
     open: isOpen,
-    onOpenChange: setIsOpen
+    onOpenChange: setIsOpen,
+    middleware: [
+      arrow({
+        element: arrowRef
+      })
+    ]
   })
 
   const showPopover = () => {
-    setIsOpen(true)
+    // setIsOpen(true)
   }
 
   const hidePopover = () => {
-    setIsOpen(false)
+    // setIsOpen(false)
   }
 
   return (
@@ -75,6 +81,16 @@ export default function MainHeader() {
                       className='flex flex-col gap-y-7 rounded-sm bg-white px-10 py-6'
                       style={floatingStyles}
                     >
+                      <div
+                        ref={arrowRef}
+                        style={{
+                          position: 'absolute',
+                          zIndex: 100,
+                          left: middlewareData.arrow?.x,
+                          top: middlewareData.arrow?.y
+                        }}
+                        className='-translate-y-full border-[11px] border-solid border-x-transparent border-b-red-500 border-t-transparent'
+                      />
                       <button className='hover:text-primaryColor'>Tiếng Việt</button>
                       <button className='hover:text-primaryColor'>Tiếng Anh</button>
                     </div>
