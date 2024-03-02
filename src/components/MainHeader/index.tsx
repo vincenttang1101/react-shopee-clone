@@ -1,13 +1,14 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useFloating } from '@floating-ui/react'
+import { offset, shift, useFloating } from '@floating-ui/react'
 import { FloatingPortal, arrow } from '@floating-ui/react'
 import { IoSearch } from 'react-icons/io5'
 import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export default function MainHeader() {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const arrowRef = useRef(null)
   const { refs, floatingStyles, middlewareData } = useFloating({
     open: isOpen,
@@ -15,16 +16,18 @@ export default function MainHeader() {
     middleware: [
       arrow({
         element: arrowRef
-      })
+      }),
+      offset(10),
+      shift()
     ]
   })
 
   const showPopover = () => {
-    // setIsOpen(true)
+    setIsOpen(true)
   }
 
   const hidePopover = () => {
-    // setIsOpen(false)
+    setIsOpen(false)
   }
 
   return (
@@ -74,28 +77,33 @@ export default function MainHeader() {
               >
                 <span>Tiếng Việt</span>
                 <FaChevronDown />
-                {isOpen && (
-                  <FloatingPortal>
-                    <div
-                      ref={refs.setFloating}
-                      className='flex flex-col gap-y-7 rounded-sm bg-white px-10 py-6'
-                      style={floatingStyles}
-                    >
-                      <div
-                        ref={arrowRef}
-                        style={{
-                          position: 'absolute',
-                          zIndex: 100,
-                          left: middlewareData.arrow?.x,
-                          top: middlewareData.arrow?.y
-                        }}
-                        className='-translate-y-full border-[11px] border-solid border-x-transparent border-b-red-500 border-t-transparent'
-                      />
-                      <button className='hover:text-primaryColor'>Tiếng Việt</button>
-                      <button className='hover:text-primaryColor'>Tiếng Anh</button>
-                    </div>
-                  </FloatingPortal>
-                )}
+                <AnimatePresence>
+                  {isOpen && (
+                    <FloatingPortal>
+                      <motion.div
+                        ref={refs.setFloating}
+                        className='flex flex-col gap-y-7 rounded-sm bg-white px-10 py-6'
+                        style={floatingStyles}
+                        initial={{ opacity: 0, transform: 'scale(0)' }}
+                        animate={{ opacity: 1, transform: 'scale(1)' }}
+                        exit={{ opacity: 0, transform: 'scale(0)' }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div
+                          ref={arrowRef}
+                          style={{
+                            position: 'absolute',
+                            left: middlewareData.arrow?.x,
+                            top: middlewareData.arrow?.y
+                          }}
+                          className='-translate-y-[168%] border-[11px] border-solid border-white border-x-transparent border-t-transparent'
+                        />
+                        <button className='hover:text-primaryColor'>Tiếng Việt</button>
+                        <button className='hover:text-primaryColor'>Tiếng Anh</button>
+                      </motion.div>
+                    </FloatingPortal>
+                  )}
+                </AnimatePresence>
               </li>
               <li>
                 <Link to='/#!'>Đăng Ký</Link>
