@@ -2,10 +2,10 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { offset, shift, useFloating } from '@floating-ui/react'
 import { FloatingPortal, arrow } from '@floating-ui/react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { IoSearch } from 'react-icons/io5'
 import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
-import { AnimatePresence, motion } from 'framer-motion'
 
 export default function MainHeader() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +19,8 @@ export default function MainHeader() {
       }),
       offset(10),
       shift()
-    ]
+    ],
+    transform: false
   })
 
   const showPopover = () => {
