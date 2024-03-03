@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { offset, shift, useFloating } from '@floating-ui/react'
 import { FloatingPortal, arrow } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IoSearch } from 'react-icons/io5'
+import { IoSearch, IoNotificationsOutline } from 'react-icons/io5'
 import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
+import { BsQuestionCircle, BsGlobe } from 'react-icons/bs'
 
 export default function MainHeader() {
   const [isOpen, setIsOpen] = useState(false)
@@ -36,46 +37,49 @@ export default function MainHeader() {
       <div className='container'>
         <div className='pb-10 pt-5'>
           <nav className='flex items-center justify-between text-[1.5rem] font-light text-white'>
-            <ul className='flex gap-x-3'>
-              <li>
+            <ul className='flex gap-x-4'>
+              <li className='hover:text-[#ffffffb3]'>
                 <Link to='/#!'>Kênh Người Bán</Link>
               </li>
-              <li>
-                <Link to='/#!' className='border-l border-solid border-white pl-2'>
+              <li className='hover:text-[#ffffffb3]'>
+                <Link to='/#!' className='border-l border-solid border-white pl-3'>
                   Trở thành Người bán Shopee
                 </Link>
               </li>
-              <li>
-                <Link to='/#!' className='border-l border-solid border-white pl-2'>
+              <li className='hover:text-[#ffffffb3]'>
+                <Link to='/#!' className='border-l border-solid border-white pl-3'>
                   Tải ứng dụng
                 </Link>
               </li>
               <li>
-                <span className='border-l border-solid border-white pl-2'>Kết nối</span>
+                <span className='border-l border-solid border-white pl-3'>Kết nối</span>
               </li>
-              <li className='gap-x- flex items-start'>
-                <Link to='/#!' className='ml-2 text-3xl'>
+              <li className='flex items-start gap-x-2'>
+                <Link to='/#!' className='text-3xl hover:text-[#ffffffb3]'>
                   <FaFacebook />
                 </Link>
-                <Link to='/#!' className='ml-4 text-3xl'>
+                <Link to='/#!' className='text-3xl hover:text-[#ffffffb3]'>
                   <PiInstagramLogoFill />
                 </Link>
               </li>
             </ul>
 
-            <ul className='flex gap-x-6'>
-              <li>
+            <ul className='flex items-center gap-x-6'>
+              <li className='flex items-center gap-x-2 hover:text-[#ffffffb3]'>
+                <IoNotificationsOutline className='flex h-8 w-8' />
                 <Link to='/#!'>Thông Báo</Link>
               </li>
-              <li>
+              <li className='flex items-center gap-x-2 hover:text-[#ffffffb3]'>
+                <BsQuestionCircle className='flex h-7 w-7' />
                 <Link to='/#!'>Hỗ Trợ</Link>
               </li>
               <li
-                className='flex cursor-pointer items-center gap-x-2'
+                className='flex cursor-pointer items-center gap-x-2 hover:text-[#ffffffb3]'
                 ref={refs.setReference}
                 onMouseEnter={showPopover}
                 onMouseLeave={hidePopover}
               >
+                <BsGlobe />
                 <span>Tiếng Việt</span>
                 <FaChevronDown />
                 <AnimatePresence>
@@ -84,7 +88,10 @@ export default function MainHeader() {
                       <motion.div
                         ref={refs.setFloating}
                         className='flex flex-col gap-y-7 rounded-sm bg-white px-10 py-6'
-                        style={floatingStyles}
+                        style={{
+                          transformOrigin: `${middlewareData.arrow?.x}px top`,
+                          ...floatingStyles
+                        }}
                         initial={{ opacity: 0, transform: 'scale(0)' }}
                         animate={{ opacity: 1, transform: 'scale(1)' }}
                         exit={{ opacity: 0, transform: 'scale(0)' }}
@@ -107,10 +114,12 @@ export default function MainHeader() {
                 </AnimatePresence>
               </li>
               <li>
-                <Link to='/#!'>Đăng Ký</Link>
+                <Link to='/#!' className='hover:text-[#ffffffb3]'>
+                  Đăng Ký
+                </Link>
               </li>
               <li>
-                <Link to='/#!' className='border-l border-solid border-white pl-6'>
+                <Link to='/#!' className='border-l border-solid border-white pl-6 hover:text-[#ffffffb3]'>
                   Đăng Nhập
                 </Link>
               </li>
@@ -147,7 +156,7 @@ export default function MainHeader() {
                 </div>
               </div>
 
-              <button className='mr-1 flex h-[40px] w-[65px] items-center justify-center rounded-md bg-primaryColor'>
+              <button className='mr-1 flex h-16 w-28 items-center justify-center rounded-md bg-primaryColor hover:opacity-90'>
                 <IoSearch className=' text-[1.8rem] text-white' />
               </button>
             </form>
