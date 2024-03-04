@@ -1,17 +1,17 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { offset, shift, useFloating } from '@floating-ui/react'
-import { FloatingPortal, arrow } from '@floating-ui/react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { arrow } from '@floating-ui/react'
 import { IoSearch, IoNotificationsOutline } from 'react-icons/io5'
 import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
 import { BsQuestionCircle, BsGlobe } from 'react-icons/bs'
+import { Popover } from '@/components'
 
 export default function MainHeader() {
   const [isOpen, setIsOpen] = useState(false)
   const arrowRef = useRef(null)
-  const { refs, floatingStyles, middlewareData } = useFloating({
+  const floatConfig = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
     middleware: [
@@ -75,43 +75,14 @@ export default function MainHeader() {
               </li>
               <li
                 className='flex cursor-pointer items-center gap-x-2 hover:text-[#ffffffb3]'
-                ref={refs.setReference}
+                ref={floatConfig.refs.setReference}
                 onMouseEnter={showPopover}
                 onMouseLeave={hidePopover}
               >
                 <BsGlobe />
                 <span>Tiếng Việt</span>
                 <FaChevronDown />
-                <AnimatePresence>
-                  {isOpen && (
-                    <FloatingPortal>
-                      <motion.div
-                        ref={refs.setFloating}
-                        className='flex flex-col gap-y-7 rounded-sm bg-white px-10 py-6'
-                        style={{
-                          transformOrigin: `${middlewareData.arrow?.x}px top`,
-                          ...floatingStyles
-                        }}
-                        initial={{ opacity: 0, transform: 'scale(0)' }}
-                        animate={{ opacity: 1, transform: 'scale(1)' }}
-                        exit={{ opacity: 0, transform: 'scale(0)' }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div
-                          ref={arrowRef}
-                          style={{
-                            position: 'absolute',
-                            left: middlewareData.arrow?.x,
-                            top: middlewareData.arrow?.y
-                          }}
-                          className='-translate-y-[168%] border-[11px] border-solid border-white border-x-transparent border-t-transparent'
-                        />
-                        <button className='hover:text-primaryColor'>Tiếng Việt</button>
-                        <button className='hover:text-primaryColor'>Tiếng Anh</button>
-                      </motion.div>
-                    </FloatingPortal>
-                  )}
-                </AnimatePresence>
+                <Popover floatConfig={floatConfig} isOpen={isOpen} arrowRef={arrowRef} />
               </li>
               <li>
                 <Link to='/#!' className='hover:text-[#ffffffb3]'>
