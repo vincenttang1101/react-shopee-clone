@@ -1,7 +1,4 @@
-import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { offset, shift, useFloating } from '@floating-ui/react'
-import { arrow } from '@floating-ui/react'
 import { IoSearch, IoNotificationsOutline } from 'react-icons/io5'
 import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
@@ -9,29 +6,6 @@ import { BsQuestionCircle, BsGlobe } from 'react-icons/bs'
 import { Popover } from '@/components'
 
 export default function MainHeader() {
-  const [isOpen, setIsOpen] = useState(false)
-  const arrowRef = useRef(null)
-  const floatConfig = useFloating({
-    open: isOpen,
-    onOpenChange: setIsOpen,
-    middleware: [
-      arrow({
-        element: arrowRef
-      }),
-      offset(10),
-      shift()
-    ],
-    transform: false
-  })
-
-  const showPopover = () => {
-    setIsOpen(true)
-  }
-
-  const hidePopover = () => {
-    setIsOpen(false)
-  }
-
   return (
     <header className='bg-primaryColor'>
       <div className='container'>
@@ -73,18 +47,48 @@ export default function MainHeader() {
                 <BsQuestionCircle className='flex h-7 w-7' />
                 <Link to='/#!'>Hỗ Trợ</Link>
               </li>
-              <li
-                className='flex cursor-pointer items-center gap-x-2 hover:text-[#ffffffb3]'
-                ref={floatConfig.refs.setReference}
-                onMouseEnter={showPopover}
-                onMouseLeave={hidePopover}
+
+              <Popover
+                as='li'
+                className='flex flex-col gap-y-7 rounded-sm bg-white'
+                renderPopover={
+                  <div className='flex flex-col text-2xl'>
+                    <button className='px-10 py-4 hover:text-primaryColor'>Tiếng Việt</button>
+                    <button className='px-10 py-4 hover:text-primaryColor'>Tiếng Anh</button>
+                  </div>
+                }
               >
                 <BsGlobe />
                 <span>Tiếng Việt</span>
                 <FaChevronDown />
-                <Popover floatConfig={floatConfig} isOpen={isOpen} arrowRef={arrowRef} />
-              </li>
-              <li>
+              </Popover>
+
+              <Popover
+                as='li'
+                className='flex flex-col gap-y-7 rounded-sm bg-white'
+                renderPopover={
+                  <div className='flex flex-col text-2xl'>
+                    <Link to='#!' className='px-10 py-5 text-left hover:bg-slate-200 hover:text-primaryColor'>
+                      Tài Khoản Của Tôi
+                    </Link>
+                    <Link to='#!' className='px-10 py-5 text-left hover:bg-gray-200 hover:text-primaryColor'>
+                      Đơn Mua
+                    </Link>
+                    <button className='border-none px-10 py-5 text-left outline-none hover:bg-gray-200 hover:text-primaryColor'>
+                      Đăng Xuất
+                    </button>
+                  </div>
+                }
+              >
+                <img
+                  className='rounded-3xl'
+                  src='https://down-vn.img.susercontent.com/file/e40aebfdcdb9242d433230a3c23a664e_tn'
+                  alt='Avatar'
+                />
+                <span>tangtrinhquang</span>
+              </Popover>
+
+              {/* <li>
                 <Link to='/#!' className='hover:text-[#ffffffb3]'>
                   Đăng Ký
                 </Link>
@@ -93,7 +97,7 @@ export default function MainHeader() {
                 <Link to='/#!' className='border-l border-solid border-white pl-6 hover:text-[#ffffffb3]'>
                   Đăng Nhập
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
 
