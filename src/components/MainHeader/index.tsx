@@ -50,11 +50,11 @@ export default function MainHeader() {
 
               <Popover
                 as='li'
-                className='flex flex-col gap-y-7 rounded-sm bg-white'
+                className='flex flex-col gap-y-7 rounded-md bg-white'
                 renderPopover={
-                  <div className='flex flex-col text-2xl'>
-                    <button className='px-10 py-4 hover:text-primaryColor'>Tiếng Việt</button>
-                    <button className='px-10 py-4 hover:text-primaryColor'>Tiếng Anh</button>
+                  <div className='flex flex-col gap-y-7 py-5 pl-5 pr-44 text-2xl shadow-sm'>
+                    <button className='hover:text-primaryColor'>Tiếng Việt</button>
+                    <button className='hover:text-primaryColor'>Tiếng Anh</button>
                   </div>
                 }
               >
@@ -65,9 +65,9 @@ export default function MainHeader() {
 
               <Popover
                 as='li'
-                className='flex flex-col gap-y-7 rounded-sm bg-white'
+                className='flex flex-col gap-y-7 rounded-md bg-white'
                 renderPopover={
-                  <div className='flex flex-col text-2xl'>
+                  <div className='flex flex-col text-2xl shadow-sm'>
                     <Link to='#!' className='px-10 py-5 text-left hover:bg-slate-200 hover:text-primaryColor'>
                       Tài Khoản Của Tôi
                     </Link>
