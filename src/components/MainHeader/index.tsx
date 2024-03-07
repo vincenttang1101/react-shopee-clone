@@ -41,41 +41,45 @@ export default function MainHeader() {
             <ul className='flex items-center gap-x-6'>
               <li className='flex items-center gap-x-2 hover:text-[#ffffffb3]'>
                 <IoNotificationsOutline className='flex h-8 w-8' />
-                <Link to='/#!'>Thông Báo</Link>
+                <Link to='/#!' className='capitalize'>
+                  Thông báo
+                </Link>
               </li>
               <li className='flex items-center gap-x-2 hover:text-[#ffffffb3]'>
                 <BsQuestionCircle className='flex h-7 w-7' />
-                <Link to='/#!'>Hỗ Trợ</Link>
+                <Link to='/#!' className='capitalize'>
+                  Hỗ trợ
+                </Link>
               </li>
 
               <Popover
                 as='li'
-                className='flex flex-col gap-y-7 rounded-md bg-white'
+                className='flex cursor-pointer items-center gap-x-2'
                 renderPopover={
-                  <div className='flex flex-col gap-y-7 py-5 pl-5 pr-44 text-2xl shadow-sm'>
+                  <div className='flex flex-col gap-y-7 rounded-md bg-white py-6 pl-5 pr-44 shadow-md'>
                     <button className='hover:text-primaryColor'>Tiếng Việt</button>
                     <button className='hover:text-primaryColor'>Tiếng Anh</button>
                   </div>
                 }
               >
                 <BsGlobe />
-                <span>Tiếng Việt</span>
+                <span className='capitalize'>Tiếng Việt</span>
                 <FaChevronDown />
               </Popover>
 
               <Popover
                 as='li'
-                className='flex flex-col gap-y-7 rounded-md bg-white'
+                className='flex cursor-pointer items-center gap-x-2'
                 renderPopover={
-                  <div className='flex flex-col text-2xl shadow-sm'>
+                  <div className='flex flex-col rounded-sm bg-white text-2xl capitalize shadow-md'>
                     <Link to='#!' className='px-10 py-5 text-left hover:bg-slate-200 hover:text-primaryColor'>
-                      Tài Khoản Của Tôi
+                      Tài khoản của tôi
                     </Link>
                     <Link to='#!' className='px-10 py-5 text-left hover:bg-gray-200 hover:text-primaryColor'>
-                      Đơn Mua
+                      Đơn mua
                     </Link>
                     <button className='border-none px-10 py-5 text-left outline-none hover:bg-gray-200 hover:text-primaryColor'>
-                      Đăng Xuất
+                      Đăng xuất
                     </button>
                   </div>
                 }
@@ -117,17 +121,17 @@ export default function MainHeader() {
                   className='text[5rem] h-[45px] w-full bg-transparent px-6 placeholder-gray-500 outline-none placeholder:text-2xl'
                   placeholder='Shopee bao ship 0Đ - Đăng ký ngay!'
                 />
-                <div className='absolute -bottom-10 flex w-[120%] gap-x-7 text-[1.3rem] text-[#ffffffe6]'>
+                <div className='absolute -bottom-10 flex w-[120%] gap-x-7 text-[1.3rem] capitalize text-[#ffffffe6]'>
                   <span>Ốp</span>
-                  <span>Vợt Cầu Lông</span>
+                  <span>Vợt cầu lông</span>
                   <span>Áo 0đ</span>
                   <span>Áo Blish 7</span>
-                  <span>Set Áo Kiểu</span>
-                  <span>Điện Thoại 0đ</span>
+                  <span>Set áo kiểu</span>
+                  <span>Điện thoại 0đ</span>
                   <span>Style Hàn Quốc</span>
-                  <span>Set Đồ Gơn Phố</span>
-                  <span>Dép Nữ Xinh</span>
-                  <span>Áo Phông</span>
+                  <span>Set đồ gơn phố</span>
+                  <span>Dép nữ xinh</span>
+                  <span>Áo phông</span>
                 </div>
               </div>
 
@@ -136,7 +140,63 @@ export default function MainHeader() {
               </button>
             </form>
 
-            <PiShoppingCartSimpleBold className='cursor-pointer text-5xl text-white' />
+            <Popover
+              renderPopover={
+                <div className='text-md flex max-w-[400px] flex-col gap-y-8 rounded-md bg-white p-6 shadow-md'>
+                  <p className='capitalize text-gray-400'>Sản phẩm mới thêm</p>
+                  <div className='flex flex-col gap-y-6'>
+                    <div className='flex items-center justify-between gap-x-4'>
+                      <div className='flex items-center gap-x-4 overflow-hidden'>
+                        <img
+                          src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
+                          alt='product-in-cart'
+                          className='h-16 w-16 object-cover'
+                        />
+                        <div className='truncate'>
+                          Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
+                          phối độc quyền bởi BBae Lab
+                        </div>
+                      </div>
+                      <span className='text-primaryColor'>₫329.000</span>
+                    </div>
+                    <div className='flex items-center justify-between gap-x-4'>
+                      <div className='flex items-center gap-x-4 overflow-hidden'>
+                        <img
+                          src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
+                          alt='product-in-cart'
+                          className='h-16 w-16 object-cover'
+                        />
+                        <div className='truncate'>
+                          Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
+                          phối độc quyền bởi BBae Lab
+                        </div>
+                      </div>
+                      <span className='text-primaryColor'>₫329.000</span>
+                    </div>
+                    <div className='flex items-center justify-between gap-x-4'>
+                      <div className='flex items-center gap-x-4 overflow-hidden'>
+                        <img
+                          src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
+                          alt='product-in-cart'
+                          className='h-16 w-16 object-cover'
+                        />
+                        <div className='truncate'>
+                          Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
+                          phối độc quyền bởi BBae Lab
+                        </div>
+                      </div>
+                      <span className='text-primaryColor'>₫329.000</span>
+                    </div>
+                  </div>
+                  <button className='ml-auto rounded-md bg-primaryColor px-8 py-4 capitalize text-white hover:opacity-90'>
+                    Xem giỏ hàng
+                  </button>
+                </div>
+              }
+              className='justify-self-start'
+            >
+              <PiShoppingCartSimpleBold className='cursor-pointer text-5xl text-white' />
+            </Popover>
           </div>
         </div>
       </div>

@@ -1,16 +1,25 @@
-import { ElementType, useRef, useState } from 'react'
-import { FloatingPortal, arrow, offset, shift, useFloating } from '@floating-ui/react'
+import { type ElementType, useRef, useState } from 'react'
+import { type Placement, FloatingPortal, arrow, offset, shift, useFloating } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 interface IPopover {
-  as: ElementType
-  className: string
+  initialOpen?: boolean
+  as?: ElementType
+  className?: string
   children: React.ReactNode
   renderPopover: React.ReactNode
+  placement?: Placement
 }
 
-export default function Popover({ as: Element, className, children, renderPopover }: IPopover) {
-  const [isOpen, setIsOpen] = useState(false)
+export default function Popover({
+  initialOpen = false,
+  as: Element = 'div',
+  className,
+  children,
+  renderPopover,
+  placement = 'bottom-end'
+}: IPopover) {
+  const [isOpen, setIsOpen] = useState(initialOpen)
   const arrowRef = useRef(null)
   const floatConfig = useFloating({
     open: isOpen,
@@ -22,7 +31,8 @@ export default function Popover({ as: Element, className, children, renderPopove
       offset(10),
       shift()
     ],
-    transform: false
+    transform: false,
+    placement: placement
   })
 
   const showPopover = () => {
@@ -35,7 +45,7 @@ export default function Popover({ as: Element, className, children, renderPopove
 
   return (
     <Element
-      className='flex cursor-pointer items-center gap-x-2 hover:text-[#ffffffb3]'
+      className={className}
       ref={floatConfig.refs.setReference}
       onMouseEnter={showPopover}
       onMouseLeave={hidePopover}
@@ -46,7 +56,6 @@ export default function Popover({ as: Element, className, children, renderPopove
           <FloatingPortal>
             <motion.div
               ref={floatConfig.refs.setFloating}
-              className={className}
               style={{
                 transformOrigin: `${floatConfig.middlewareData.arrow?.x}px top`,
                 ...floatConfig.floatingStyles
