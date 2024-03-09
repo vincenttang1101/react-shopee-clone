@@ -1,6 +1,5 @@
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-import { Login, ProductList, Profile, Register } from '@/pages'
-import { AuthLayout, MainLayout } from '@/layouts'
+import { ROUTES } from '@/constants'
 
 export default function useRouteElements() {
   const isAuthenticated = true
@@ -17,48 +16,14 @@ export default function useRouteElements() {
     {
       path: '',
       element: <RejectedRoute />,
-      children: [
-        {
-          path: '/login',
-          element: (
-            <AuthLayout>
-              <Login />
-            </AuthLayout>
-          )
-        },
-        {
-          path: '/register',
-          element: (
-            <AuthLayout>
-              <Register />
-            </AuthLayout>
-          )
-        }
-      ]
+      children: [ROUTES.REGISTER, ROUTES.LOGIN]
     },
     {
       path: '',
       element: <ProtectedRoute />,
-      children: [
-        {
-          path: '/',
-          index: true,
-          element: (
-            <MainLayout>
-              <ProductList />
-            </MainLayout>
-          )
-        },
-        {
-          path: '/profile',
-          element: (
-            <MainLayout>
-              <Profile />
-            </MainLayout>
-          )
-        }
-      ]
-    }
+      children: [ROUTES.PROFILE]
+    },
+    ROUTES.PRODUCT_LIST
   ])
 
   return routeElements
