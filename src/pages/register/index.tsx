@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -14,7 +14,6 @@ import { AppContext } from '@/contexts'
 
 export default function Register() {
   const { setIsAuthenticated } = useContext(AppContext)
-  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -33,7 +32,6 @@ export default function Register() {
     registerMutation.mutate(body, {
       onSuccess: () => {
         setIsAuthenticated(true)
-        navigate('/')
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<Omit<IAuthSchema, 'confirm_password'>>>(error)) {

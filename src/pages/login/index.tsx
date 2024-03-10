@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
@@ -16,7 +16,6 @@ const loginSchema = authSchema.omit(['confirm_password'])
 
 export default function Login() {
   const { setIsAuthenticated } = useContext(AppContext)
-  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -34,7 +33,6 @@ export default function Login() {
     loginMutation.mutate(data, {
       onSuccess: () => {
         setIsAuthenticated(true)
-        navigate('/')
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<ILoginSchema>>(error)) {
