@@ -1,11 +1,27 @@
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { IoSearch, IoNotificationsOutline } from 'react-icons/io5'
 import { FaFacebook, FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold, PiInstagramLogoFill } from 'react-icons/pi'
 import { BsQuestionCircle, BsGlobe } from 'react-icons/bs'
 import { Popover } from '@/components'
+import { useMutation } from '@tanstack/react-query'
+import { authApi } from '@/apis'
+import { AppContext } from '@/contexts'
 
 export default function MainHeader() {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const logoutMutation = useMutation({
+    mutationFn: authApi.logout,
+    onSuccess: () => {
+      setIsAuthenticated(false)
+    }
+  })
+
+  const handleLogout = () => {
+    logoutMutation.mutate()
+  }
+
   return (
     <header className='bg-primaryColor'>
       <div className='container'>
@@ -67,41 +83,48 @@ export default function MainHeader() {
                 <FaChevronDown />
               </Popover>
 
-              <Popover
-                as='li'
-                className='flex cursor-pointer items-center gap-x-2'
-                renderPopover={
-                  <div className='flex flex-col rounded-sm bg-white text-2xl capitalize shadow-md'>
-                    <Link to='#!' className='px-10 py-5 text-left hover:bg-slate-200 hover:text-primaryColor'>
-                      Tài khoản của tôi
+              {isAuthenticated ? (
+                <Popover
+                  as='li'
+                  className='flex cursor-pointer items-center gap-x-2'
+                  renderPopover={
+                    <div className='flex flex-col rounded-sm bg-white text-2xl capitalize shadow-md'>
+                      <Link to='#!' className='px-10 py-5 text-left hover:bg-slate-200 hover:text-primaryColor'>
+                        Tài khoản của tôi
+                      </Link>
+                      <Link to='#!' className='px-10 py-5 text-left hover:bg-gray-200 hover:text-primaryColor'>
+                        Đơn mua
+                      </Link>
+                      <button
+                        className='border-none px-10 py-5 text-left outline-none hover:bg-gray-200 hover:text-primaryColor'
+                        onClick={handleLogout}
+                      >
+                        Đăng xuất
+                      </button>
+                    </div>
+                  }
+                >
+                  <img
+                    className='rounded-3xl'
+                    src='https://down-vn.img.susercontent.com/file/e40aebfdcdb9242d433230a3c23a664e_tn'
+                    alt='Avatar'
+                  />
+                  <span>tangtrinhquang</span>
+                </Popover>
+              ) : (
+                <>
+                  <li>
+                    <Link to='/register' className='hover:text-[#ffffffb3]'>
+                      Đăng Ký
                     </Link>
-                    <Link to='#!' className='px-10 py-5 text-left hover:bg-gray-200 hover:text-primaryColor'>
-                      Đơn mua
+                  </li>
+                  <li>
+                    <Link to='/login' className='border-l border-solid border-white pl-6 hover:text-[#ffffffb3]'>
+                      Đăng Nhập
                     </Link>
-                    <button className='border-none px-10 py-5 text-left outline-none hover:bg-gray-200 hover:text-primaryColor'>
-                      Đăng xuất
-                    </button>
-                  </div>
-                }
-              >
-                <img
-                  className='rounded-3xl'
-                  src='https://down-vn.img.susercontent.com/file/e40aebfdcdb9242d433230a3c23a664e_tn'
-                  alt='Avatar'
-                />
-                <span>tangtrinhquang</span>
-              </Popover>
-
-              {/* <li>
-                <Link to='/#!' className='hover:text-[#ffffffb3]'>
-                  Đăng Ký
-                </Link>
-              </li>
-              <li>
-                <Link to='/#!' className='border-l border-solid border-white pl-6 hover:text-[#ffffffb3]'>
-                  Đăng Nhập
-                </Link>
-              </li> */}
+                  </li>
+                </>
+              )}
             </ul>
           </nav>
 
