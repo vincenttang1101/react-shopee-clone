@@ -1,11 +1,10 @@
 import type { UseFormRegister } from 'react-hook-form'
 import styled from 'styled-components'
 
-interface IInputField {
+type IInputField = {
   name: string
   errorMessage?: string
   register: UseFormRegister<any>
-  [key: string]: any
 }
 
 const Input = styled.input<{ $hasError?: string }>`

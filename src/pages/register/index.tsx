@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Omit, omit } from 'lodash'
 import { Google, Facebook } from '@/assets/icons'
 import { IAuthSchema, authSchema } from '@/utils'
-import { InputField } from '@/components'
+import { Button, InputField } from '@/components'
 import { authApi } from '@/apis'
 import { isAxiosUnprocessableEntityError } from '@/utils'
 import { ErrorResponse } from '@/types'
@@ -96,12 +96,12 @@ export default function Register() {
               </div>
             </div>
 
-            <button
-              className='mt-4 rounded-[2px] bg-primaryColor py-[11px] text-[1.4rem] uppercase text-[#fff] hover:opacity-90'
+            <Button
+              className='mt-4 flex items-center justify-center rounded-[2px] bg-primaryColor py-[11px] text-[1.4rem] uppercase text-[#fff] hover:opacity-90'
               type='submit'
             >
               Đăng ký
-            </button>
+            </Button>
             <div
               className='mt-10 flex items-center justify-between gap-[15px] text-[1.3rem] uppercase text-[#ccc]
                         before:inline-block before:h-[1px] before:w-full before:bg-[#dbdbdb] before:content-[""]

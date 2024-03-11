@@ -2,7 +2,7 @@ import { type ElementType, useRef, useState } from 'react'
 import { type Placement, FloatingPortal, arrow, offset, shift, useFloating } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-interface IPopover {
+type IPopover = {
   initialOpen?: boolean
   as?: ElementType
   className?: string

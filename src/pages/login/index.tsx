@@ -1,14 +1,14 @@
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import { Google, Facebook } from '@/assets/icons'
 import { IAuthSchema, authSchema } from '@/utils/rules.util'
-import { InputField } from '@/components'
+import { Button, InputField } from '@/components'
 import { authApi } from '@/apis'
 import { isAxiosUnprocessableEntityError } from '@/utils'
 import { ErrorResponse } from '@/types'
-import { useContext } from 'react'
 import { AppContext } from '@/contexts'
 
 type ILoginSchema = Omit<IAuthSchema, 'confirm_password'>
@@ -83,12 +83,13 @@ export default function Login() {
                 />
               </div>
             </div>
-            <button
-              className='mt-4 rounded-[2px] bg-primaryColor py-[11px] text-[1.4rem] uppercase text-[#fff] hover:opacity-90'
+            <Button
+              className='mt-4 flex items-center justify-center rounded-[2px] bg-primaryColor py-[11px] text-[1.4rem] uppercase text-[#fff] hover:opacity-90'
               type='submit'
+              isLoading={loginMutation.isPending}
             >
               Đăng nhập
-            </button>
+            </Button>
             <span
               className='mt-10 flex items-center justify-between gap-[15px] text-[1.3rem] uppercase text-[#ccc]
                         before:inline-block before:h-[1px] before:w-full before:bg-[#dbdbdb] before:content-[""]

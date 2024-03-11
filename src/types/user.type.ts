@@ -1,6 +1,6 @@
 type Role = 'User' | 'Admin'
 
-export interface User {
+export type User = {
   _id: string
   roles: Role[]
   email: string

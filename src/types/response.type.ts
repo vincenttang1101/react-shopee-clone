@@ -1,11 +1,11 @@
 import { User } from '@/types/user.type'
 
-export interface SuccessResponse<Data> {
+export type SuccessResponse<Data> = {
   message: string
   data: Data
 }
 
-export interface ErrorResponse<Data> {
+export type ErrorResponse<Data> = {
   message: string
   data?: Data
 }

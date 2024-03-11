@@ -8,7 +8,7 @@ import {
   saveAccessTokenToLS
 } from '@/utils'
 
-interface ErrorType extends Omit<ErrorResponse<object>, 'data'> {}
+type ErrorType = Omit<ErrorResponse<object>, 'data'>
 
 class Http {
   instance: AxiosInstance
