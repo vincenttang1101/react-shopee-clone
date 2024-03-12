@@ -10,6 +10,7 @@ import { authApi } from '@/apis'
 import { isAxiosUnprocessableEntityError } from '@/utils'
 import { ErrorResponse } from '@/types'
 import { AppContext } from '@/contexts'
+import { PATHS } from '@/constants'
 
 type ILoginSchema = Omit<IAuthSchema, 'confirm_password'>
 const loginSchema = authSchema.omit(['confirm_password'])
@@ -120,7 +121,7 @@ export default function Login() {
             {/* Account link */}
             <div className='mt-8 text-center text-[1.4rem] text-[rgba(0,0,0,.26)]'>
               Bạn mới biết đến Shopee?{' '}
-              <Link to='/register' className='text-primaryColor'>
+              <Link to={PATHS.REGISTER} className='text-primaryColor'>
                 Đăng ký
               </Link>
             </div>

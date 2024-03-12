@@ -11,6 +11,7 @@ import { authApi } from '@/apis'
 import { isAxiosUnprocessableEntityError } from '@/utils'
 import { ErrorResponse } from '@/types'
 import { AppContext } from '@/contexts'
+import { PATHS } from '@/constants'
 
 export default function Register() {
   const { setIsAuthenticated } = useContext(AppContext)
@@ -139,7 +140,7 @@ export default function Register() {
             {/* Account link */}
             <div className='mt-8 text-center text-[1.4rem] text-[rgba(0,0,0,.26)]'>
               Bạn đã có tài khoản?{' '}
-              <Link to='/login' className='text-primaryColor'>
+              <Link to={PATHS.LOGIN} className='text-primaryColor'>
                 Đăng nhập
               </Link>
             </div>

@@ -1,3 +1,4 @@
+import { InputHTMLAttributes } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
 import styled from 'styled-components'
 
@@ -5,7 +6,7 @@ type IInputField = {
   name: string
   errorMessage?: string
   register: UseFormRegister<any>
-}
+} & InputHTMLAttributes<HTMLInputElement>
 
 const Input = styled.input<{ $hasError?: string }>`
   padding: 12px;

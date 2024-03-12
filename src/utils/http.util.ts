@@ -7,6 +7,7 @@ import {
   isAxiosUnprocessableEntityError,
   saveAccessTokenToLS
 } from '@/utils'
+import { PATHS } from '@/constants'
 
 type ErrorType = Omit<ErrorResponse<object>, 'data'>
 
@@ -40,10 +41,10 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config
-        if (url === '/login' || url === '/register') {
+        if (url === PATHS.REGISTER || url === PATHS.LOGIN) {
           this.accessToken = (response.data as AuthResponse).data.access_token
           saveAccessTokenToLS(this.accessToken)
-        } else if (url === '/logout') {
+        } else if (url === PATHS.LOGOUT) {
           this.accessToken = ''
           clearAccessTokenFromLS()
         }

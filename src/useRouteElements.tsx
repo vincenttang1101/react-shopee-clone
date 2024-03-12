@@ -1,17 +1,17 @@
 import { useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-import { ROUTES } from '@/constants'
+import { PATHS, ROUTES } from '@/constants'
 import { AppContext } from '@/contexts'
 
 export default function useRouteElements() {
   const { isAuthenticated } = useContext(AppContext)
 
   const ProtectedRoute = () => {
-    return isAuthenticated ? <Outlet /> : <Navigate to='/login' />
+    return isAuthenticated ? <Outlet /> : <Navigate to={PATHS.LOGIN} />
   }
 
   const RejectedRoute = () => {
-    return !isAuthenticated ? <Outlet /> : <Navigate to='/' />
+    return !isAuthenticated ? <Outlet /> : <Navigate to={PATHS.HOME} />
   }
 
   const routeElements = useRoutes([
