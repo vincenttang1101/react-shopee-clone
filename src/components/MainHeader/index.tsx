@@ -10,7 +10,7 @@ import { authApi } from '@/apis'
 import { AppContext } from '@/contexts'
 
 export default function MainHeader() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, setIsAuthenticated, profile } = useContext(AppContext)
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
@@ -109,7 +109,7 @@ export default function MainHeader() {
                     src='https://down-vn.img.susercontent.com/file/e40aebfdcdb9242d433230a3c23a664e_tn'
                     alt='Avatar'
                   />
-                  <span>tangtrinhquang</span>
+                  <span>{profile?.email}</span>
                 </Popover>
               ) : (
                 <>

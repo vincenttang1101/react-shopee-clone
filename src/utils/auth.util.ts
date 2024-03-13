@@ -1,5 +1,19 @@
-export const saveAccessTokenToLS = (access_token: string) => localStorage.setItem('access_token', access_token)
+import { User } from '@/types'
 
-export const clearAccessTokenFromLS = () => localStorage.removeItem('access_token')
+export const authUtils = {
+  setAccessTokenToLS: (access_token: string) => localStorage.setItem('access_token', access_token),
+  getAccessTokenFromLS: () => localStorage.getItem('access_token'),
 
-export const getAccessTokenFromLS = () => localStorage.getItem('access_token') || ''
+  setProfileToLS: (profile: User) => localStorage.setItem('profile', JSON.stringify(profile)),
+  getProfileFromLS: () => {
+    const profile = localStorage.getItem('profile')
+    if (profile) {
+      return JSON.parse(profile)
+    }
+  },
+
+  clearLS: () => {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('profile')
+  }
+}

@@ -1,22 +1,20 @@
 import axios, { AxiosError, type AxiosInstance } from 'axios'
 import { toast } from 'react-toastify'
-import { AuthResponse, ErrorResponse } from '@/types'
-import {
-  clearAccessTokenFromLS,
-  getAccessTokenFromLS,
-  isAxiosUnprocessableEntityError,
-  saveAccessTokenToLS
-} from '@/utils'
+import { AuthResponse, ErrorResponse, User } from '@/types'
+import { authUtils, isAxiosUnprocessableEntityError } from '@/utils'
 import { PATHS } from '@/constants'
 
 type ErrorType = Omit<ErrorResponse<object>, 'data'>
 
 class Http {
   instance: AxiosInstance
-  private accessToken: string
+  private accessToken: string | null
+  private profile: User | null
 
   constructor() {
-    this.accessToken = getAccessTokenFromLS()
+    this.accessToken = authUtils.getAccessTokenFromLS()
+    this.profile = authUtils.getProfileFromLS()
+
     this.instance = axios.create({
       baseURL: 'https://api-ecom.duthanhduoc.com/',
       timeout: 10000,
@@ -42,11 +40,15 @@ class Http {
       (response) => {
         const { url } = response.config
         if (url === PATHS.REGISTER || url === PATHS.LOGIN) {
-          this.accessToken = (response.data as AuthResponse).data.access_token
-          saveAccessTokenToLS(this.accessToken)
+          const result = response.data as AuthResponse
+          this.accessToken = result.data.access_token
+          authUtils.setAccessTokenToLS(this.accessToken)
+          this.profile = result.data.user
+          authUtils.setProfileToLS(this.profile)
         } else if (url === PATHS.LOGOUT) {
-          this.accessToken = ''
-          clearAccessTokenFromLS()
+          this.accessToken = null
+          this.profile = null
+          authUtils.clearLS()
         }
         return response
       },
