@@ -14,9 +14,6 @@ export default {
       },
       backgroundImage: {
         hero: "url('./src/assets/images/register-hero.png')"
-      },
-      screens: {
-        xs: '320px'
       }
     }
   },

@@ -1,5 +1,5 @@
 import { AuthLayout, MainLayout } from '@/layouts'
-import { Login, ProductList, Profile, Register } from '@/pages'
+import { Login, Home, Profile, Register } from '@/pages'
 
 type RouteKey = 'REGISTER' | 'LOGIN' | 'PROFILE' | 'PRODUCT_LIST'
 
@@ -41,7 +41,7 @@ export const ROUTES: IRoute = {
     index: true,
     element: (
       <MainLayout>
-        <ProductList />
+        <Home />
       </MainLayout>
     )
   }
