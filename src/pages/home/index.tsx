@@ -1,4 +1,4 @@
-import { AsideFilter, Product } from '@/components'
+import { AsideFilter, ProductItem } from '@/components'
 
 export default function Home() {
   return (
@@ -10,13 +10,13 @@ export default function Home() {
           </div>
           <div className='col-span-9'>
             <span>Sắp xếp theo</span>
-            <div className='grid sm:grid-cols-2 md:grid-cols-5'>
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
+            <div className='grid grid-cols-5'>
+              <ProductItem />
+              <ProductItem />
+              <ProductItem />
+              <ProductItem />
+              <ProductItem />
+              <ProductItem />
             </div>
           </div>
         </div>
