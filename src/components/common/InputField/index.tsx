@@ -2,11 +2,10 @@ import { InputHTMLAttributes } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
 import styled from 'styled-components'
 
-type IInputField = {
-  name: string
+type IInputField = InputHTMLAttributes<HTMLInputElement> & {
   errorMessage?: string
-  register: UseFormRegister<any>
-} & InputHTMLAttributes<HTMLInputElement>
+  register?: UseFormRegister<any>
+}
 
 const Input = styled.input<{ $hasError?: string }>`
   padding: 12px;
@@ -32,10 +31,12 @@ const Input = styled.input<{ $hasError?: string }>`
 `
 
 export default function InputField({ name, errorMessage, register, ...rest }: IInputField) {
+  const newRegister = register && name ? register(name) : {}
+
   return (
     <>
-      <Input className={name} $hasError={errorMessage} {...register(name)} autoComplete='off' {...rest} />
-      <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'> {errorMessage}</p>
+      <Input $hasError={errorMessage} {...newRegister} {...rest} />
+      {errorMessage && <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'>{errorMessage}</p>}
     </>
   )
 }

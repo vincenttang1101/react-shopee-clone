@@ -6,10 +6,10 @@ interface IMainLayout {
 
 export default function MainLayout({ children }: IMainLayout) {
   return (
-    <main>
+    <>
       <MainHeader />
-      {children}
+      <main className='bg-gray-200 py-20'>{children}</main>
       <Footer />
-    </main>
+    </>
   )
 }
