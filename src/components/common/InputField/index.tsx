@@ -1,41 +1,28 @@
 import { InputHTMLAttributes } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
-import styled from 'styled-components'
+import clsx from 'clsx'
 
 type IInputField = InputHTMLAttributes<HTMLInputElement> & {
   errorMessage?: string
   register?: UseFormRegister<any>
 }
 
-const Input = styled.input<{ $hasError?: string }>`
-  padding: 12px;
-  width: 100%;
-  border-radius: 2px;
-  font-size: 1.5rem;
-
-  border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : '#00000024')};
-  background: ${(props) => (props.$hasError ? '#fff6f7' : '#fff')};
-  box-shadow: ${(props) =>
-    props.$hasError ? '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' : 'none'};
-
-  &:focus {
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1);
-    outline: none;
-    border: 1px solid ${(props) => (props.$hasError ? '#ff424f' : 'rgba(0, 0, 0, 0.5)')};
-  }
-  &::placeholder {
-    padding-inline: 3px;
-  }
-`
-
 export default function InputField({ name, errorMessage, register, ...rest }: IInputField) {
+  const classes = clsx(
+    'p-5 w-full rounded-sm',
+    'text-2xl border border-solid border-slate-300',
+    'bg-white focus:outline-none focus:border',
+    'focus:border-solid focus:border-slate-900 focus:shadow-md',
+    {
+      'focus:border-red-400 border-red-400 bg-red-50 shadow-md': Boolean(errorMessage)
+    }
+  )
+
   const newRegister = register && name ? register(name) : {}
 
   return (
     <>
-      <Input $hasError={errorMessage} {...newRegister} {...rest} />
+      <input className={classes} {...newRegister} {...rest} />
       {errorMessage && <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'>{errorMessage}</p>}
     </>
   )
