@@ -57,7 +57,7 @@ export default function Login() {
       <div className='container'>
         <div className='flex h-screen w-full items-center justify-center bg-contain bg-center bg-no-repeat lg:bg-hero'>
           {/* Login Form */}
-          <div className='ml-[50%] h-full xs:hidden lg:block'></div>
+          <div className='xs:hidden ml-[50%] h-full lg:block'></div>
           <form
             className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'
             onSubmit={handleSubmit(onSubmit)}

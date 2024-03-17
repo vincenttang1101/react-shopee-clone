@@ -44,9 +44,15 @@ export default function AsideFilter() {
           <section className='flex flex-col gap-y-6'>
             <h3 className='capitalize'>Khoảng giá</h3>
             <div className='flex items-center justify-between gap-x-2'>
-              <InputField className='h-12 placeholder:text-xl' placeholder='₫ TỪ'></InputField>
+              <InputField
+                className='h-12 placeholder:text-xl focus:border-slate-300 focus:shadow-none'
+                placeholder='₫ TỪ'
+              ></InputField>
               <div className='h-[1px] w-14 bg-gray-400' />
-              <InputField className='h-12 placeholder:text-xl' placeholder='₫ ĐẾN'></InputField>
+              <InputField
+                className='h-12 placeholder:text-xl focus:border-slate-300 focus:shadow-none'
+                placeholder='₫ ĐẾN'
+              ></InputField>
             </div>
             <Button className='rounded-md bg-primaryColor py-3 text-2xl uppercase text-slate-100 hover:opacity-90'>
               Áp dụng

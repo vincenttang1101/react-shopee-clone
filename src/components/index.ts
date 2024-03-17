@@ -7,3 +7,4 @@ export { default as Popover } from '@/components/common/Popover'
 
 export { default as AsideFilter } from '@/components/product/AsideFilter'
 export { default as ProductItem } from '@/components/product/ProductItem'
+export { default as ProductSorter } from '@/components/product/ProductSorter'

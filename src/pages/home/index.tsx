@@ -1,4 +1,4 @@
-import { AsideFilter, ProductItem } from '@/components'
+import { AsideFilter, ProductItem, ProductSorter } from '@/components'
 
 export default function Home() {
   return (
@@ -9,7 +9,9 @@ export default function Home() {
             <AsideFilter />
           </div>
           <div className='col-span-9'>
-            <div>Sắp xếp theo</div>
+            <div>
+              <ProductSorter />
+            </div>
             <div className='mt-12 grid grid-cols-5'>
               {Array(30)
                 .fill(0)
