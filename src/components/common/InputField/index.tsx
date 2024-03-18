@@ -9,8 +9,8 @@ type InputField = InputHTMLAttributes<HTMLInputElement> & {
 
 export default function InputField({ className, name, errorMessage, register, ...rest }: InputField) {
   const classes = clsx(
-    'p-5 w-full rounded-sm',
-    'text-2xl border border-solid border-slate-300',
+    'p-2 w-full rounded-sm',
+    'border border-solid border-slate-300',
     'bg-white focus:outline-none focus:border',
     'focus:border-solid focus:border-slate-900 focus:shadow-md',
     {
@@ -22,9 +22,9 @@ export default function InputField({ className, name, errorMessage, register, ..
   const newRegister = register && name ? register(name) : {}
 
   return (
-    <>
+    <div>
       <input className={classes} {...newRegister} {...rest} />
-      {errorMessage && <p className='min-h-[2rem] text-[1.3rem] text-[#ff424f]'>{errorMessage}</p>}
-    </>
+      {errorMessage && <p className='min-h-[2rem] text-lg text-[#ff424f]'>{errorMessage}</p>}
+    </div>
   )
 }

@@ -24,12 +24,6 @@ export default {
           width: '1210px',
           maxWidth: 'calc(100% - 48px)',
           marginInline: 'auto'
-        },
-        '.footerTitle': {
-          marginBottom: '13px',
-          fontSize: '1.1rem',
-          fontWeight: '700',
-          textTransform: 'uppercase'
         }
       })
     })

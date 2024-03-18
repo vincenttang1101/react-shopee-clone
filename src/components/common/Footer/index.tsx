@@ -19,24 +19,20 @@ import {
   Carrier8,
   Carrier9,
   Carrier10,
-  Carrier11,
-  App1,
-  App2,
-  App3,
-  App4
+  Carrier11
 } from '@/assets/images'
 
 export default function Footer() {
   return (
-    <footer className='bg-[#f5f5f5] py-[35px] xs:hidden lg:block'>
+    <footer className='bg-gray-50 py-14 lg:block'>
       {/* Container */}
       <div className='container'>
         {/* Row item 01 */}
-        <div className='grid grid-cols-5 border-b border-solid border-b-[#0000001a] pb-16'>
+        <div className='grid grid-cols-4'>
           {/* Column item 01 */}
           <div>
-            <p className='footerTitle'>CHĂM SÓC KHÁCH HÀNG</p>
-            <ul className='flex flex-col gap-3 text-[1.2rem] text-[rgba(0,0,0,.65)]'>
+            <p className='mb-4 text-sm font-bold uppercase'>Chăm sóc khách hàng</p>
+            <ul className='flex flex-col gap-y-3 text-sm text-gray-700'>
               <li>Trung Tâm Trợ Giúp</li>
               <li>IShopee Blog</li>
               <li>Shopee Mall</li>
@@ -53,8 +49,8 @@ export default function Footer() {
 
           {/* Column item 02 */}
           <div>
-            <p className='footerTitle'>VỀ SHOPEE</p>
-            <ul className='flex flex-col gap-3 text-[1.2rem] text-[rgba(0,0,0,.65)]'>
+            <p className='mb-4 text-sm font-bold uppercase'>Về Shopee</p>
+            <ul className='flex flex-col gap-y-3 text-sm text-gray-700'>
               <li>Giới Thiệu Về Shopee Việt Nam</li>
               <li>Tuyển Dụng</li>
               <li>Điều Khoản Shopee</li>
@@ -71,7 +67,7 @@ export default function Footer() {
           <div className='flex flex-col gap-y-10'>
             {/* Row 01 */}
             <div>
-              <p className='footerTitle'>THANH TOÁN</p>
+              <p className='mb-4 text-sm font-bold uppercase'>Thanh toán</p>
               <ul className='flex flex-wrap gap-3 text-[1.2rem] text-[rgba(0,0,0,.65)]'>
                 <li className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'>
                   <Link to='#!'>
@@ -181,7 +177,7 @@ export default function Footer() {
 
           {/* Column item 04 */}
           <div>
-            <p className='footerTitle'>THEO DÕI CHÚNG TÔI TRÊN</p>
+            <p className='mb-4 text-sm font-bold uppercase'>Theo dõi chúng tôi trên</p>
             <ul className='flex flex-col gap-3 text-[1.2rem] text-[#000000a6]'>
               <li>
                 <Link to='https://www.facebook.com/vincenttang1101/' className='flex items-center gap-3 '>
@@ -203,57 +199,39 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Column item 05 */}
-          <div>
-            <p className='footerTitle'>TẢI ỨNG DỤNG SHOPEE NGAY THÔI</p>
-            <div className='flex gap-4'>
-              <div>
-                <img
-                  src={App1}
-                  alt='Download App'
-                  className='h-full bg-white object-cover p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]'
-                />
-              </div>
-              <div className='flex flex-col gap-4'>
-                <img src={App2} alt='Download App' className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]' />
-                <img src={App3} alt='Download App' className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]' />
-                <img src={App4} alt='Download App' className='bg-white p-2 [box-shadow:0_1px_1px_rgba(0,_0,_0,_0.2)]' />
-              </div>
-            </div>
-          </div>
         </div>
 
+        <div className='my-10 h-[1px] bg-gray-300' />
+
         {/* Row item 02 */}
-        <div className='flex justify-between pt-[35px] text-[1.4rem] text-[#0000008a]'>
-          {/* Column item 01 */}
-          <span>© 2024 Shopee. Tất cả các quyền được bảo lưu.</span>
-          <div>
+        <div className='flex justify-between text-sm text-gray-500'>
+          <div>© 2024 Shopee. Tất cả các quyền được bảo lưu.</div>
+          <div className='flex-shrink-0'>
             <span>Quốc gia & Khu vực:</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Singapore</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Indonesia</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Thái Lan</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Malaysia</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Việt Nam</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Philippines</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Brazil</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>México</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Colombia</span>
-            <span className='border-r border-solid border-r-[#0000008a] px-2'>Chile</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Singapore</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Indonesia</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Thái Lan</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Malaysia</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Việt Nam</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Philippines</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Brazil</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>México</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Colombia</span>
+            <span className='border-r border-solid border-r-slate-600 px-2'>Chile</span>
             <span className='pl-2'>Đài Loan</span>
           </div>
         </div>
 
         {/* Row item 03 */}
-        <div className='mt-20 flex justify-center text-[1.1rem] uppercase text-[#0000008a]'>
-          <span className='border-r border-solid border-r-[#00000017] px-7'>CHÍNH SÁCH BẢO MẬT</span>
-          <span className='border-r border-solid border-r-[#00000017] px-7'>QUY CHẾ HOẠT ĐỘNG</span>
-          <span className='border-r border-solid border-r-[#00000017] px-7'>CHÍNH SÁCH VẬN CHUYỂN</span>
-          <span className='pl-7'>CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</span>
+        <div className='mt-14 flex justify-center text-sm uppercase text-gray-500'>
+          <span className='border-r border-solid border-r-slate-600 px-7'>Chính sách bảo mật</span>
+          <span className='border-r border-solid border-r-slate-600 px-7'>Quy chế hoạt động</span>
+          <span className='border-r border-solid border-r-slate-600 px-7'>Chính sách vận chuyển</span>
+          <span className='pl-7'>Chính sách trả hàng và hoàn tiền</span>
         </div>
 
         {/* Row item 04 */}
-        <div className='mt-10 text-center text-[1.1rem] text-[#000000a6]'>
+        <div className='mt-10 text-center text-sm text-gray-500'>
           <p>
             Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành
             phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn

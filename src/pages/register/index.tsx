@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Omit, omit } from 'lodash'
-import { Google, Facebook } from '@/assets/icons'
+// import { Google, Facebook } from '@/assets/icons'
 import { IAuthSchema, authSchema } from '@/utils'
 import { Button, InputField } from '@/components'
 import { authApi } from '@/apis'
@@ -55,65 +55,54 @@ export default function Register() {
     <div className='bg-primaryColor'>
       {/* Container */}
       <div className='container'>
-        <div className='flex h-screen w-full items-center justify-center bg-contain bg-center bg-no-repeat lg:bg-hero'>
+        <div className='flex h-screen w-full items-center justify-end bg-contain bg-center bg-no-repeat pr-10 lg:bg-hero'>
           {/* Register form */}
-          <div className='ml-[50%] h-full xs:hidden lg:block'></div>
           <form
-            className='flex w-[400px] flex-col rounded-[4px] bg-[#fff] px-12 py-10 shadow-md'
+            className='flex w-[400px] flex-col rounded-md bg-white px-7 py-10 shadow-md'
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
-            <p className='text-[2rem]'>Đăng ký</p>
-            {/* Input form */}
-            <div className='mt-8'>
-              <div className='mt-4'>
-                <InputField
-                  name='email'
-                  errorMessage={errors.email?.message}
-                  register={register}
-                  type='email'
-                  placeholder='Email'
-                />
-              </div>
-
-              <div className='mt-4'>
-                <InputField
-                  name='password'
-                  errorMessage={errors.password?.message}
-                  register={register}
-                  type='password'
-                  placeholder='Mật khẩu'
-                />
-              </div>
-
-              <div className='mt-4'>
-                <InputField
-                  name='confirm_password'
-                  errorMessage={errors.confirm_password?.message}
-                  register={register}
-                  type='password'
-                  placeholder='Xác nhận mật khẩu'
-                />
-              </div>
+            <p className='text-2xl'>Đăng ký</p>
+            <div className='mt-7 flex flex-col gap-y-7'>
+              <InputField
+                name='email'
+                errorMessage={errors.email?.message}
+                register={register}
+                type='email'
+                placeholder='Email'
+              />
+              <InputField
+                name='password'
+                errorMessage={errors.password?.message}
+                register={register}
+                type='password'
+                placeholder='Mật khẩu'
+              />
+              <InputField
+                name='confirm_password'
+                errorMessage={errors.confirm_password?.message}
+                register={register}
+                type='password'
+                placeholder='Xác nhận mật khẩu'
+              />
             </div>
 
             <Button
-              className='mt-4 flex items-center justify-center rounded-[2px] bg-primaryColor py-[11px] text-[1.4rem] uppercase text-[#fff] hover:opacity-90'
+              className='mt-6 rounded-sm bg-primaryColor py-2 text-center uppercase text-white hover:opacity-90'
               type='submit'
             >
               Đăng ký
             </Button>
-            <div
+            {/* <div
               className='mt-10 flex items-center justify-between gap-[15px] text-[1.3rem] uppercase text-[#ccc]
                         before:inline-block before:h-[1px] before:w-full before:bg-[#dbdbdb] before:content-[""]
                         after:inline-block after:h-[1px] after:w-full after:bg-[#dbdbdb] after:content-[""]'
             >
               Hoặc
-            </div>
+            </div> */}
 
             {/* OAuth list */}
-            <div className='mt-6 flex gap-4'>
-              {/* OAuth item 01 */}
+            {/* <div className='flex gap-4 mt-6'>
               <Link to='#!' className='flex-1 hover:bg-[#00000005]'>
                 <div className='flex items-center gap-2 border border-solid border-[rgba(0,0,0,.26)] px-14 py-3'>
                   <img className='h-[24px] w-[24px]' src={Facebook} alt='Facebook' />
@@ -121,25 +110,17 @@ export default function Register() {
                 </div>
               </Link>
 
-              {/* OAuth item 02 */}
               <Link to='#!' className='flex-1 hover:bg-[#00000005]'>
                 <div className='flex items-center gap-2 border border-solid border-[rgba(0,0,0,.26)] px-14 py-3'>
                   <img className='h-[24px] w-[24px]' src={Google} alt='Google' />
                   <span className='text-[1.4rem]'>Google</span>
                 </div>
               </Link>
-            </div>
-
-            {/* Legal */}
-            <div className='mx-auto mt-8 max-w-[283px] text-center text-[1.2rem]'>
-              Bằng việc đăng kí, bạn đã đồng ý với Shopee về{' '}
-              <span className='text-primaryColor'>Điều khoản dịch vụ</span> &{' '}
-              <span className='text-primaryColor'>Chính sách và bảo mật</span>
-            </div>
+            </div> */}
 
             {/* Account link */}
-            <div className='mt-8 text-center text-[1.4rem] text-[rgba(0,0,0,.26)]'>
-              Bạn đã có tài khoản?{' '}
+            <div className='mt-8 text-center text-lg'>
+              <span className='text-gray-400'>Bạn đã có tài khoản? </span>
               <Link to={PATHS.LOGIN} className='text-primaryColor'>
                 Đăng nhập
               </Link>
