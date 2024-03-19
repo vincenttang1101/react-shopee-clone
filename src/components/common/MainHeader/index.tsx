@@ -25,14 +25,14 @@ export default function MainHeader() {
   return (
     <header className='bg-primaryColor'>
       <div className='container'>
-        <div className='pb-10 pt-5'>
-          <nav className='text-[1.5rem] font-light text-white'>
+        <div className='py-5'>
+          <nav className='text-lg font-light text-white'>
             <ul className='flex items-center justify-end gap-x-6'>
               <Popover
                 as='li'
                 className='flex cursor-pointer items-center gap-x-2'
                 renderPopover={
-                  <div className='flex flex-col gap-y-7 rounded-md bg-white py-6 pl-5 pr-44 shadow-md'>
+                  <div className='flex flex-col gap-y-7 rounded-sm bg-white py-6 pl-5 pr-44 shadow-md'>
                     <button className='hover:text-primaryColor'>Tiếng Việt</button>
                     <button className='hover:text-primaryColor'>Tiếng Anh</button>
                   </div>
@@ -74,12 +74,15 @@ export default function MainHeader() {
               ) : (
                 <>
                   <li>
-                    <Link to='/register' className='hover:text-[#ffffffb3]'>
+                    <Link to='/register' className='transition-colors hover:text-gray-300'>
                       Đăng Ký
                     </Link>
                   </li>
                   <li>
-                    <Link to='/login' className='border-l border-solid border-white pl-6 hover:text-[#ffffffb3]'>
+                    <Link
+                      to='/login'
+                      className='border-l border-solid border-white pl-6 transition-colors hover:text-gray-300'
+                    >
                       Đăng Nhập
                     </Link>
                   </li>
@@ -97,29 +100,15 @@ export default function MainHeader() {
               </svg>
             </Link>
 
-            <form className='col-span-9 flex items-center rounded-md bg-white'>
-              <div className='relative w-full'>
-                <input
-                  type='text'
-                  className='text[5rem] h-[45px] w-full bg-transparent px-6 placeholder-gray-500 outline-none placeholder:text-2xl'
-                  placeholder='Shopee bao ship 0Đ - Đăng ký ngay!'
-                />
-                <div className='absolute -bottom-10 flex w-[120%] gap-x-7 text-[1.3rem] capitalize text-[#ffffffe6]'>
-                  <span>Ốp</span>
-                  <span>Vợt cầu lông</span>
-                  <span>Áo 0đ</span>
-                  <span>Áo Blish 7</span>
-                  <span>Set áo kiểu</span>
-                  <span>Điện thoại 0đ</span>
-                  <span>Style Hàn Quốc</span>
-                  <span>Set đồ gơn phố</span>
-                  <span>Dép nữ xinh</span>
-                  <span>Áo phông</span>
-                </div>
-              </div>
+            <form className='col-span-9 flex items-center rounded-sm bg-white'>
+              <input
+                type='text'
+                className='h-[45px] w-full bg-transparent px-4 text-lg text-gray-600 outline-none'
+                placeholder='Shopee bao ship 0Đ - Đăng ký ngay!'
+              />
 
-              <button className='mr-1 flex h-16 w-28 items-center justify-center rounded-md bg-primaryColor hover:opacity-90'>
-                <IoSearch className=' text-[1.8rem] text-white' />
+              <button className='mr-1 flex h-10 w-20 items-center justify-center rounded-sm bg-primaryColor hover:opacity-90'>
+                <IoSearch className='text-xl text-white' />
               </button>
             </form>
 
@@ -129,11 +118,11 @@ export default function MainHeader() {
                   <p className='capitalize text-gray-400'>Sản phẩm mới thêm</p>
                   <div className='flex flex-col gap-y-6'>
                     <div className='flex items-center justify-between gap-x-4'>
-                      <div className='flex items-center gap-x-4 overflow-hidden'>
+                      <div className='flex items-center gap-x-2 overflow-hidden'>
                         <img
                           src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
                           alt='product-in-cart'
-                          className='h-16 w-16 object-cover'
+                          className='h-14 w-14 object-cover'
                         />
                         <div className='truncate'>
                           Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
@@ -143,11 +132,11 @@ export default function MainHeader() {
                       <span className='text-primaryColor'>₫329.000</span>
                     </div>
                     <div className='flex items-center justify-between gap-x-4'>
-                      <div className='flex items-center gap-x-4 overflow-hidden'>
+                      <div className='flex items-center gap-x-2 overflow-hidden'>
                         <img
                           src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
                           alt='product-in-cart'
-                          className='h-16 w-16 object-cover'
+                          className='h-14 w-14 object-cover'
                         />
                         <div className='truncate'>
                           Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
@@ -157,11 +146,11 @@ export default function MainHeader() {
                       <span className='text-primaryColor'>₫329.000</span>
                     </div>
                     <div className='flex items-center justify-between gap-x-4'>
-                      <div className='flex items-center gap-x-4 overflow-hidden'>
+                      <div className='flex items-center gap-x-2 overflow-hidden'>
                         <img
                           src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
                           alt='product-in-cart'
-                          className='h-16 w-16 object-cover'
+                          className='h-14 w-14 object-cover'
                         />
                         <div className='truncate'>
                           Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
@@ -171,14 +160,14 @@ export default function MainHeader() {
                       <span className='text-primaryColor'>₫329.000</span>
                     </div>
                   </div>
-                  <button className='ml-auto rounded-md bg-primaryColor px-8 py-4 capitalize text-white hover:opacity-90'>
+                  <button className='ml-auto rounded-sm bg-primaryColor px-4 py-2 capitalize text-white hover:opacity-90'>
                     Xem giỏ hàng
                   </button>
                 </div>
               }
               className='justify-self-start'
             >
-              <PiShoppingCartSimpleBold className='cursor-pointer text-5xl text-white' />
+              <PiShoppingCartSimpleBold className='cursor-pointer text-4xl text-white' />
             </Popover>
           </div>
         </div>
