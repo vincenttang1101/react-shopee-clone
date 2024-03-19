@@ -8,7 +8,7 @@ export default function MainLayout({ children }: IMainLayout) {
   return (
     <>
       <MainHeader />
-      <main className='bg-gray-200 py-20'>{children}</main>
+      <main className='bg-gray-200 py-9'>{children}</main>
       <Footer />
     </>
   )

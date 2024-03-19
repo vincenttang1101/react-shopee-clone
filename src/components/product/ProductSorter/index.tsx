@@ -2,27 +2,27 @@ import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5'
 
 export default function ProductSorter() {
   return (
-    <div className='flex items-center justify-between rounded-md bg-gray-300 px-11 py-5 text-2xl'>
-      <div className='flex items-center'>
+    <div className='flex items-center justify-between rounded-sm bg-gray-300 px-6 py-2'>
+      <div className='flex items-center gap-x-3'>
         <span>Sắp xếp theo</span>
-        <ul className='ml-4 flex gap-x-4 capitalize'>
+        <ul className='flex gap-x-4 capitalize'>
           <li>
-            <button className='min-w-[90px] rounded-md bg-primaryColor px-7 py-4 text-center text-white transition-opacity hover:opacity-90 hover:shadow-sm'>
+            <button className='min-w-[90px] rounded-sm bg-primaryColor px-5 py-2 text-center text-white transition-opacity hover:opacity-90 hover:shadow-sm'>
               Phổ biến
             </button>
           </li>
           <li>
-            <button className='min-w-[90px] rounded-md bg-white px-7 py-4 text-center transition-colors hover:bg-slate-50 hover:shadow-sm'>
+            <button className='min-w-[90px] rounded-sm bg-white px-5 py-2 text-center transition-colors hover:bg-slate-50 hover:shadow-sm'>
               Mới nhất
             </button>
           </li>
           <li>
-            <button className='min-w-[90px] rounded-md bg-white px-7 py-4 text-center transition-colors hover:bg-slate-50 hover:shadow-sm'>
+            <button className='min-w-[90px] rounded-sm bg-white px-5 py-2 text-center transition-colors hover:bg-slate-50 hover:shadow-sm'>
               Bán chạy
             </button>
           </li>
           <li>
-            <select className='h-full rounded-md px-4 focus:outline-none'>
+            <select className='h-full rounded-sm px-4 focus:outline-none'>
               <option disabled>Giá</option>
               <option>Giá: Thấp đến Cao</option>
               <option>Giá: Cao đến Thấp</option>
@@ -30,19 +30,19 @@ export default function ProductSorter() {
           </li>
         </ul>
       </div>
-      <div className='flex items-center gap-x-8'>
+      <div className='flex items-center gap-x-6'>
         <div>
           <span className='text-primaryColor'>1</span>
           <span>/2</span>
         </div>
         <div>
           <button
-            className='cursor-not-allowed rounded-md border border-solid border-gray-400 bg-gray-300 p-4 transition-colors hover:border-white/60 hover:bg-white/60 disabled:border-gray-400 disabled:bg-white disabled:opacity-30'
+            className='cursor-not-allowed rounded-sm border border-solid border-gray-400 bg-gray-300 p-3 transition-colors hover:border-white/60 hover:bg-white/60 disabled:border-gray-400 disabled:bg-white disabled:opacity-30'
             disabled
           >
             <IoChevronBackOutline />
           </button>
-          <button className='rounded-md border border-solid border-gray-400 bg-gray-300 p-4 transition-colors hover:border-white/60 hover:bg-white/60'>
+          <button className='b3-gray-300 rounded-sm border border-solid border-gray-400 p-3 transition-colors hover:border-white/60 hover:bg-white/60'>
             <IoChevronForwardOutline />
           </button>
         </div>

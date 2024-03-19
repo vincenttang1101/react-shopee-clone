@@ -10,7 +10,7 @@ type InputField = InputHTMLAttributes<HTMLInputElement> & {
 export default function InputField({ className, name, errorMessage, register, ...rest }: InputField) {
   const classes = clsx(
     'p-2 w-full rounded-sm',
-    'border border-solid border-slate-300',
+    'border border-solid border-gray-300',
     'bg-white focus:outline-none focus:border',
     'focus:border-solid focus:border-slate-900 focus:shadow-md',
     {

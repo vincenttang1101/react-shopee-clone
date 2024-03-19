@@ -5,10 +5,10 @@ export default function Home() {
     <div>
       <div className='container'>
         <div className='grid grid-cols-12'>
-          <div className='col-span-3 w-4/5'>
+          <div className='col-span-3 w-2/3'>
             <AsideFilter />
           </div>
-          <div className='col-span-9'>
+          <div className='col-span-9 -ml-20'>
             <div>
               <ProductSorter />
             </div>

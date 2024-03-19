@@ -9,16 +9,18 @@ export default function AsideFilter() {
   return (
     <aside>
       <div className='flex flex-col gap-y-14'>
-        <section className='flex flex-col gap-y-8'>
-          <div className='flex items-center gap-x-4'>
-            <TfiMenuAlt className='h-7 w-7' />
-            <h2 className='text-3xl font-semibold capitalize'>Tất cả danh mục</h2>
+        <section className='flex flex-col gap-y-5'>
+          <div className='flex items-center gap-x-3'>
+            <TfiMenuAlt className='h-5 w-5' />
+            <h2 className='text-lg font-semibold capitalize'>Tất cả danh mục</h2>
           </div>
+
           <div className='h-[1px] bg-gray-300' />
-          <ul className='ml-7 flex flex-col gap-y-5 text-2xl capitalize'>
+
+          <ul className='ml-4 flex flex-col gap-y-5 capitalize'>
             <li>
               <Link to='#!' className='relative flex items-center font-bold text-primaryColor'>
-                <RxTriangleRight className='absolute -left-9' />
+                <RxTriangleRight className='absolute -left-6' />
                 <span>Thời trang nam</span>
               </Link>
             </li>
@@ -35,30 +37,34 @@ export default function AsideFilter() {
           </ul>
         </section>
 
-        <section className='flex flex-col gap-y-8'>
-          <div className='flex items-center gap-x-4'>
-            <LiaFilterSolid className='h-7 w-7' />
-            <h2 className='text-3xl font-semibold capitalize'>Bộ lọc tìm kiếm</h2>
+        <section className='flex flex-col gap-y-5'>
+          <div className='flex items-center gap-x-2'>
+            <LiaFilterSolid className='h-6 w-6' />
+            <h2 className='text-lg font-semibold capitalize'>Bộ lọc tìm kiếm</h2>
           </div>
+
           <div className='h-[1px] bg-gray-300' />
+
           <section className='flex flex-col gap-y-6'>
             <h3 className='capitalize'>Khoảng giá</h3>
             <div className='flex items-center justify-between gap-x-2'>
               <InputField
-                className='h-12 placeholder:text-xl focus:border-slate-300 focus:shadow-none'
+                className='h-8 border-gray-300 text-sm focus:border-gray-300 focus:shadow-none'
                 placeholder='₫ TỪ'
               ></InputField>
-              <div className='h-[1px] w-14 bg-gray-400' />
+              <div className='h-[1px] w-5 bg-gray-400' />
               <InputField
-                className='h-12 placeholder:text-xl focus:border-slate-300 focus:shadow-none'
+                className='h-8 text-sm focus:border-gray-300 focus:shadow-none focus:outline-none'
                 placeholder='₫ ĐẾN'
               ></InputField>
             </div>
-            <Button className='rounded-md bg-primaryColor py-3 text-2xl uppercase text-slate-100 hover:opacity-90'>
+            <Button className='rounded-sm bg-primaryColor py-1 text-center uppercase text-slate-100 hover:opacity-90'>
               Áp dụng
             </Button>
           </section>
+
           <div className='h-[1px] bg-gray-300' />
+
           <section className='flex flex-col gap-y-4'>
             <div className='capitalize'>Đánh giá</div>
             <div className='ml-2'>
@@ -187,8 +193,10 @@ export default function AsideFilter() {
               </ul>
             </div>
           </section>
+
           <div className='h-[1px] bg-gray-300' />
-          <Button className='rounded-md bg-primaryColor py-3 text-2xl uppercase text-slate-100 hover:opacity-90'>
+
+          <Button className='rounded-sm bg-primaryColor py-1 text-center uppercase text-slate-100 hover:opacity-90'>
             Xóa tất cả
           </Button>
         </section>
