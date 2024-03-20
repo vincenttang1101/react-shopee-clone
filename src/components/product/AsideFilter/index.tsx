@@ -3,7 +3,7 @@ import { TfiMenuAlt } from 'react-icons/tfi'
 import { RxTriangleRight } from 'react-icons/rx'
 import { LiaFilterSolid } from 'react-icons/lia'
 import { FaRegStar, FaStar } from 'react-icons/fa'
-import { Button, InputField } from '@/components'
+import { Button, InputField } from '@/components/common'
 
 export default function AsideFilter() {
   return (

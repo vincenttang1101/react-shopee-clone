@@ -12,7 +12,7 @@ export default function Home() {
             <div>
               <ProductSorter />
             </div>
-            <div className='mt-12 grid grid-cols-5'>
+            <div className='mt-12 grid grid-cols-5 gap-3'>
               {Array(30)
                 .fill(0)
                 .map((_, index) => (
