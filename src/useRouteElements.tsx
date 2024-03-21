@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-import { PATHS, ROUTES } from '@/constants'
+import { ROUTES } from '@/constants/route.constant'
+import { PATHS } from '@/constants/path.constant'
 import { AppContext } from '@/contexts'
 
 export default function useRouteElements() {

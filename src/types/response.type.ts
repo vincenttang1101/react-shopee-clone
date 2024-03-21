@@ -1,19 +1,21 @@
 import { User } from '@/types/user.type'
 
-export type SuccessResponse<Data> = {
+type SuccessResponse<Data> = {
   message: string
   data: Data
 }
 
-export type ErrorResponse<Data> = {
+type ErrorResponse<Data> = {
   message: string
   data?: Data
 }
 
-export type AuthResponse = SuccessResponse<{
+type AuthResponse = SuccessResponse<{
   access_token: string
   expires: number
   refresh_token: string
   expires_refresh_token: number
   user: User
 }>
+
+export type { SuccessResponse, ErrorResponse, AuthResponse }

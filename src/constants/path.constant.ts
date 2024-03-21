@@ -1,6 +1,6 @@
-export const PATHS = {
-  REGISTER: '/register',
-  LOGIN: '/login',
-  LOGOUT: '/logout',
-  HOME: '/'
+export enum PATHS {
+  REGISTER = '/register',
+  LOGIN = '/login',
+  LOGOUT = '/logout',
+  HOME = '/'
 }

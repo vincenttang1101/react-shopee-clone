@@ -5,13 +5,13 @@ import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Omit, omit } from 'lodash'
 // import { Google, Facebook } from '@/assets/icons'
-import { IAuthSchema, authSchema } from '@/utils'
+import { IAuthSchema, authSchema } from '@/utils/rules.util'
 import { Button, InputField } from '@/components'
 import { authApi } from '@/apis'
-import { isAxiosUnprocessableEntityError } from '@/utils'
-import { ErrorResponse } from '@/types'
+import { isAxiosUnprocessableEntityError } from '@/utils/axiosError.util'
+import { ErrorResponse } from '@/types/response.type'
 import { AppContext } from '@/contexts'
-import { PATHS } from '@/constants'
+import { PATHS } from '@/constants/path.constant'
 
 export default function Register() {
   const { setIsAuthenticated } = useContext(AppContext)

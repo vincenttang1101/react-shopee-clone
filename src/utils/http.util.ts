@@ -1,8 +1,10 @@
 import axios, { AxiosError, type AxiosInstance } from 'axios'
 import { toast } from 'react-toastify'
-import { AuthResponse, ErrorResponse, User } from '@/types'
-import { authUtils, isAxiosUnprocessableEntityError } from '@/utils'
-import { PATHS } from '@/constants'
+import { AuthResponse, ErrorResponse } from '@/types/response.type'
+import { User } from '@/types/user.type'
+import { authUtils } from '@/utils/auth.util'
+import { isAxiosUnprocessableEntityError } from '@/utils/axiosError.util'
+import { PATHS } from '@/constants/path.constant'
 
 type ErrorType = Omit<ErrorResponse<object>, 'data'>
 
@@ -66,4 +68,4 @@ class Http {
 
 const http = new Http().instance
 
-export default http
+export { http }
