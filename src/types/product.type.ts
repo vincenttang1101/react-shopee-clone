@@ -1,4 +1,4 @@
-type Product = {
+export type Product = {
   _id: string
   images: string[]
   price: number
@@ -17,7 +17,7 @@ type Product = {
   updatedAt: string
 }
 
-type Products = {
+export type Products = {
   products: Product[]
   paginate: {
     page: number
@@ -26,7 +26,7 @@ type Products = {
   }
 }
 
-type ProductsConfig = {
+export type ProductsConfig = {
   page?: number
   limit?: number
   sort_by?: 'createdAt' | 'view' | 'sold' | 'price'
@@ -37,5 +37,3 @@ type ProductsConfig = {
   price_min?: number
   name?: string
 }
-
-export type { Product, Products, ProductsConfig }

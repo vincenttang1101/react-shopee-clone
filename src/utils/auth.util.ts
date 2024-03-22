@@ -1,6 +1,6 @@
 import { User } from '@/types/user.type'
 
-const authUtils = {
+export const authUtils = {
   setAccessTokenToLS: (access_token: string) => localStorage.setItem('access_token', access_token),
   getAccessTokenFromLS: () => localStorage.getItem('access_token'),
 
@@ -17,5 +17,3 @@ const authUtils = {
     localStorage.removeItem('profile')
   }
 }
-
-export { authUtils }

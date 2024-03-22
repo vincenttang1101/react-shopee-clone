@@ -11,7 +11,7 @@ export default function Home() {
       return productApi.getProducts(queryParams)
     }
   })
-  console.log(data)
+  console.log()
   return (
     <div>
       <div className='container'>
@@ -23,15 +23,10 @@ export default function Home() {
             <div>
               <ProductSorter />
             </div>
-            <div className='mt-12 grid grid-cols-5 gap-3'>
-              {Array(30)
-                .fill(0)
-                .map((_, index) => (
-                  <div key={index}>
-                    <ProductItem />
-                  </div>
-                ))}
-            </div>
+            <ul className='mt-12 grid grid-cols-5 gap-3'>
+              {data?.data.data.products.map((product) => <ProductItem key={product._id} product={product} />)}
+              <li></li>
+            </ul>
           </div>
         </div>
       </div>
