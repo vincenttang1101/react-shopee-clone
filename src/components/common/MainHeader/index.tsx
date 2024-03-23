@@ -5,7 +5,7 @@ import { FaChevronDown } from 'react-icons/fa'
 import { PiShoppingCartSimpleBold } from 'react-icons/pi'
 import { BsGlobe } from 'react-icons/bs'
 import { useMutation } from '@tanstack/react-query'
-import { Popover } from '@/components'
+import { Popover } from '@/components/common'
 import { authApi } from '@/apis'
 import { AppContext } from '@/contexts'
 

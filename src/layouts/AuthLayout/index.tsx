@@ -1,4 +1,4 @@
-import { Footer, AuthHeader } from '@/components'
+import { AuthHeader, Footer } from '@/components/common'
 
 interface ILayout {
   children: React.ReactNode
