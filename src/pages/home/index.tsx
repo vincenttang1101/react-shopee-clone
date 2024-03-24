@@ -11,7 +11,6 @@ export default function Home() {
       return productApi.getProducts(queryParams)
     }
   })
-  console.log()
   return (
     <div>
       <div className='container'>

@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
-import { FaStar } from 'react-icons/fa6'
 import { Product } from '@/types/product.type'
 import { formatCurrency, formatNumberToSocialStyle } from '@/utils/utils'
+import { ProductRating } from '@/components/pages/product'
 
-type ProductItem = {
+type ProductItemProps = {
   product: Product
 }
 
-export default function ProductItem({ product }: ProductItem) {
+export default function ProductItem({ product }: ProductItemProps) {
   return (
     <article className='rounded-sm bg-white shadow-sm transition-transform hover:-translate-y-0.5 hover:overflow-hidden hover:shadow-md'>
       <Link to='#!'>
@@ -28,36 +28,7 @@ export default function ProductItem({ product }: ProductItem) {
           </div>
           <div className='mt-3 flex items-center gap-x-2'>
             <div className='flex gap-x-px'>
-              <div className='relative'>
-                <div className='absolute left-0 top-0 overflow-hidden' style={{ width: '100%' }}>
-                  <FaStar className='h-full w-3 text-yellow-300' />
-                </div>
-                <FaStar className='h-full w-3 text-gray-300' />
-              </div>
-              <div className='relative'>
-                <div className='absolute left-0 top-0 overflow-hidden' style={{ width: '100%' }}>
-                  <FaStar className='h-full w-3 text-yellow-300' />
-                </div>
-                <FaStar className='h-full w-3 text-gray-300' />
-              </div>
-              <div className='relative'>
-                <div className='absolute left-0 top-0 overflow-hidden' style={{ width: '100%' }}>
-                  <FaStar className='h-full w-3 text-yellow-300' />
-                </div>
-                <FaStar className='h-full w-3 text-gray-300' />
-              </div>
-              <div className='relative'>
-                <div className='absolute left-0 top-0 overflow-hidden' style={{ width: '100%' }}>
-                  <FaStar className='h-full w-3 text-yellow-300' />
-                </div>
-                <FaStar className='h-full w-3 text-gray-300' />
-              </div>
-              <div className='relative'>
-                <div className='absolute left-0 top-0 overflow-hidden' style={{ width: '48.555%' }}>
-                  <FaStar className='h-full w-3 text-yellow-300' />
-                </div>
-                <FaStar className='h-full w-3 text-gray-300' />
-              </div>
+              <ProductRating rating={product.rating} />
             </div>
             <div className='text-sm'>Đã bán {formatNumberToSocialStyle(product.sold)}</div>
           </div>
