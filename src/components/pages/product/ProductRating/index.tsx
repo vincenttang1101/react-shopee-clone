@@ -5,7 +5,7 @@ export default function ProductRating({ rating }: { rating: number }) {
     if (order <= rating) return '100%'
     else if (order > rating && order - rating < 1) {
       return (rating - Math.floor(rating)) * 100 + '%'
-    }
+    } else return '0%'
   }
 
   return (

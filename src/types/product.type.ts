@@ -19,7 +19,7 @@ export type Product = {
 
 export type Products = {
   products: Product[]
-  paginate: {
+  pagination: {
     page: number
     limit: number
     page_size: number
