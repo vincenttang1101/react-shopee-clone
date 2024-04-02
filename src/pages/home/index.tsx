@@ -22,12 +22,12 @@ export default function Home() {
           </div>
           <div className='col-span-9 -ml-20'>
             <div>
-              <ProductSorter />
+              <ProductSorter queryParams={queryParams} />
             </div>
             <ul className='mt-12 grid grid-cols-5 gap-3'>
               {data?.data.data.products.map((product) => (
                 <li key={product._id}>
-                  <ProductItem key={product._id} product={product} />{' '}
+                  <ProductItem key={product._id} product={product} />
                 </li>
               ))}
             </ul>

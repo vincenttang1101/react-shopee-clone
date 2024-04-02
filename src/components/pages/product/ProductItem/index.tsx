@@ -12,7 +12,7 @@ export default function ProductItem({ product }: ProductItemProps) {
     <article className='rounded-sm bg-white shadow-sm transition-transform hover:-translate-y-0.5 hover:overflow-hidden hover:shadow-md'>
       <Link to='#!'>
         <figure className='relative w-full pt-[100%]'>
-          <img className='absolute left-0 top-0' src={product.image} alt='Thumbnail' />
+          <img className='absolute left-0 top-0 h-full w-full' src={product.image} alt='Thumbnail' />
         </figure>
         <div className='p-3'>
           <h2 className='line-clamp-2 text-sm'>{product.name}</h2>

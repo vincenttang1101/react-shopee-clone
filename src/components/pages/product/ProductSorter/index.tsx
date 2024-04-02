@@ -1,29 +1,86 @@
+import { createSearchParams, useNavigate } from 'react-router-dom'
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5'
+import clsx from 'clsx'
+import { SORT_BY } from '@/constants/product.constant'
+import { ProductsConfig } from '@/types/product.type'
+import { PATHS } from '@/constants/path.constant'
 
-export default function ProductSorter() {
+type ProductSorter = {
+  queryParams: any
+}
+
+type ValueOfSort = Exclude<ProductsConfig['sort_by'], undefined>
+export default function ProductSorter({ queryParams }: ProductSorter) {
+  const navigate = useNavigate()
+
+  const { sort_by = SORT_BY.view } = queryParams
+
+  const isActiveSortBy = (value: ValueOfSort) => {
+    return sort_by === value
+  }
+
+  const handleSort = (value: ValueOfSort) => {
+    if (queryParams) {
+      navigate({
+        pathname: PATHS.HOME,
+        search: createSearchParams({
+          ...queryParams,
+          sort_by: value
+        }).toString()
+      })
+    }
+  }
+
   return (
     <div className='flex items-center justify-between rounded-sm bg-gray-300 px-6 py-2'>
       <div className='flex items-center gap-x-3'>
         <span>Sắp xếp theo</span>
-        <ul className='flex gap-x-4 capitalize'>
+        <ul className='flex gap-x-4 text-sm capitalize'>
           <li>
-            <button className='min-w-[90px] rounded-sm bg-primaryColor px-5 py-2 text-center text-white transition-opacity hover:opacity-90 hover:shadow-sm'>
+            <button
+              className={clsx(
+                'min-w-[90px] rounded-sm px-4 py-2 text-center  transition-opacity hover:opacity-90 hover:shadow-sm',
+                {
+                  'bg-white text-black': !isActiveSortBy(SORT_BY.view),
+                  'bg-primaryColor text-white': isActiveSortBy(SORT_BY.view)
+                }
+              )}
+              onClick={() => handleSort(SORT_BY.view)}
+            >
               Phổ biến
             </button>
           </li>
           <li>
-            <button className='min-w-[90px] rounded-sm bg-white px-5 py-2 text-center transition-colors hover:bg-slate-50 hover:shadow-sm'>
+            <button
+              className={clsx(
+                'min-w-[90px] rounded-sm px-4 py-2 text-center  transition-opacity hover:opacity-90 hover:shadow-sm',
+                {
+                  'bg-white text-black': !isActiveSortBy(SORT_BY.createdAt),
+                  'bg-primaryColor text-white': isActiveSortBy(SORT_BY.createdAt)
+                }
+              )}
+              onClick={() => handleSort(SORT_BY.createdAt)}
+            >
               Mới nhất
             </button>
           </li>
           <li>
-            <button className='min-w-[90px] rounded-sm bg-white px-5 py-2 text-center transition-colors hover:bg-slate-50 hover:shadow-sm'>
+            <button
+              className={clsx(
+                'min-w-[90px] rounded-sm px-4 py-2 text-center  transition-opacity hover:opacity-90 hover:shadow-sm',
+                {
+                  'bg-white text-black': !isActiveSortBy(SORT_BY.sold),
+                  'bg-primaryColor text-white': isActiveSortBy(SORT_BY.sold)
+                }
+              )}
+              onClick={() => handleSort(SORT_BY.sold)}
+            >
               Bán chạy
             </button>
           </li>
           <li>
-            <select className='h-full rounded-sm px-4 focus:outline-none'>
-              <option disabled>Giá</option>
+            <select className='h-full rounded-sm border-r-[16px] border-solid border-transparent px-4 focus:outline-none'>
+              <option>Giá</option>
               <option>Giá: Thấp đến Cao</option>
               <option>Giá: Cao đến Thấp</option>
             </select>
