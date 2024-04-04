@@ -1,12 +1,13 @@
-enum SORT_BY {
-  createdAt = 'createdAt',
-  view = 'view',
-  sold = 'sold'
-}
+const ProductConstant = {
+  sortBy: {
+    createdAt: 'createdAt',
+    view: 'view',
+    sold: 'sold'
+  },
+  order: {
+    asc: 'asc',
+    desc: 'desc'
+  }
+} as const
 
-enum ORDER {
-  asc = 'asc',
-  desc = 'desc,'
-}
-
-export { SORT_BY, ORDER }
+export { ProductConstant }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Product } from '@/types/product.type'
-import { formatCurrency, formatNumberToSocialStyle } from '@/utils/utils'
+import { Util } from '@/utils'
 import { ProductRating } from '@/components/pages/product'
 
 type ProductItemProps = {
@@ -19,18 +19,18 @@ export default function ProductItem({ product }: ProductItemProps) {
           <div className='mt-8 flex items-center gap-x-2'>
             <div className='flex items-center gap-x-px text-gray-500 line-through'>
               <span className='text-xs'>₫</span>
-              <span>{formatCurrency(product.price_before_discount)}</span>
+              <span>{Util.formatCurrency(product.price_before_discount)}</span>
             </div>
             <div className='flex items-center gap-x-px text-primaryColor'>
               <span className='text-xs'>₫</span>
-              <span>{formatCurrency(product.price)}</span>
+              <span>{Util.formatCurrency(product.price)}</span>
             </div>
           </div>
           <div className='mt-3 flex items-center gap-x-2'>
             <div className='flex gap-x-px'>
               <ProductRating rating={product.rating} />
             </div>
-            <div className='text-sm'>Đã bán {formatNumberToSocialStyle(product.sold)}</div>
+            <div className='text-sm'>Đã bán {Util.formatNumberToSocialStyle(product.sold)}</div>
           </div>
         </div>
       </Link>

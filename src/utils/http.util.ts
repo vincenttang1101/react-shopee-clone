@@ -2,9 +2,9 @@ import axios, { AxiosError, type AxiosInstance } from 'axios'
 import { toast } from 'react-toastify'
 import { AuthResponse, ErrorResponse } from '@/types/response.type'
 import { User } from '@/types/user.type'
-import { authUtils } from '@/utils/auth.util'
-import { isAxiosUnprocessableEntityError } from '@/utils/axiosError.util'
-import { PATHS } from '@/constants/path.constant'
+import { AuthUtil } from '@/utils/auth.util'
+import { AxiosErrorUtil } from '@/utils/axiosError.util'
+import { PathConstant } from '@/constants/path.constant'
 
 type ErrorType = Omit<ErrorResponse<object>, 'data'>
 
@@ -14,8 +14,8 @@ class Http {
   private profile: User | null
 
   constructor() {
-    this.accessToken = authUtils.getAccessTokenFromLS()
-    this.profile = authUtils.getProfileFromLS()
+    this.accessToken = AuthUtil.getAccessTokenFromLS()
+    this.profile = AuthUtil.getProfileFromLS()
 
     this.instance = axios.create({
       baseURL: 'https://api-ecom.duthanhduoc.com/',
@@ -41,22 +41,22 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config
-        if (url === PATHS.REGISTER || url === PATHS.LOGIN) {
+        if (url === PathConstant.register || url === PathConstant.login) {
           const result = response.data as AuthResponse
           this.accessToken = result.data.access_token
-          authUtils.setAccessTokenToLS(this.accessToken)
+          AuthUtil.setAccessTokenToLS(this.accessToken)
           this.profile = result.data.user
-          authUtils.setProfileToLS(this.profile)
-        } else if (url === PATHS.LOGOUT) {
+          AuthUtil.setProfileToLS(this.profile)
+        } else if (url === PathConstant.logout) {
           this.accessToken = null
           this.profile = null
-          authUtils.clearLS()
+          AuthUtil.clearLS()
         }
         return response
       },
       function (error: AxiosError) {
         console.log(error)
-        if (!isAxiosUnprocessableEntityError<ErrorType>(error)) {
+        if (!AxiosErrorUtil.isAxiosUnprocessableEntityError<ErrorType>(error)) {
           const message = (error as AxiosError<ErrorType>).response?.data.message || error.message
           toast.error(message)
         }
@@ -66,6 +66,6 @@ class Http {
   }
 }
 
-const http = new Http().instance
+const HttpUtil = new Http().instance
 
-export { http }
+export { HttpUtil }

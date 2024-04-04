@@ -1,9 +1,9 @@
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5'
 import clsx from 'clsx'
-import { SORT_BY } from '@/constants/product.constant'
+import { ProductConstant } from '@/constants/product.constant'
 import { ProductsConfig } from '@/types/product.type'
-import { PATHS } from '@/constants/path.constant'
+import { PathConstant } from '@/constants/path.constant'
 
 type ProductSorter = {
   queryParams: any
@@ -13,7 +13,7 @@ type ValueOfSort = Exclude<ProductsConfig['sort_by'], undefined>
 export default function ProductSorter({ queryParams }: ProductSorter) {
   const navigate = useNavigate()
 
-  const { sort_by = SORT_BY.view } = queryParams
+  const { sort_by = ProductConstant.sortBy.view } = queryParams
 
   const isActiveSortBy = (value: ValueOfSort) => {
     return sort_by === value
@@ -22,7 +22,7 @@ export default function ProductSorter({ queryParams }: ProductSorter) {
   const handleSort = (value: ValueOfSort) => {
     if (queryParams) {
       navigate({
-        pathname: PATHS.HOME,
+        pathname: PathConstant.home,
         search: createSearchParams({
           ...queryParams,
           sort_by: value
@@ -41,11 +41,11 @@ export default function ProductSorter({ queryParams }: ProductSorter) {
               className={clsx(
                 'min-w-[90px] rounded-sm px-4 py-2 text-center  transition-opacity hover:opacity-90 hover:shadow-sm',
                 {
-                  'bg-white text-black': !isActiveSortBy(SORT_BY.view),
-                  'bg-primaryColor text-white': isActiveSortBy(SORT_BY.view)
+                  'bg-white text-black': !isActiveSortBy(ProductConstant.sortBy.view),
+                  'bg-primaryColor text-white': isActiveSortBy(ProductConstant.sortBy.view)
                 }
               )}
-              onClick={() => handleSort(SORT_BY.view)}
+              onClick={() => handleSort(ProductConstant.sortBy.view)}
             >
               Phổ biến
             </button>
@@ -55,11 +55,11 @@ export default function ProductSorter({ queryParams }: ProductSorter) {
               className={clsx(
                 'min-w-[90px] rounded-sm px-4 py-2 text-center  transition-opacity hover:opacity-90 hover:shadow-sm',
                 {
-                  'bg-white text-black': !isActiveSortBy(SORT_BY.createdAt),
-                  'bg-primaryColor text-white': isActiveSortBy(SORT_BY.createdAt)
+                  'bg-white text-black': !isActiveSortBy(ProductConstant.sortBy.createdAt),
+                  'bg-primaryColor text-white': isActiveSortBy(ProductConstant.sortBy.createdAt)
                 }
               )}
-              onClick={() => handleSort(SORT_BY.createdAt)}
+              onClick={() => handleSort(ProductConstant.sortBy.createdAt)}
             >
               Mới nhất
             </button>
@@ -69,11 +69,11 @@ export default function ProductSorter({ queryParams }: ProductSorter) {
               className={clsx(
                 'min-w-[90px] rounded-sm px-4 py-2 text-center  transition-opacity hover:opacity-90 hover:shadow-sm',
                 {
-                  'bg-white text-black': !isActiveSortBy(SORT_BY.sold),
-                  'bg-primaryColor text-white': isActiveSortBy(SORT_BY.sold)
+                  'bg-white text-black': !isActiveSortBy(ProductConstant.sortBy.sold),
+                  'bg-primaryColor text-white': isActiveSortBy(ProductConstant.sortBy.sold)
                 }
               )}
-              onClick={() => handleSort(SORT_BY.sold)}
+              onClick={() => handleSort(ProductConstant.sortBy.sold)}
             >
               Bán chạy
             </button>

@@ -1,32 +1,32 @@
 import { useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-import { ROUTES } from '@/constants/route.constant'
-import { PATHS } from '@/constants/path.constant'
+import { RouteConstant } from '@/constants/route.constant'
+import { PathConstant } from '@/constants/path.constant'
 import { AppContext } from '@/contexts'
 
 export default function useRouteElements() {
   const { isAuthenticated } = useContext(AppContext)
 
   const ProtectedRoute = () => {
-    return isAuthenticated ? <Outlet /> : <Navigate to={PATHS.LOGIN} />
+    return isAuthenticated ? <Outlet /> : <Navigate to={PathConstant.login} />
   }
 
   const RejectedRoute = () => {
-    return !isAuthenticated ? <Outlet /> : <Navigate to={PATHS.HOME} />
+    return !isAuthenticated ? <Outlet /> : <Navigate to={PathConstant.home} />
   }
 
   const routeElements = useRoutes([
     {
       path: '',
       element: <RejectedRoute />,
-      children: [ROUTES.REGISTER, ROUTES.LOGIN]
+      children: [RouteConstant.register, RouteConstant.login]
     },
     {
       path: '',
       element: <ProtectedRoute />,
-      children: [ROUTES.PROFILE]
+      children: [RouteConstant.profile]
     },
-    ROUTES.PRODUCT_LIST
+    RouteConstant.productList
   ])
 
   return routeElements

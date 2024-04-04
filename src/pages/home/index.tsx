@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import useQueryParams from '@/hooks/useQueryParams'
-import { productApi } from '@/apis'
+import { ProductApi } from '@/apis'
 import { AsideFilter, ProductItem, ProductSorter } from '@/components/pages/product'
 import PaginationMui from '@/components/common/Pagination'
 
@@ -9,7 +9,7 @@ export default function Home() {
   const { data } = useQuery({
     queryKey: ['products', queryParams],
     queryFn: () => {
-      return productApi.getProducts(queryParams)
+      return ProductApi.getProducts(queryParams)
     }
   })
 

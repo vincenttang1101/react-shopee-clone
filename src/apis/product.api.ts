@@ -1,17 +1,17 @@
 import { SuccessResponse } from '@/types/response.type'
 import { Products, ProductsConfig } from '@/types/product.type'
-import { http } from '@/utils/http.util'
+import { HttpUtil } from '@/utils/http.util'
 
 const URL = 'products'
-const productApi = {
-  getProducts(params: ProductsConfig) {
-    return http.get<SuccessResponse<Products>>(URL, {
+const ProductApi = {
+  getProducts: (params: ProductsConfig) => {
+    return HttpUtil.get<SuccessResponse<Products>>(URL, {
       params
     })
   },
-  getProductDetail(id: string) {
-    return http.get(`${URL}/${id}`)
+  getProductDetail: (id: string) => {
+    return HttpUtil.get(`${URL}/${id}`)
   }
 }
 
-export default productApi
+export default ProductApi

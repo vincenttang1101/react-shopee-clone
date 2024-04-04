@@ -1,2 +1,2 @@
-export { default as authApi } from '@/apis/auth.api'
-export { default as productApi } from '@/apis/product.api'
+export { default as AuthApi } from '@/apis/auth.api'
+export { default as ProductApi } from '@/apis/product.api'

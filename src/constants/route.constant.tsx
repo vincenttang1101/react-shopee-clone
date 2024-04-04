@@ -1,7 +1,8 @@
 import { AuthLayout, MainLayout } from '@/layouts'
 import { Login, Home, Profile, Register } from '@/pages'
+import { PathConstant } from '@/constants/path.constant'
 
-type RouteKey = 'REGISTER' | 'LOGIN' | 'PROFILE' | 'PRODUCT_LIST'
+type RouteKey = 'register' | 'login' | 'profile' | 'productList'
 
 type IRoute = {
   [key in RouteKey]: {
@@ -11,33 +12,33 @@ type IRoute = {
   }
 }
 
-export const ROUTES: IRoute = {
-  REGISTER: {
-    path: '/register',
+const RouteConstant: IRoute = {
+  register: {
+    path: PathConstant.register,
     element: (
       <AuthLayout>
         <Register />
       </AuthLayout>
     )
   },
-  LOGIN: {
-    path: '/login',
+  login: {
+    path: PathConstant.login,
     element: (
       <AuthLayout>
         <Login />
       </AuthLayout>
     )
   },
-  PROFILE: {
-    path: '/profile',
+  profile: {
+    path: PathConstant.profile,
     element: (
       <MainLayout>
         <Profile />
       </MainLayout>
     )
   },
-  PRODUCT_LIST: {
-    path: '/',
+  productList: {
+    path: PathConstant.home,
     index: true,
     element: (
       <MainLayout>
@@ -46,3 +47,5 @@ export const ROUTES: IRoute = {
     )
   }
 }
+
+export { RouteConstant }

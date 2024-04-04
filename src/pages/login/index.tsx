@@ -4,16 +4,16 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 // import { Google, Facebook } from '@/assets/icons'
-import { IAuthSchema, authSchema } from '@/utils/rules.util'
+import { IAuthSchema, RuleUtil } from '@/utils/rules.util'
 import { Button, InputField } from '@/components/common'
-import { authApi } from '@/apis'
-import { isAxiosUnprocessableEntityError } from '@/utils/axiosError.util'
+import { AuthApi } from '@/apis'
+import { AxiosErrorUtil } from '@/utils/axiosError.util'
 import { ErrorResponse } from '@/types/response.type'
 import { AppContext } from '@/contexts'
-import { PATHS } from '@/constants/path.constant'
+import { PathConstant } from '@/constants/path.constant'
 
 type ILoginSchema = Omit<IAuthSchema, 'confirm_password'>
-const loginSchema = authSchema.omit(['confirm_password'])
+const loginSchema = RuleUtil.authSchema.omit(['confirm_password'])
 
 export default function Login() {
   const { setIsAuthenticated } = useContext(AppContext)
@@ -27,7 +27,7 @@ export default function Login() {
   })
 
   const loginMutation = useMutation({
-    mutationFn: (body: ILoginSchema) => authApi.login(body)
+    mutationFn: (body: ILoginSchema) => AuthApi.login(body)
   })
 
   const onSubmit: SubmitHandler<ILoginSchema> = (data) => {
@@ -36,7 +36,7 @@ export default function Login() {
         setIsAuthenticated(true)
       },
       onError: (error) => {
-        if (isAxiosUnprocessableEntityError<ErrorResponse<ILoginSchema>>(error)) {
+        if (AxiosErrorUtil.isAxiosUnprocessableEntityError<ErrorResponse<ILoginSchema>>(error)) {
           const formError = error.response?.data.data
 
           if (formError) {
@@ -114,7 +114,7 @@ export default function Login() {
             {/* Account link */}
             <div className='mt-8 text-center text-lg'>
               <span className='text-gray-400'>Bạn mới biết đến Shopee? </span>
-              <Link to={PATHS.REGISTER} className='text-primaryColor'>
+              <Link to={PathConstant.register} className='text-primaryColor'>
                 Đăng ký
               </Link>
             </div>

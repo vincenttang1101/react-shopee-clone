@@ -5,13 +5,13 @@ import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Omit, omit } from 'lodash'
 // import { Google, Facebook } from '@/assets/icons'
-import { IAuthSchema, authSchema } from '@/utils/rules.util'
+import { IAuthSchema, RuleUtil } from '@/utils/rules.util'
 import { Button, InputField } from '@/components/common'
-import { authApi } from '@/apis'
-import { isAxiosUnprocessableEntityError } from '@/utils/axiosError.util'
+import { AuthApi } from '@/apis'
+import { AxiosErrorUtil } from '@/utils/axiosError.util'
 import { ErrorResponse } from '@/types/response.type'
 import { AppContext } from '@/contexts'
-import { PATHS } from '@/constants/path.constant'
+import { PathConstant } from '@/constants/path.constant'
 
 export default function Register() {
   const { setIsAuthenticated } = useContext(AppContext)
@@ -21,11 +21,11 @@ export default function Register() {
     setError,
     formState: { errors }
   } = useForm<IAuthSchema>({
-    resolver: yupResolver(authSchema)
+    resolver: yupResolver(RuleUtil.authSchema)
   })
 
   const registerMutation = useMutation({
-    mutationFn: (body: Omit<IAuthSchema, 'confirm_password'>) => authApi.register(body)
+    mutationFn: (body: Omit<IAuthSchema, 'confirm_password'>) => AuthApi.register(body)
   })
 
   const onSubmit: SubmitHandler<IAuthSchema> = (data) => {
@@ -35,7 +35,9 @@ export default function Register() {
         setIsAuthenticated(true)
       },
       onError: (error) => {
-        if (isAxiosUnprocessableEntityError<ErrorResponse<Omit<IAuthSchema, 'confirm_password'>>>(error)) {
+        if (
+          AxiosErrorUtil.isAxiosUnprocessableEntityError<ErrorResponse<Omit<IAuthSchema, 'confirm_password'>>>(error)
+        ) {
           const formError = error.response?.data.data
 
           if (formError) {
@@ -121,7 +123,7 @@ export default function Register() {
             {/* Account link */}
             <div className='mt-8 text-center text-lg'>
               <span className='text-gray-400'>Bạn đã có tài khoản? </span>
-              <Link to={PATHS.LOGIN} className='text-primaryColor'>
+              <Link to={PathConstant.login} className='text-primaryColor'>
                 Đăng nhập
               </Link>
             </div>

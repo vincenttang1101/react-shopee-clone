@@ -6,13 +6,13 @@ import { PiShoppingCartSimpleBold } from 'react-icons/pi'
 import { BsGlobe } from 'react-icons/bs'
 import { useMutation } from '@tanstack/react-query'
 import { Popover } from '@/components/common'
-import { authApi } from '@/apis'
+import { AuthApi } from '@/apis'
 import { AppContext } from '@/contexts'
 
 export default function MainHeader() {
   const { isAuthenticated, setIsAuthenticated, profile } = useContext(AppContext)
   const logoutMutation = useMutation({
-    mutationFn: authApi.logout,
+    mutationFn: AuthApi.logout,
     onSuccess: () => {
       setIsAuthenticated(false)
     }
