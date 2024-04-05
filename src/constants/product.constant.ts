@@ -2,7 +2,8 @@ const ProductConstant = {
   sortBy: {
     createdAt: 'createdAt',
     view: 'view',
-    sold: 'sold'
+    sold: 'sold',
+    price: 'price'
   },
   order: {
     asc: 'asc',
