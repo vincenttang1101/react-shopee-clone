@@ -27,7 +27,7 @@ export default function Home() {
           </div>
           <div className='col-span-9 -ml-20'>
             <div>
-              <ProductSorter queryParams={queryParams} />
+              <ProductSorter queryParams={queryParams} pagination={pagination} />
             </div>
             <ul className='mt-12 grid grid-cols-5 gap-3'>
               {products.map((product) => (

@@ -6,7 +6,10 @@ const URL = 'products'
 const ProductApi = {
   getProducts: (params: ProductsConfig) => {
     return HttpUtil.get<SuccessResponse<Products>>(URL, {
-      params
+      params: {
+        ...params,
+        limit: 20
+      }
     })
   },
   getProductDetail: (id: string) => {

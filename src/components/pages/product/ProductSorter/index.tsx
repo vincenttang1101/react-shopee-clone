@@ -1,15 +1,19 @@
-import { createSearchParams, useNavigate } from 'react-router-dom'
+import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5'
 import clsx from 'clsx'
 import { isUndefined, omit, omitBy } from 'lodash'
 import { ProductConstant } from '@/constants/product.constant'
-import { ProductsConfig } from '@/types/product.type'
+import { Products, ProductsConfig } from '@/types/product.type'
 import { PathConstant } from '@/constants/path.constant'
 
 type SortByValue = ProductsConfig['sort_by']
 type OrderByValue = ProductsConfig['order']
+type Props = {
+  queryParams: ProductsConfig
+  pagination: Products['pagination']
+}
 
-export default function ProductSorter({ queryParams }: { queryParams: ProductsConfig }) {
+export default function ProductSorter({ queryParams, pagination }: Props) {
   const navigate = useNavigate()
 
   const { sortBy, order: orderBy } = ProductConstant
@@ -124,19 +128,29 @@ export default function ProductSorter({ queryParams }: { queryParams: ProductsCo
       </div>
       <div className='flex items-center gap-x-6'>
         <div>
-          <span className='text-primaryColor'>1</span>
-          <span>/2</span>
+          <span className='text-primaryColor'>{pagination?.page || 0}</span>
+          <span>/</span>
+          <span>{pagination.page_size || 0}</span>
         </div>
-        <div>
-          <button
-            className='cursor-not-allowed rounded-sm border border-solid border-gray-400 bg-gray-300 p-3 transition-colors hover:border-white/60 hover:bg-white/60 disabled:border-gray-400 disabled:bg-white disabled:opacity-30'
-            disabled
+        <div className='flex'>
+          <Link
+            to={`?page=${pagination.page - 1}&limit=${pagination.limit}`}
+            className={clsx(
+              `rounded-sm border border-solid border-gray-400 bg-gray-300 p-3 transition-colors hover:border-white/60 hover:bg-white/60 disabled:border-gray-400 disabled:bg-white disabled:opacity-30`,
+              { 'pointer-events-none opacity-15 ': pagination.page <= 1 }
+            )}
           >
             <IoChevronBackOutline />
-          </button>
-          <button className='b3-gray-300 rounded-sm border border-solid border-gray-400 p-3 transition-colors hover:border-white/60 hover:bg-white/60'>
+          </Link>
+          <Link
+            to={`?page=${pagination.page + 1}&limit=${pagination.limit}`}
+            className={clsx(
+              `rounded-sm border border-solid border-gray-400 bg-gray-300 p-3 transition-colors hover:border-white/60 hover:bg-white/60 disabled:border-gray-400 disabled:bg-white disabled:opacity-30`,
+              { 'pointer-events-none opacity-15 ': pagination.page === pagination.page_size }
+            )}
+          >
             <IoChevronForwardOutline />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
