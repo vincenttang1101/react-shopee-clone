@@ -13,6 +13,11 @@ export default function Home() {
     }
   })
 
+  const productsData = data?.data?.data
+  if (!productsData) return <p>Loading !!!!</p>
+
+  const { products, pagination } = productsData
+
   return (
     <div>
       <div className='container'>
@@ -25,14 +30,14 @@ export default function Home() {
               <ProductSorter queryParams={queryParams} />
             </div>
             <ul className='mt-12 grid grid-cols-5 gap-3'>
-              {data?.data.data.products.map((product) => (
+              {products.map((product) => (
                 <li key={product._id}>
                   <ProductItem key={product._id} product={product} />
                 </li>
               ))}
             </ul>
             <div className='mt-4 flex justify-center'>
-              {data?.data.data.pagination && <PaginationMui pageSize={data.data.data.pagination.page_size} />}
+              {pagination && <PaginationMui limit={pagination.limit} pageSize={pagination.page_size} />}
             </div>
           </div>
         </div>

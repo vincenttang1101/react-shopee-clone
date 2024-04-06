@@ -3,11 +3,12 @@ import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { ProductsConfig } from '@/types/product.type'
 
-type PaginationMui = {
+type Props = {
+  limit: number
   pageSize: number
 }
 
-export default function PaginationMui({ pageSize }: { pageSize: number }) {
+export default function PaginationMui({ limit, pageSize }: Props) {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
@@ -15,7 +16,7 @@ export default function PaginationMui({ pageSize }: { pageSize: number }) {
   const page = Number(params.page) || 1
 
   const handleChangePage = (_: React.ChangeEvent<unknown>, pageNumber: number) => {
-    navigate(`?page=${pageNumber}&pageSize=${pageSize}`)
+    navigate(`?page=${pageNumber}&limit=${limit}`)
   }
 
   return (
