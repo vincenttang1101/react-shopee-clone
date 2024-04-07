@@ -1,7 +1,7 @@
 import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5'
 import clsx from 'clsx'
-import { isUndefined, omit, omitBy } from 'lodash'
+import { omit } from 'lodash'
 import { ProductConstant } from '@/constants/product.constant'
 import { Products, ProductsConfig } from '@/types/product.type'
 import { PathConstant } from '@/constants/path.constant'
@@ -19,7 +19,6 @@ export default function ProductSorter({ queryParams, pagination }: Props) {
   const { sortBy, order: orderBy } = ProductConstant
 
   const { sort_by = sortBy.view, order } = queryParams
-  const queryConfig = omitBy(queryParams, isUndefined)
 
   const isActiveSortBy = (sortByValue: ProductsConfig['sort_by']) => {
     return sort_by === sortByValue
@@ -32,7 +31,7 @@ export default function ProductSorter({ queryParams, pagination }: Props) {
         search: createSearchParams(
           omit(
             {
-              ...queryConfig,
+              ...queryParams,
               sort_by: sortByValue
             },
             ['order']
@@ -47,7 +46,7 @@ export default function ProductSorter({ queryParams, pagination }: Props) {
       navigate({
         pathname: PathConstant.home,
         search: createSearchParams({
-          ...queryConfig,
+          ...queryParams,
           sort_by: sortBy.price,
           order: orderByValue
         }).toString()

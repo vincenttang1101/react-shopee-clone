@@ -27,13 +27,14 @@ export type Products = {
 }
 
 export type ProductsConfig = {
-  page?: number
-  limit?: number
-  sort_by?: 'createdAt' | 'view' | 'sold' | 'price'
-  order?: 'asc' | 'desc'
-  exclude?: string
-  rating_filter?: number
-  price_max?: number
-  price_min?: number
-  name?: string
+  page: string
+  limit: string
+  sort_by: 'createdAt' | 'view' | 'sold' | 'price'
+  order: 'asc' | 'desc'
+  exclude: string
+  rating_filter: string
+  price_max: string
+  price_min: string
+  name: string
+  category: string
 }
