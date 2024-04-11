@@ -11,5 +11,9 @@ const Util = {
       .toLocaleLowerCase()
   }
 }
+type NoUndefinedField<T> = {
+  [P in keyof T]-?: NoUndefinedField<NonNullable<T[P]>>
+}
 
 export { Util }
+export type { NoUndefinedField }

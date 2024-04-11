@@ -31,7 +31,7 @@ export default function Home() {
             {productsData && (
               <>
                 <ProductSorter queryParams={queryParams} pagination={productsData.data.data.pagination} />
-                <ul className='mt-12 grid grid-cols-5 gap-3'>
+                <ul className='mt-12 grid grid-cols-4 gap-3'>
                   {productsData.data.data.products.map((product) => (
                     <li key={product._id}>
                       <ProductItem key={product._id} product={product} />

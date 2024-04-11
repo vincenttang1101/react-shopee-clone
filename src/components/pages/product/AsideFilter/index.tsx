@@ -1,21 +1,48 @@
-import { Link, createSearchParams } from 'react-router-dom'
+import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 import { TfiMenuAlt } from 'react-icons/tfi'
 import { RxTriangleRight } from 'react-icons/rx'
 import { LiaFilterSolid } from 'react-icons/lia'
 import { FaRegStar, FaStar } from 'react-icons/fa'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import clsx from 'clsx'
 import { Button, InputField } from '@/components/common'
 import { Category } from '@/types/category.type'
 import { ProductsConfig } from '@/types/product.type'
 import { PathConstant } from '@/constants/path.constant'
+import { PriceRangeSchema, RuleUtil } from '@/utils/rules.util'
+import { NoUndefinedField } from '@/utils'
+import { ObjectSchema } from 'yup'
 
 type Props = {
   queryParams: ProductsConfig
   categories: Category[]
 }
 
+type FormData = NoUndefinedField<PriceRangeSchema>
 export default function AsideFilter({ queryParams, categories }: Props) {
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(RuleUtil.priceRangeSchema as ObjectSchema<FormData>)
+  })
+  const navigate = useNavigate()
+
   const { category: categoryParam } = queryParams
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    navigate({
+      pathname: PathConstant.home,
+      search: createSearchParams({
+        ...queryParams,
+        price_min: data.price_min,
+        price_max: data.price_max
+      }).toString()
+    })
+  }
 
   return (
     <aside>
@@ -63,23 +90,40 @@ export default function AsideFilter({ queryParams, categories }: Props) {
 
           <div className='h-[1px] bg-gray-300' />
 
-          <section className='flex flex-col gap-y-6'>
+          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-2'>
             <h3 className='capitalize'>Khoảng giá</h3>
             <div className='flex items-center justify-between gap-x-2'>
               <InputField
-                className='h-8 border-gray-300 text-sm focus:border-gray-300 focus:shadow-none'
+                className='h-8 text-sm focus:border-gray-300'
                 placeholder='₫ TỪ'
-              ></InputField>
+                name='price_min'
+                register={register}
+                type='number'
+                isErrorMessage={false}
+                onChange={(event) => {
+                  register('price_min').onChange(event)
+                  trigger('price_max')
+                }}
+              />
               <div className='h-[1px] w-5 bg-gray-400' />
               <InputField
-                className='h-8 text-sm focus:border-gray-300 focus:shadow-none focus:outline-none'
+                className='h-8 text-sm focus:border-gray-300'
                 placeholder='₫ ĐẾN'
-              ></InputField>
+                register={register}
+                name='price_max'
+                type='number'
+                isErrorMessage={false}
+                onChange={(event) => {
+                  register('price_max').onChange(event)
+                  trigger('price_min')
+                }}
+              />
             </div>
+            <p className='min-h-6 text-center font-medium text-red-500'>{errors.price_min?.message}</p>
             <Button className='rounded-sm bg-primaryColor py-1 text-center uppercase text-slate-100 hover:opacity-90'>
               Áp dụng
             </Button>
-          </section>
+          </form>
 
           <div className='h-[1px] bg-gray-300' />
 

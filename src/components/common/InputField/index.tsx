@@ -5,9 +5,17 @@ import clsx from 'clsx'
 type InputField = InputHTMLAttributes<HTMLInputElement> & {
   errorMessage?: string
   register?: UseFormRegister<any>
+  isErrorMessage?: boolean
 }
 
-export default function InputField({ className, name, errorMessage, register, ...rest }: InputField) {
+export default function InputField({
+  className,
+  name,
+  errorMessage,
+  register,
+  isErrorMessage = true,
+  ...rest
+}: InputField) {
   const classes = clsx(
     'p-2 w-full rounded-sm',
     'border border-solid border-gray-300',
@@ -24,7 +32,7 @@ export default function InputField({ className, name, errorMessage, register, ..
   return (
     <div>
       <input className={classes} {...newRegister} {...rest} />
-      <p className='min-h-[2rem] text-lg text-[#ff424f]'>{errorMessage}</p>
+      {isErrorMessage && <p className='min-h-[2rem] text-lg text-[#ff424f]'>{errorMessage}</p>}
     </div>
   )
 }
