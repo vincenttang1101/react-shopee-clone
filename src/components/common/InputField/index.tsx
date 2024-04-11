@@ -14,7 +14,7 @@ export default function InputField({ className, name, errorMessage, register, ..
     'bg-white focus:outline-none focus:border',
     'focus:border-solid focus:border-slate-900 focus:shadow-md',
     {
-      'focus:border-red-400 border-red-400 bg-red-50 shadow-md': Boolean(errorMessage)
+      'border-red-400 focus:!border-red-400 bg-red-50 shadow-md': Boolean(errorMessage)
     },
     className
   )
@@ -24,7 +24,7 @@ export default function InputField({ className, name, errorMessage, register, ..
   return (
     <div>
       <input className={classes} {...newRegister} {...rest} />
-      {errorMessage && <p className='min-h-[2rem] text-lg text-[#ff424f]'>{errorMessage}</p>}
+      <p className='min-h-[2rem] text-lg text-[#ff424f]'>{errorMessage}</p>
     </div>
   )
 }

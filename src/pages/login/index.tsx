@@ -63,7 +63,7 @@ export default function Login() {
             noValidate
           >
             <p className='text-2xl'>Đăng nhập</p>
-            <div className='mt-7 flex flex-col gap-y-7'>
+            <div className='mt-7 flex flex-col gap-y-px'>
               <InputField
                 name='email'
                 errorMessage={errors.email?.message}
@@ -80,7 +80,7 @@ export default function Login() {
               />
             </div>
             <Button
-              className='mt-6 rounded-sm bg-primaryColor py-2 text-center uppercase text-white hover:opacity-90'
+              className='mt-1 rounded-sm bg-primaryColor py-2 text-center uppercase text-white hover:opacity-90'
               type='submit'
               isLoading={loginMutation.isPending}
             >
