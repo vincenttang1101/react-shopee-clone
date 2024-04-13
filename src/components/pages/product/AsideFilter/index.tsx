@@ -2,7 +2,6 @@ import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 import { TfiMenuAlt } from 'react-icons/tfi'
 import { RxTriangleRight } from 'react-icons/rx'
 import { LiaFilterSolid } from 'react-icons/lia'
-import { FaRegStar, FaStar } from 'react-icons/fa'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import clsx from 'clsx'
@@ -13,6 +12,7 @@ import { PathConstant } from '@/constants/path.constant'
 import { PriceRangeSchema, RuleUtil } from '@/utils/rules.util'
 import { NoUndefinedField } from '@/utils'
 import { ObjectSchema } from 'yup'
+import StarRater from '@/components/pages/product/StarRater'
 
 type Props = {
   queryParams: ProductsConfig
@@ -127,134 +127,7 @@ export default function AsideFilter({ queryParams, categories }: Props) {
 
           <div className='h-[1px] bg-gray-300' />
 
-          <section className='flex flex-col gap-y-4'>
-            <div className='capitalize'>Đánh giá</div>
-            <div className='ml-2'>
-              <ul className='flex items-center gap-x-3'>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li>
-                  <Link to='#!'>trở lên</Link>
-                </li>
-              </ul>
-
-              <ul className='flex items-center gap-x-3'>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li>
-                  <Link to='#!'>trở lên</Link>
-                </li>
-              </ul>
-
-              <ul className='flex items-center gap-x-3'>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li>
-                  <Link to='#!'>trở lên</Link>
-                </li>
-              </ul>
-
-              <ul className='flex items-center gap-x-3'>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li className='text-yellow-400'>
-                  <Link to='#!'>
-                    <FaRegStar />
-                  </Link>
-                </li>
-                <li>
-                  <Link to='#!'>trở lên</Link>
-                </li>
-              </ul>
-            </div>
-          </section>
+          <StarRater />
 
           <div className='h-[1px] bg-gray-300' />
 
