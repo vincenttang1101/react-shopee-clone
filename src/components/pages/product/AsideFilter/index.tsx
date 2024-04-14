@@ -7,20 +7,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import clsx from 'clsx'
 import { Button, InputField } from '@/components/common'
 import { Category } from '@/types/category.type'
-import { ProductsConfig } from '@/types/product.type'
 import { PathConstant } from '@/constants/path.constant'
 import { PriceRangeSchema, RuleUtil } from '@/utils/rules.util'
 import { NoUndefinedField } from '@/utils'
 import { ObjectSchema } from 'yup'
 import StarRater from '@/components/pages/product/StarRater'
+import { QueryConfig } from '@/hooks/useQueryConfig'
 
 type Props = {
-  queryParams: ProductsConfig
+  queryConfig: QueryConfig
   categories: Category[]
 }
 
 type FormData = NoUndefinedField<PriceRangeSchema>
-export default function AsideFilter({ queryParams, categories }: Props) {
+export default function AsideFilter({ queryConfig, categories }: Props) {
   const {
     register,
     handleSubmit,
@@ -31,13 +31,13 @@ export default function AsideFilter({ queryParams, categories }: Props) {
   })
   const navigate = useNavigate()
 
-  const { category: categoryParam } = queryParams
+  const { category: categoryParam } = queryConfig
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     navigate({
       pathname: PathConstant.home,
       search: createSearchParams({
-        ...queryParams,
+        ...queryConfig,
         price_min: data.price_min,
         price_max: data.price_max
       }).toString()
@@ -66,7 +66,7 @@ export default function AsideFilter({ queryParams, categories }: Props) {
                   to={{
                     pathname: PathConstant.home,
                     search: createSearchParams({
-                      ...queryParams,
+                      ...queryConfig,
                       category: category._id
                     }).toString()
                   }}
@@ -127,7 +127,7 @@ export default function AsideFilter({ queryParams, categories }: Props) {
 
           <div className='h-[1px] bg-gray-300' />
 
-          <StarRater />
+          <StarRater queryConfig={queryConfig} />
 
           <div className='h-[1px] bg-gray-300' />
 

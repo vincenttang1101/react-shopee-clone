@@ -5,20 +5,21 @@ import { omit } from 'lodash'
 import { ProductConstant } from '@/constants/product.constant'
 import { Products, ProductsConfig } from '@/types/product.type'
 import { PathConstant } from '@/constants/path.constant'
+import { QueryConfig } from '@/hooks/useQueryConfig'
 
 type SortByValue = ProductsConfig['sort_by']
 type OrderByValue = ProductsConfig['order']
 type Props = {
-  queryParams: ProductsConfig
+  queryConfig: QueryConfig
   pagination: Products['pagination']
 }
 
-export default function ProductSorter({ queryParams, pagination }: Props) {
+export default function ProductSorter({ queryConfig, pagination }: Props) {
   const navigate = useNavigate()
 
   const { sortBy, order: orderBy } = ProductConstant
 
-  const { sort_by = sortBy.view, order } = queryParams
+  const { sort_by = sortBy.view, order } = queryConfig
 
   const isActiveSortBy = (sortByValue: ProductsConfig['sort_by']) => {
     return sort_by === sortByValue
@@ -31,7 +32,7 @@ export default function ProductSorter({ queryParams, pagination }: Props) {
         search: createSearchParams(
           omit(
             {
-              ...queryParams,
+              ...queryConfig,
               sort_by: sortByValue
             },
             ['order']
@@ -46,7 +47,7 @@ export default function ProductSorter({ queryParams, pagination }: Props) {
       navigate({
         pathname: PathConstant.home,
         search: createSearchParams({
-          ...queryParams,
+          ...queryConfig,
           sort_by: sortBy.price,
           order: orderByValue
         }).toString()
