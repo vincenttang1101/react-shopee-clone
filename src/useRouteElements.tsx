@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 
-import { PathConstant } from '@/constants/path.constant'
+import PathConstant from '@/constants/path.constant'
 import { RouteConstant } from '@/constants/route.constant'
 import { AppContext } from '@/contexts'
 
@@ -27,7 +27,8 @@ export default function useRouteElements() {
       element: <ProtectedRoute />,
       children: [RouteConstant.profile]
     },
-    RouteConstant.productList
+    RouteConstant.productList,
+    RouteConstant.productDetails
   ])
 
   return routeElements

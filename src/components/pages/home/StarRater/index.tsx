@@ -3,7 +3,7 @@ import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 
 import { omit } from 'lodash'
 
-import { PathConstant } from '@/constants/path.constant'
+import PathConstant from '@/constants/path.constant'
 import { QueryConfig } from '@/hooks/useQueryConfig'
 
 /**

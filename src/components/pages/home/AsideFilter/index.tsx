@@ -10,7 +10,7 @@ import { ObjectSchema } from 'yup'
 
 import { Button, InputField } from '@/components/common'
 import { StarRater } from '@/components/pages/home'
-import { PathConstant } from '@/constants/path.constant'
+import PathConstant from '@/constants/path.constant'
 import { QueryConfig } from '@/hooks/useQueryConfig'
 import { Category } from '@/types/category.type'
 import { NoUndefinedField } from '@/utils'

@@ -4,7 +4,7 @@ import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import { omit } from 'lodash'
 
-import { PathConstant } from '@/constants/path.constant'
+import PathConstant from '@/constants/path.constant'
 import { ProductConstant } from '@/constants/product.constant'
 import { QueryConfig } from '@/hooks/useQueryConfig'
 import { Products, ProductsConfig } from '@/types/product.type'

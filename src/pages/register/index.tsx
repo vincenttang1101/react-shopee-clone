@@ -8,7 +8,7 @@ import { Omit, omit } from 'lodash'
 
 import { AuthApi } from '@/apis'
 import { Button, InputField } from '@/components/common'
-import { PathConstant } from '@/constants/path.constant'
+import PathConstant from '@/constants/path.constant'
 import { AppContext } from '@/contexts'
 import { ErrorResponse } from '@/types/response.type'
 import { AxiosErrorUtil } from '@/utils/axiosError.util'

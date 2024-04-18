@@ -1,6 +1,14 @@
 import { FaStar } from 'react-icons/fa'
 
-export default function ProductRating({ rating }: { rating: number }) {
+import { twMerge } from 'tailwind-merge'
+
+type Props = {
+  rating: number
+  classNameStar?: string
+  classNameStarActive?: string
+}
+
+export default function ProductRating({ rating, classNameStar, classNameStarActive }: Props) {
   const handleWidth = (order: number) => {
     if (order <= rating) return '100%'
     else if (order > rating && order - rating < 1) {
@@ -9,17 +17,17 @@ export default function ProductRating({ rating }: { rating: number }) {
   }
 
   return (
-    <>
+    <ul className='flex gap-x-px'>
       {Array(5)
         .fill(0)
         .map((_, index) => (
-          <div className='relative' key={index}>
+          <li key={index} className={twMerge('relative w-3', classNameStar)}>
             <div className='absolute left-0 top-0 overflow-hidden' style={{ width: handleWidth(index + 1) }}>
-              <FaStar className='h-full w-3 text-yellow-300' />
+              <FaStar className={twMerge('h-full w-full text-yellow-300', classNameStarActive)} />
             </div>
-            <FaStar className='h-full w-3 text-gray-300' />
-          </div>
+            <FaStar className='h-full w-full text-gray-300' />
+          </li>
         ))}
-    </>
+    </ul>
   )
 }

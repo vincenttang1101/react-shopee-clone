@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 
 import axios, { AxiosError, type AxiosInstance } from 'axios'
 
-import { PathConstant } from '@/constants/path.constant'
+import PathConstant from '@/constants/path.constant'
 import { AuthResponse, ErrorResponse } from '@/types/response.type'
 import { User } from '@/types/user.type'
 import { AuthUtil } from '@/utils/auth.util'
