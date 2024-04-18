@@ -1,5 +1,6 @@
 import { type ElementType, useRef, useState } from 'react'
-import { type Placement, FloatingPortal, arrow, offset, shift, useFloating } from '@floating-ui/react'
+
+import { FloatingPortal, type Placement, arrow, offset, shift, useFloating } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 type IPopover = {

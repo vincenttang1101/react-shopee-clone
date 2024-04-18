@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
+
+import { ProductRating } from '@/components/pages/home'
 import { Product } from '@/types/product.type'
 import { Util } from '@/utils'
-import { ProductRating } from '@/components/pages/product'
 
 type ProductItemProps = {
   product: Product

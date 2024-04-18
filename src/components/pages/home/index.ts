@@ -1,0 +1,5 @@
+export { default as AsideFilter } from '@/components/pages/home/AsideFilter'
+export { default as ProductItem } from '@/components/pages/home/ProductItem'
+export { default as ProductRating } from '@/components/pages/home/ProductRating'
+export { default as ProductSorter } from '@/components/pages/home/ProductSorter'
+export { default as StarRater } from '@/components/pages/home/StarRater'

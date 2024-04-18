@@ -1,6 +1,8 @@
 import { useNavigate, useSearchParams } from 'react-router-dom'
+
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+
 import { ProductsConfig } from '@/types/product.type'
 
 type Props = {

@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
+
 import { CategoryApi, ProductApi } from '@/apis'
-import { AsideFilter, ProductItem, ProductSorter } from '@/components/pages/product'
 import PaginationMui from '@/components/common/Pagination'
+import { AsideFilter, ProductItem, ProductSorter } from '@/components/pages/home'
 import useQueryConfig from '@/hooks/useQueryConfig'
 import { ProductsConfig } from '@/types/product.type'
 

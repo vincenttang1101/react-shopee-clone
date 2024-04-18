@@ -1,5 +1,5 @@
-import { HttpUtil } from '@/utils/http.util'
 import { AuthResponse } from '@/types/response.type'
+import { HttpUtil } from '@/utils/http.util'
 
 const AuthApi = {
   register: (body: { email: string; password: string }) => {

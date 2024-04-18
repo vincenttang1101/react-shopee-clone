@@ -1,5 +1,5 @@
-import { Link, useLocation } from 'react-router-dom'
 import { FaArrowLeftLong } from 'react-icons/fa6'
+import { Link, useLocation } from 'react-router-dom'
 
 enum AuthHeaderEnum {
   register = '/register',

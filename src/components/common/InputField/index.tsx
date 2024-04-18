@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
+
 import clsx from 'clsx'
 
 type InputField = InputHTMLAttributes<HTMLInputElement> & {

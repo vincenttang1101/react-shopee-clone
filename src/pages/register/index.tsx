@@ -1,17 +1,19 @@
 import { useContext } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { useMutation } from '@tanstack/react-query'
+
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
 import { Omit, omit } from 'lodash'
+
+import { AuthApi } from '@/apis'
+import { Button, InputField } from '@/components/common'
+import { PathConstant } from '@/constants/path.constant'
+import { AppContext } from '@/contexts'
+import { ErrorResponse } from '@/types/response.type'
+import { AxiosErrorUtil } from '@/utils/axiosError.util'
 // import { Google, Facebook } from '@/assets/icons'
 import { IAuthSchema, RuleUtil } from '@/utils/rules.util'
-import { Button, InputField } from '@/components/common'
-import { AuthApi } from '@/apis'
-import { AxiosErrorUtil } from '@/utils/axiosError.util'
-import { ErrorResponse } from '@/types/response.type'
-import { AppContext } from '@/contexts'
-import { PathConstant } from '@/constants/path.constant'
 
 export default function Register() {
   const { setIsAuthenticated } = useContext(AppContext)

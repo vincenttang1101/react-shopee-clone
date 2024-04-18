@@ -1,12 +1,14 @@
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { IoSearch } from 'react-icons/io5'
-import { FaChevronDown } from 'react-icons/fa'
-import { PiShoppingCartSimpleBold } from 'react-icons/pi'
 import { BsGlobe } from 'react-icons/bs'
+import { FaChevronDown } from 'react-icons/fa'
+import { IoSearch } from 'react-icons/io5'
+import { PiShoppingCartSimpleBold } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
+
 import { useMutation } from '@tanstack/react-query'
-import { Popover } from '@/components/common'
+
 import { AuthApi } from '@/apis'
+import { Popover } from '@/components/common'
 import { AppContext } from '@/contexts'
 
 export default function MainHeader() {

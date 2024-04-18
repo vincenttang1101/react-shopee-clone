@@ -1,5 +1,5 @@
-import { SuccessResponse } from '@/types/response.type'
 import { Products, ProductsConfig } from '@/types/product.type'
+import { SuccessResponse } from '@/types/response.type'
 import { HttpUtil } from '@/utils/http.util'
 
 const URL = 'products'

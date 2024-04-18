@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react'
-import { AuthUtil } from '@/utils/auth.util'
+
 import { User } from '@/types/user.type'
+import { AuthUtil } from '@/utils/auth.util'
 
 interface AppContextInterface {
   isAuthenticated: boolean

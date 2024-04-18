@@ -1,6 +1,6 @@
-import { AuthLayout, MainLayout } from '@/layouts'
-import { Login, Home, Profile, Register } from '@/pages'
 import { PathConstant } from '@/constants/path.constant'
+import { AuthLayout, MainLayout } from '@/layouts'
+import { Home, Login, Profile, Register } from '@/pages'
 
 type RouteKey = 'register' | 'login' | 'profile' | 'productList'
 

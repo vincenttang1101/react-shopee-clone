@@ -1,14 +1,7 @@
+import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { FaFacebook, FaLinkedin, FaGithub } from 'react-icons/fa'
+
 import {
-  Payment1,
-  Payment2,
-  Payment3,
-  Payment4,
-  Payment5,
-  Payment6,
-  Payment7,
-  Payment8,
   Carrier1,
   Carrier2,
   Carrier3,
@@ -19,7 +12,15 @@ import {
   Carrier8,
   Carrier9,
   Carrier10,
-  Carrier11
+  Carrier11,
+  Payment1,
+  Payment2,
+  Payment3,
+  Payment4,
+  Payment5,
+  Payment6,
+  Payment7,
+  Payment8
 } from '@/assets/images'
 
 export default function Footer() {
