@@ -2,11 +2,13 @@ import { InputHTMLAttributes } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
 
 import clsx from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 type InputField = InputHTMLAttributes<HTMLInputElement> & {
   errorMessage?: string
   register?: UseFormRegister<any>
   isErrorMessage?: boolean
+  classNameContainer?: string
 }
 
 export default function InputField({
@@ -15,6 +17,7 @@ export default function InputField({
   errorMessage,
   register,
   isErrorMessage = true,
+  classNameContainer,
   ...rest
 }: InputField) {
   const classes = clsx(
@@ -31,7 +34,7 @@ export default function InputField({
   const newRegister = register && name ? register(name) : {}
 
   return (
-    <div>
+    <div className={twMerge(classNameContainer)}>
       <input className={classes} {...newRegister} {...rest} />
       {isErrorMessage && <p className='min-h-[2rem] text-lg text-[#ff424f]'>{errorMessage}</p>}
     </div>
