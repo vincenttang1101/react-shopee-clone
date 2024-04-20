@@ -5,13 +5,14 @@ import { FiMinus, FiPlus } from 'react-icons/fi'
 import { useParams } from 'react-router-dom'
 
 import { useQuery } from '@tanstack/react-query'
-import 'swiper/css'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import { ProductApi } from '@/apis'
 import { InputField } from '@/components/common'
 import { ProductRating } from '@/components/pages/home'
 import { Util } from '@/utils'
+
+import 'swiper/css'
 
 export default function ProductDetails() {
   const { id } = useParams()
