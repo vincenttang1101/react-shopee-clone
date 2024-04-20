@@ -9,6 +9,9 @@ const Util = {
       .format(price)
       .replace('.', ',')
       .toLocaleLowerCase()
+  },
+  calculateDiscountPercentage: (originalPrice: number, salePrice: number) => {
+    return originalPrice === 0 ? 0 + '%' : Math.floor(((originalPrice - salePrice) / originalPrice) * 100) + '%'
   }
 }
 type NoUndefinedField<T> = {
