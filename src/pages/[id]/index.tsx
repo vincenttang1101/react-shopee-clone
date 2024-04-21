@@ -11,6 +11,7 @@ import { ProductApi } from '@/apis'
 import { InputField } from '@/components/common'
 import { ProductRating } from '@/components/pages/home'
 import { Util } from '@/utils'
+import DOMPurify from 'dompurify';
 
 import 'swiper/css'
 
@@ -23,8 +24,33 @@ export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1)
   const [activeImage, setActiveImage] = useState(productDetailsData?.data.data.images[0])
   const swiperRef = useRef<SwiperClass>()
+  const imageRef  = useRef<HTMLImageElement>(null)
 
   const product = productDetailsData?.data.data
+
+  const handleZoom = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const image = imageRef.current  as HTMLImageElement
+    const {naturalWidth, naturalHeight} = image
+    /* Cách 1: Lấy offsetX, offsetY khi chúng ta xử lý được bubble event */
+    const {offsetX, offsetY} = event.nativeEvent;
+
+    /* Cách 2: Lấy offsetX, offsetY khi chúng ta không xử lý được bubble event 
+    const offsetX = event.pageX - (rect.x + window.scrollX)
+    const offsetY = event.pageY - (rect.y + window.scrollY) */
+
+    const top = offsetY * (1 - naturalHeight / rect.height)
+    const left = offsetX * (1 - naturalWidth / rect.width)
+    
+    image.style.width = naturalWidth + "px"
+    image.style.height = naturalHeight + "px"
+    image.style.top = top + "px"
+    image.style.left = left + "px"
+  }
+
+  const handleRemoveZoom = () => {
+   imageRef.current?.removeAttribute('style')
+  }
 
   return (
     <main>
@@ -32,8 +58,8 @@ export default function ProductDetails() {
         <div className='container'>
           <div className='bg-white grid grid-cols-12 p-4 gap-8 rounded-sm'>
             <div className='col-span-5'>
-              <figure className='shadow'>
-                <img className='w-full h-full object-cover' src={product?.image} alt='' />
+              <figure className='shadow overflow-hidden w-full h-[500px] cursor-zoom-in' onMouseMove={handleZoom} onMouseLeave={handleRemoveZoom}>
+                <img ref={imageRef} className='relative w-full h-full object-cover pointer-events-none' src={product?.image} alt='' />
               </figure>
               <div className='relative mt-5'>
                 <button
@@ -152,7 +178,7 @@ export default function ProductDetails() {
             <div
               className='mt-4 px-3 flex flex-col gap-y-4'
               dangerouslySetInnerHTML={{
-                __html: product?.description as string
+                __html: DOMPurify.sanitize(product?.description as string)
               }}
             />
           </div>
