@@ -6,6 +6,7 @@ import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import clsx from 'clsx'
+import { omit } from 'lodash'
 import { ObjectSchema } from 'yup'
 
 import { Button, InputField } from '@/components/common'
@@ -13,7 +14,7 @@ import { StarRater } from '@/components/pages/home'
 import PathConstant from '@/constants/path.constant'
 import { QueryConfig } from '@/hooks/useQueryConfig'
 import { Category } from '@/types/category.type'
-import { NoUndefinedField } from '@/utils'
+import { NoUndefinedField, Util } from '@/utils'
 import { PriceRangeSchema, RuleUtil } from '@/utils/rules.util'
 
 type Props = {
@@ -50,14 +51,25 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
     <aside>
       <div className='flex flex-col gap-y-14'>
         <section className='flex flex-col gap-y-5'>
-          <div
-            className={clsx(`flex items-center gap-x-3`, {
+          <Link
+            to={{
+              pathname: PathConstant.home,
+              search: createSearchParams(
+                omit(
+                  {
+                    ...queryConfig
+                  },
+                  ['category']
+                )
+              ).toString()
+            }}
+            className={clsx(`flex items-center gap-x-3 cursor-pointer`, {
               'text-primaryColor': !categoryParam
             })}
           >
             <TfiMenuAlt className='h-5 w-5' />
             <h2 className='text-lg font-semibold capitalize'>Tất cả danh mục</h2>
-          </div>
+          </Link>
 
           <div className='h-[1px] bg-gray-300' />
 
@@ -69,14 +81,16 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                     pathname: PathConstant.home,
                     search: createSearchParams({
                       ...queryConfig,
-                      category: category._id
+                      category: Util.generateNameId(category.name, category._id)
                     }).toString()
                   }}
                   className={clsx('relative flex items-center font-bold', {
-                    'text-primaryColor': categoryParam === category._id
+                    'text-primaryColor': categoryParam && Util.getIdFromNameId(categoryParam as string) === category._id
                   })}
                 >
-                  {categoryParam === category._id && <RxTriangleRight className='absolute -left-6' />}
+                  {categoryParam && Util.getIdFromNameId(categoryParam) === category._id && (
+                    <RxTriangleRight className='absolute -left-6' />
+                  )}
                   <span>{category.name}</span>
                 </Link>
               </li>

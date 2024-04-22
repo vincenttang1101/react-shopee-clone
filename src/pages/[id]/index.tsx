@@ -16,10 +16,10 @@ import { Util } from '@/utils'
 import 'swiper/css'
 
 export default function ProductDetails() {
-  const { id } = useParams()
+  const { nameId } = useParams()
   const { data: productDetailsData } = useQuery({
-    queryKey: ['product', id],
-    queryFn: () => ProductApi.getProductDetail(id as string)
+    queryKey: ['product', nameId],
+    queryFn: () => ProductApi.getProductDetail(Util.getIdFromNameId(nameId as string))
   })
   const [quantity, setQuantity] = useState(1)
   const [activeImage, setActiveImage] = useState('')

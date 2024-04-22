@@ -11,7 +11,7 @@ type ProductItemProps = {
 export default function ProductItem({ product }: ProductItemProps) {
   return (
     <article className='rounded-sm bg-white shadow-sm transition-transform hover:-translate-y-0.5 hover:overflow-hidden hover:shadow-md'>
-      <Link to={`/${product._id}`}>
+      <Link to={`${Util.generateNameId(product.name, product._id)}`}>
         <figure className='relative w-full pt-[100%]'>
           <img className='absolute left-0 top-0 h-full w-full' src={product.image} alt='Thumbnail' />
         </figure>

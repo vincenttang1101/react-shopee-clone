@@ -4,7 +4,7 @@ enum PathConstant {
   login = '/login',
   logout = '/logout',
   profile = '/profile',
-  productDetails = '/:id'
+  productDetails = '/:nameId'
 }
 
 export default PathConstant

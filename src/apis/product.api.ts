@@ -1,5 +1,6 @@
 import { Product, Products, ProductsConfig } from '@/types/product.type'
 import { SuccessResponse } from '@/types/response.type'
+import { Util } from '@/utils'
 import { HttpUtil } from '@/utils/http.util'
 
 const pathname = 'products'
@@ -8,6 +9,7 @@ const ProductApi = {
     return HttpUtil.get<SuccessResponse<Products>>(pathname, {
       params: {
         ...params,
+        category: params.category && Util.getIdFromNameId(params.category),
         limit: 20
       }
     })
