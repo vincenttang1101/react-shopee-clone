@@ -17,10 +17,13 @@ import 'swiper/css'
 
 export default function ProductDetails() {
   const { nameId } = useParams()
+
+  const id = Util.getIdFromNameId(nameId as string)
   const { data: productDetailsData } = useQuery({
-    queryKey: ['product', nameId],
-    queryFn: () => ProductApi.getProductDetail(Util.getIdFromNameId(nameId as string))
+    queryKey: ['product', id],
+    queryFn: () => ProductApi.getProductDetail(id)
   })
+
   const [quantity, setQuantity] = useState(1)
   const [activeImage, setActiveImage] = useState('')
   const swiperRef = useRef<SwiperClass>()
@@ -157,6 +160,7 @@ export default function ProductDetails() {
                     className='border-gray-200 h-8 w-full focus:!border-gray-200 focus:!shadow-none text-center'
                     isErrorMessage={false}
                     value={quantity}
+                    onChange={(event) => setQuantity(Number(event.target.value))}
                   />
                   <button className='border border-gray-200 h-8 p-2 flex items-center justify-center'>
                     <FiPlus
