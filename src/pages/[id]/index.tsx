@@ -10,26 +10,38 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import { ProductApi } from '@/apis'
 import { InputField } from '@/components/common'
-import { ProductRating } from '@/components/pages/home'
+import { ProductItem, ProductRating } from '@/components/pages/home'
+import { ProductsConfig } from '@/types/product.type'
 import { Util } from '@/utils'
 
 import 'swiper/css'
 
 export default function ProductDetails() {
   const { nameId } = useParams()
+  const [quantity, setQuantity] = useState(1)
+  const [activeImage, setActiveImage] = useState('')
+  const swiperRef = useRef<SwiperClass>()
+  const imageRef = useRef<HTMLImageElement>(null)
 
   const id = Util.getIdFromNameId(nameId as string)
   const { data: productDetailsData } = useQuery({
     queryKey: ['product', id],
     queryFn: () => ProductApi.getProductDetail(id)
   })
+  const product = productDetailsData?.data?.data
 
-  const [quantity, setQuantity] = useState(1)
-  const [activeImage, setActiveImage] = useState('')
-  const swiperRef = useRef<SwiperClass>()
-  const imageRef = useRef<HTMLImageElement>(null)
+  const queryConfig: ProductsConfig = { page: '1', limit: '20', category: product?.category?._id }
 
-  const product = productDetailsData?.data.data
+  const { data: productsData } = useQuery({
+    queryKey: ['products', queryConfig],
+    queryFn: () => {
+      return ProductApi.getProducts(queryConfig)
+    },
+    enabled: Boolean(product),
+    staleTime: 3 * 60 * 1000
+  })
+
+  const products = productsData?.data?.data
 
   const handleZoom = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -201,6 +213,19 @@ export default function ProductDetails() {
               }}
             />
           </div>
+        </div>
+      </section>
+
+      <section className='mt-8'>
+        <div className='container'>
+          <h2 className='uppercase text-gray-500 text-lg'>Có thể bạn cũng thích</h2>
+          <ul className='mt-4 grid grid-cols-6 gap-3'>
+            {products?.products?.map((product) => (
+              <li key={product._id}>
+                <ProductItem key={product._id} product={product} />
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </main>

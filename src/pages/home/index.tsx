@@ -5,6 +5,7 @@ import PaginationMui from '@/components/common/Pagination'
 import { AsideFilter, ProductItem, ProductSorter } from '@/components/pages/home'
 import useQueryConfig from '@/hooks/useQueryConfig'
 import { ProductsConfig } from '@/types/product.type'
+import { Util } from '@/utils'
 
 export default function Home() {
   const queryConfig = useQueryConfig()
@@ -12,8 +13,10 @@ export default function Home() {
   const { data: productsData } = useQuery({
     queryKey: ['products', queryConfig],
     queryFn: () => {
+      queryConfig.category = queryConfig.category ? Util.getIdFromNameId(queryConfig.category) : undefined
       return ProductApi.getProducts(queryConfig as ProductsConfig)
-    }
+    },
+    staleTime: 3 * 60 * 1000
   })
   const { data: categoriesData } = useQuery({
     queryKey: ['categories'],
