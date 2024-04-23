@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { BsCartPlus } from 'react-icons/bs'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { FiMinus, FiPlus } from 'react-icons/fi'
 import { useParams } from 'react-router-dom'
 
 import { useQuery } from '@tanstack/react-query'
@@ -9,7 +8,7 @@ import DOMPurify from 'dompurify'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import { ProductApi } from '@/apis'
-import { InputField } from '@/components/common'
+import { QuantityController } from '@/components/pages/[nameId]'
 import { ProductItem, ProductRating } from '@/components/pages/home'
 import { ProductsConfig } from '@/types/product.type'
 import { Util } from '@/utils'
@@ -18,7 +17,6 @@ import 'swiper/css'
 
 export default function ProductDetails() {
   const { nameId } = useParams()
-  const [quantity, setQuantity] = useState(1)
   const [activeImage, setActiveImage] = useState('')
   const swiperRef = useRef<SwiperClass>()
   const imageRef = useRef<HTMLImageElement>(null)
@@ -157,34 +155,8 @@ export default function ProductDetails() {
               </div>
               <div className='mt-7 flex items-center'>
                 <div className='capitalize text-gray-500 text-lg'>Số lượng</div>
-                <div className='flex ml-10'>
-                  <button className='border border-gray-200 h-8 p-2 flex items-center justify-center'>
-                    <FiMinus
-                      size={18}
-                      className='text-gray-500'
-                      onClick={() => {
-                        if (quantity >= 1) setQuantity(quantity - 1)
-                      }}
-                    />
-                  </button>
-                  <InputField
-                    classNameContainer='shrink-0 w-14'
-                    className='border-gray-200 h-8 w-full focus:!border-gray-200 focus:!shadow-none text-center'
-                    isErrorMessage={false}
-                    value={quantity}
-                    onChange={(event) => setQuantity(Number(event.target.value))}
-                  />
-                  <button className='border border-gray-200 h-8 p-2 flex items-center justify-center'>
-                    <FiPlus
-                      size={18}
-                      className='text-gray-500'
-                      onClick={() => {
-                        if (quantity < product!.quantity) setQuantity(quantity + 1)
-                      }}
-                    />
-                  </button>
-                </div>
-                <div className='text-gray-500 ml-5'>{product?.view} Sản phẩm có sẵn</div>
+                <QuantityController quantity={product?.quantity || 0} />
+                <div className='text-gray-500 ml-5'>{product?.quantity} Sản phẩm có sẵn</div>
               </div>
               <div className='mt-7 flex gap-x-4'>
                 <button className='px-4 py-3 flex items-center text-primaryColor gap-x-3 border border-primaryColor bg-primaryColor/10 rounded-sm hover:bg-primaryColor/5 transition-colors'>
