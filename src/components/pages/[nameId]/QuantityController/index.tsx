@@ -3,7 +3,7 @@ import { FiMinus, FiPlus } from 'react-icons/fi'
 
 import { InputField } from '@/components/common'
 
-export default function QuantityController({ quantity: maxQuantity }: { quantity: number }) {
+export default function QuantityController({ maxQuantity }: { maxQuantity: number }) {
   const [quantity, setQuantity] = useState(1)
 
   const handleDescrease = () => {

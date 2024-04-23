@@ -155,7 +155,7 @@ export default function ProductDetails() {
               </div>
               <div className='mt-7 flex items-center'>
                 <div className='capitalize text-gray-500 text-lg'>Số lượng</div>
-                <QuantityController quantity={product?.quantity || 0} />
+                <QuantityController maxQuantity={product?.quantity || 0} />
                 <div className='text-gray-500 ml-5'>{product?.quantity} Sản phẩm có sẵn</div>
               </div>
               <div className='mt-7 flex gap-x-4'>

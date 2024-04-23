@@ -1,11 +1,10 @@
 import { AuthHeader, Footer } from '@/components/common'
 
-interface ILayout {
+type Layout = {
   children: React.ReactNode
-  type?: string
 }
 
-export default function AuthLayout({ children }: ILayout) {
+export default function AuthLayout({ children }: Layout) {
   return (
     <div>
       <AuthHeader />
