@@ -2,14 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 import { BsCartPlus } from 'react-icons/bs'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import DOMPurify from 'dompurify'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
-import { ProductApi } from '@/apis'
+import { ProductApi, PurchaseApi } from '@/apis'
 import { QuantityController } from '@/components/pages/[nameId]'
 import { ProductItem, ProductRating } from '@/components/pages/home'
+import PurchaseConstant from '@/constants/purchase.constant'
+import { queryClient } from '@/main'
 import { ProductsConfig } from '@/types/product.type'
 import { Util } from '@/utils'
 
@@ -20,6 +23,7 @@ export default function ProductDetails() {
   const [activeImage, setActiveImage] = useState('')
   const swiperRef = useRef<SwiperClass>()
   const imageRef = useRef<HTMLImageElement>(null)
+  const [quantity, setQuantity] = useState(1)
 
   const id = Util.getIdFromNameId(nameId as string)
   const { data: productDetailsData } = useQuery({
@@ -40,7 +44,6 @@ export default function ProductDetails() {
   })
 
   const products = productsData?.data?.data
-
   const handleZoom = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const rect = event.currentTarget.getBoundingClientRect()
     const image = imageRef.current as HTMLImageElement
@@ -65,6 +68,20 @@ export default function ProductDetails() {
     imageRef.current?.removeAttribute('style')
   }
 
+  const addToCartMutation = useMutation({
+    mutationFn: (body: { product_id: string; buy_count: number }) => PurchaseApi.addToCart(body),
+    onSuccess: (data) => {
+      toast.success(data.data.message, {
+        autoClose: 1000
+      })
+      queryClient.invalidateQueries({ queryKey: ['purchases', { status: PurchaseConstant.inCart }] })
+    }
+  })
+
+  const addToCart = () => {
+    addToCartMutation.mutate({ product_id: product?._id as string, buy_count: quantity })
+  }
+
   useEffect(() => {
     if (product?.images && product.images.length > 0) {
       setActiveImage(product.images[0])
@@ -85,8 +102,8 @@ export default function ProductDetails() {
                 <img
                   ref={imageRef}
                   className='relative w-full h-full pointer-events-none'
-                  src={product?.images.filter((image) => image === activeImage)[0]}
-                  alt=''
+                  src={activeImage}
+                  alt={activeImage}
                 />
               </figure>
               <div className='relative mt-5'>
@@ -149,17 +166,24 @@ export default function ProductDetails() {
                   <span className='leading-normal font-medium'>₫</span>
                   <span className='text-3xl leading-none'>{Util.formatCurrency(product?.price || 0)}</span>
                 </div>
-                <mark className='uppercase p-1 bg-primaryColor text-white text-xs rounded-sm font-bold'>
+                <span className='uppercase p-1 bg-primaryColor text-white text-xs rounded-sm font-bold'>
                   {Util.calculateDiscountPercentage(product?.price_before_discount || 0, product?.price || 0)} giảm
-                </mark>
+                </span>
               </div>
               <div className='mt-7 flex items-center'>
                 <div className='capitalize text-gray-500 text-lg'>Số lượng</div>
-                <QuantityController maxQuantity={product?.quantity || 0} />
+                <QuantityController
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  maxQuantity={product?.quantity || 0}
+                />
                 <div className='text-gray-500 ml-5'>{product?.quantity} Sản phẩm có sẵn</div>
               </div>
               <div className='mt-7 flex gap-x-4'>
-                <button className='px-4 py-3 flex items-center text-primaryColor gap-x-3 border border-primaryColor bg-primaryColor/10 rounded-sm hover:bg-primaryColor/5 transition-colors'>
+                <button
+                  className='px-4 py-3 flex items-center text-primaryColor gap-x-3 border border-primaryColor bg-primaryColor/10 rounded-sm hover:bg-primaryColor/5 transition-colors'
+                  onClick={addToCart}
+                >
                   <BsCartPlus className='w-6 h-6' />
                   <span className='capitalize'>Thêm vào giỏ hàng</span>
                 </button>

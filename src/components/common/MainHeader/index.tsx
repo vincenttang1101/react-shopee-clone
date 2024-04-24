@@ -6,14 +6,18 @@ import { IoSearch } from 'react-icons/io5'
 import { PiShoppingCartSimpleBold } from 'react-icons/pi'
 import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
-import { AuthApi } from '@/apis'
+import { AuthApi, PurchaseApi } from '@/apis'
+import NoProductInCart from '@/assets/icons/no-cart.webp'
 import { Popover } from '@/components/common'
 import PathConstant from '@/constants/path.constant'
+import PurchaseConstant from '@/constants/purchase.constant'
 import { AppContext } from '@/contexts'
 import useQueryConfig from '@/hooks/useQueryConfig'
+import { Util } from '@/utils'
 
+const MAX_PURCHASES = 5
 export default function MainHeader() {
   const { isAuthenticated, setIsAuthenticated, profile } = useContext(AppContext)
   const logoutMutation = useMutation({
@@ -31,6 +35,19 @@ export default function MainHeader() {
       name: ''
     }
   })
+
+  /**
+   * Khi chúng ta chuyển trang thì Header chỉ bị re-render
+   * Không bị unmount - mounting again
+   * (Trừ trường hợp logout nhảy sang Register rồi nhảy vào lại)
+   * Nên các query này sẽ không bị inractive => Không bị gọi lại => Không cần thiết phải set stale: Infinity
+   */
+  const { data: purchasesIncartData } = useQuery({
+    queryKey: ['purchases', { status: PurchaseConstant.inCart }],
+    queryFn: () => PurchaseApi.getPurchases({ status: PurchaseConstant.inCart })
+  })
+
+  const purchasesIncart = purchasesIncartData?.data.data
 
   const onSubmit: SubmitHandler<{ name: string }> = (data) => {
     navigate({
@@ -145,60 +162,65 @@ export default function MainHeader() {
 
             <Popover
               renderPopover={
-                <div className='text-md flex max-w-[400px] flex-col gap-y-8 rounded-md bg-white p-6 shadow-md'>
-                  <p className='capitalize text-gray-400'>Sản phẩm mới thêm</p>
-                  <div className='flex flex-col gap-y-6'>
-                    <div className='flex items-center justify-between gap-x-4'>
-                      <div className='flex items-center gap-x-2 overflow-hidden'>
-                        <img
-                          src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
-                          alt='product-in-cart'
-                          className='h-14 w-14 object-cover'
-                        />
-                        <div className='truncate'>
-                          Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
-                          phối độc quyền bởi BBae Lab
-                        </div>
+                <div className='text-md max-w-[400px] rounded-md bg-white p-6 shadow-md'>
+                  {purchasesIncart ? (
+                    <div className='flex flex-col gap-y-8'>
+                      <p className='capitalize text-gray-400'>Sản phẩm mới thêm</p>
+                      <div className='flex flex-col gap-y-4'>
+                        {purchasesIncart.slice(0, MAX_PURCHASES).map((purchase) => (
+                          <div
+                            key={purchase.product._id}
+                            className='flex items-center justify-between gap-x-4 hover:bg-gray-100 py-2'
+                          >
+                            <div className='flex items-center gap-x-2 overflow-hidden'>
+                              <img
+                                src={purchase.product.image}
+                                alt='product-in-cart'
+                                className='object-cover h-14 w-14'
+                              />
+                              <div className='truncate'>{purchase.product.name}</div>
+                            </div>
+                            <span className='text-primaryColor bg-transparent flex items-start'>
+                              <span className='text-xs leading-none'>₫</span>
+                              <span className='leading-none'>{Util.formatCurrency(purchase.product.price)}</span>
+                            </span>
+                          </div>
+                        ))}
                       </div>
-                      <span className='text-primaryColor'>₫329.000</span>
-                    </div>
-                    <div className='flex items-center justify-between gap-x-4'>
-                      <div className='flex items-center gap-x-2 overflow-hidden'>
-                        <img
-                          src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
-                          alt='product-in-cart'
-                          className='h-14 w-14 object-cover'
-                        />
-                        <div className='truncate'>
-                          Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
-                          phối độc quyền bởi BBae Lab
-                        </div>
+
+                      <div className='flex items-center'>
+                        {purchasesIncart.length > MAX_PURCHASES && (
+                          <span className='text-gray-600 text-sm capitalize'>
+                            {purchasesIncart.length - MAX_PURCHASES} Thêm hàng vào giỏ
+                          </span>
+                        )}
+                        <button className='ml-auto rounded-sm bg-primaryColor px-4 py-2 capitalize text-white hover:opacity-90'>
+                          Xem giỏ hàng
+                        </button>
                       </div>
-                      <span className='text-primaryColor'>₫329.000</span>
                     </div>
-                    <div className='flex items-center justify-between gap-x-4'>
-                      <div className='flex items-center gap-x-2 overflow-hidden'>
-                        <img
-                          src='https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lkvuddtae5zf64_tn'
-                          alt='product-in-cart'
-                          className='h-14 w-14 object-cover'
-                        />
-                        <div className='truncate'>
-                          Viên sủi chuyển hoá chất béo Balporo BBae Hàn Quốc, hỗ trợ giảm cân, dưỡng da sáng mịn, phân
-                          phối độc quyền bởi BBae Lab
-                        </div>
-                      </div>
-                      <span className='text-primaryColor'>₫329.000</span>
-                    </div>
-                  </div>
-                  <button className='ml-auto rounded-sm bg-primaryColor px-4 py-2 capitalize text-white hover:opacity-90'>
-                    Xem giỏ hàng
-                  </button>
+                  ) : (
+                    <figure className='w-[300px] h-[300px] flex justify-center items-center gap-y-3'>
+                      <img
+                        src={NoProductInCart}
+                        alt='Không có sản phẩm trong giỏ hàng'
+                        className='w-24 h-24 object-cover'
+                      />
+                      <figcaption className='capitalize text-lg text-gray-400'>Chưa có sản phẩm</figcaption>
+                    </figure>
+                  )}
                 </div>
               }
               className='justify-self-start'
             >
-              <PiShoppingCartSimpleBold className='cursor-pointer text-4xl text-white' />
+              <div className='relative'>
+                <PiShoppingCartSimpleBold className='cursor-pointer text-4xl text-white' />
+                {purchasesIncart && purchasesIncart.length > 0 && (
+                  <mark className='absolute px-2 text-sm bg-white text-primaryColor rounded-full -top-1 -right-2'>
+                    {purchasesIncart?.length}
+                  </mark>
+                )}
+              </div>
             </Popover>
           </div>
         </div>

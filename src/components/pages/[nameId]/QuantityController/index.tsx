@@ -1,11 +1,14 @@
-import { useState } from 'react'
 import { FiMinus, FiPlus } from 'react-icons/fi'
 
 import { InputField } from '@/components/common'
 
-export default function QuantityController({ maxQuantity }: { maxQuantity: number }) {
-  const [quantity, setQuantity] = useState(1)
+type QuantityControllerProps = {
+  quantity: number
+  setQuantity: React.Dispatch<React.SetStateAction<number>>
+  maxQuantity: number
+}
 
+export default function QuantityController({ quantity, setQuantity, maxQuantity }: QuantityControllerProps) {
   const handleDescrease = () => {
     if (quantity > 1) setQuantity(quantity - 1)
   }
