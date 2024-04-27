@@ -44,7 +44,8 @@ export default function MainHeader() {
    */
   const { data: purchasesIncartData } = useQuery({
     queryKey: ['purchases', { status: PurchaseConstant.inCart }],
-    queryFn: () => PurchaseApi.getPurchases({ status: PurchaseConstant.inCart })
+    queryFn: () => PurchaseApi.getPurchases({ status: PurchaseConstant.inCart }),
+    enabled: isAuthenticated
   })
 
   const purchasesIncart = purchasesIncartData?.data.data
