@@ -9,7 +9,7 @@ import DOMPurify from 'dompurify'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import { ProductApi, PurchaseApi } from '@/apis'
-import { QuantityController } from '@/components/pages/[nameId]'
+import { QuantityController } from '@/components/common'
 import { ProductItem, ProductRating } from '@/components/pages/home'
 import PurchaseConstant from '@/constants/purchase.constant'
 import { queryClient } from '@/main'
