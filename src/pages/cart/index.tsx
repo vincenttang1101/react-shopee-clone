@@ -1,18 +1,58 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useQuery } from '@tanstack/react-query'
+import { useImmer } from 'use-immer'
 
 import { PurchaseApi } from '@/apis'
 import { Button, QuantityController } from '@/components/common'
 import PurchaseConstant from '@/constants/purchase.constant'
+import { Purchase } from '@/types/purchase.type'
 import { Util } from '@/utils'
 
+type ExtendedPurchase = Purchase & { isDisabled: boolean; isChecked: boolean }
+
 export default function Cart() {
+  const [extendedPurchases, setExtendedPurchases] = useImmer<ExtendedPurchase[]>([])
+  const [totalPurchases, setTotalPurchases] = useState(0)
+
   const { data: purchasesIncartData } = useQuery({
     queryKey: ['purchases', { status: PurchaseConstant.inCart }],
     queryFn: () => PurchaseApi.getPurchases({ status: PurchaseConstant.inCart })
   })
-  const purchasesIncart = purchasesIncartData?.data.data
+  const purchasesIncart = useMemo(() => purchasesIncartData?.data?.data || [], [purchasesIncartData])
+
+  useEffect(() => {
+    setExtendedPurchases(
+      purchasesIncart?.map((purchase) => ({
+        ...purchase,
+        isDisabled: false,
+        isChecked: false
+      })) || []
+    )
+    setTotalPurchases(() => {
+      let totalExtendedPurchases = 0
+      extendedPurchases.forEach((purchase) => {
+        totalExtendedPurchases += purchase.price * purchase.buy_count
+      })
+      return totalExtendedPurchases
+    })
+  }, [extendedPurchases, purchasesIncart, setExtendedPurchases])
+
+  const isCheckAll = extendedPurchases.every((purchase) => purchase.isChecked)
+
+  const handleCheck = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    // extendedPurchases[index] = { ...extendedPurchases[index], isChecked: event.target.checked }
+    // setExtendedPurchases([...extendedPurchases])
+
+    setExtendedPurchases((draft) => {
+      draft[index].isChecked = event.target.checked
+    })
+  }
+
+  const handleCheckAll = () => {
+    setExtendedPurchases(extendedPurchases.map((purchase) => ({ ...purchase, isChecked: !isCheckAll })))
+  }
 
   return (
     <main>
@@ -20,8 +60,16 @@ export default function Cart() {
         <div className='container'>
           <div className='grid grid-cols-12 bg-white px-8 py-4 rounded-sm'>
             <div className='col-span-5 capitalize flex items-center gap-x-3'>
-              <input type='checkbox' className='accent-primaryColor w-5 h-5 outline-red-500' />
-              <span className='text-black'>Sản phẩm</span>
+              <input
+                type='checkbox'
+                id='check_all_1'
+                checked={isCheckAll}
+                onChange={handleCheckAll}
+                className='accent-primaryColor w-5 h-5 outline-red-500'
+              />
+              <label htmlFor='check_all_1' className='text-black cursor-pointer capitalize'>
+                Sản phẩm
+              </label>
             </div>
             <div className='col-span-7 grid grid-cols-6 text-gray-500 text-center'>
               <div className='col-span-2'>Đơn giá</div>
@@ -35,13 +83,18 @@ export default function Cart() {
 
       <div className='mt-4'>
         <div className='container'>
-          {purchasesIncart?.map((purchase, index) => (
+          {extendedPurchases?.map((purchase, index) => (
             <>
               <section key={purchase._id}>
                 <div className='grid grid-cols-12 bg-white px-8 py-4 rounded-sm after:w-full'>
                   <div className='col-span-5 hover:text-primaryColor flex items-center gap-x-4'>
                     <div>
-                      <input type='checkbox' className='accent-primaryColor w-5 h-5 outline-red-500' />
+                      <input
+                        type='checkbox'
+                        className='accent-primaryColor w-5 h-5 outline-red-500'
+                        checked={purchase.isChecked}
+                        onChange={handleCheck(index)}
+                      />
                     </div>
                     <Link
                       to={`/${Util.generateNameId(purchase.product.name, purchase.product._id)}`}
@@ -88,12 +141,25 @@ export default function Cart() {
       <div className='mt-7'>
         <div className='container'>
           <div className='grid grid-cols-12 bg-white px-8 py-4 rounded-sm'>
-            <div className='col-span-5 capitalize flex items-center gap-x-3'>
-              <input type='checkbox' className='accent-primaryColor w-5 h-5 outline-red-500' />
-              <span className='capitalize text-lg'>Chọn tất cả</span>
+            <div className='col-span-5 capitalize flex items-center gap-x-3 w-full' aria-hidden='true'>
+              <input
+                type='checkbox'
+                id='check_all_2'
+                className='accent-primaryColor w-5 h-5 outline-red-500'
+                onChange={handleCheckAll}
+              />
+              <label htmlFor='check_all_2' className='capitalize text-lg cursor-pointer'>
+                Chọn tất cả ({extendedPurchases.length})
+              </label>
             </div>
-            <div className='col-span-7 flex items-center justify-end'>
-              <span className='text-lg'>Tổng thanh toán: </span>
+            <div className='col-span-7 flex items-center justify-end gap-x-3'>
+              <div className='text-lg flex items-center gap-x-2'>
+                Tổng thanh toán ():
+                <div className='flex items-start text-primaryColor'>
+                  <u className='text-lg leading-tight'>đ</u>
+                  <span className='text-[25px]'>{Util.formatCurrency(totalPurchases)}</span>
+                </div>
+              </div>
               <Button className='capitalize text-white min-w-[210px] h-[40px] px-4 bg-primaryColor rounded-sm'>
                 Mua hàng
               </Button>
