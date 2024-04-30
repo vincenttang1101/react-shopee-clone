@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useImmer } from 'use-immer'
 
 import { PurchaseApi } from '@/apis'
@@ -22,6 +22,25 @@ export default function Cart() {
   })
   const purchasesIncart = useMemo(() => purchasesIncartData?.data?.data || [], [purchasesIncartData])
 
+  const updatePurchaseMutation = useMutation({
+    mutationFn: (body: { product_id: string; buy_count: number }) => PurchaseApi.updatePurchase(body)
+  })
+
+  const isCheckAll = extendedPurchases.every((purchase) => purchase.isChecked)
+
+  const handleCheck = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    // extendedPurchases[index] = { ...extendedPurchases[index], isChecked: event.target.checked }
+    // setExtendedPurchases([...extendedPurchases])
+
+    setExtendedPurchases((draft) => {
+      draft[index].isChecked = event.target.checked
+    })
+  }
+
+  const handleCheckAll = () => {
+    setExtendedPurchases(extendedPurchases.map((purchase) => ({ ...purchase, isChecked: !isCheckAll })))
+  }
+
   useEffect(() => {
     setExtendedPurchases(
       purchasesIncart?.map((purchase) => ({
@@ -38,21 +57,6 @@ export default function Cart() {
       return totalExtendedPurchases
     })
   }, [extendedPurchases, purchasesIncart, setExtendedPurchases])
-
-  const isCheckAll = extendedPurchases.every((purchase) => purchase.isChecked)
-
-  const handleCheck = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    // extendedPurchases[index] = { ...extendedPurchases[index], isChecked: event.target.checked }
-    // setExtendedPurchases([...extendedPurchases])
-
-    setExtendedPurchases((draft) => {
-      draft[index].isChecked = event.target.checked
-    })
-  }
-
-  const handleCheckAll = () => {
-    setExtendedPurchases(extendedPurchases.map((purchase) => ({ ...purchase, isChecked: !isCheckAll })))
-  }
 
   return (
     <main>
@@ -116,11 +120,7 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className='col-span-2 flex justify-center'>
-                      <QuantityController
-                        buyCount={purchase.buy_count}
-                        maxQuantity={purchase.product.quantity}
-                        className='ml-0'
-                      />
+                      <QuantityController buyCount={purchase.buy_count} maxQuantity={purchase.product.quantity} />
                     </div>
                     <div className='text-primaryColor flex items-start col-span-1 justify-center'>
                       <span className='text-xs leading-tight'>đ</span>

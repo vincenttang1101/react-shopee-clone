@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiMinus, FiPlus } from 'react-icons/fi'
 
 import { twMerge } from 'tailwind-merge'
@@ -8,10 +8,16 @@ import { InputField } from '@/components/common'
 type QuantityControllerProps = {
   buyCount: number
   maxQuantity: number
+  onChangeQuantity?: (value: number) => void
   className?: string
 }
 
-export default function QuantityController({ buyCount, maxQuantity, className }: QuantityControllerProps) {
+export default function QuantityController({
+  buyCount,
+  maxQuantity,
+  onChangeQuantity,
+  className
+}: QuantityControllerProps) {
   const [quantity, setQuantity] = useState(buyCount)
 
   const handleDescrease = () => {
@@ -30,8 +36,12 @@ export default function QuantityController({ buyCount, maxQuantity, className }:
     else setQuantity(value)
   }
 
+  useEffect(() => {
+    onChangeQuantity && onChangeQuantity(quantity)
+  }, [onChangeQuantity, quantity])
+
   return (
-    <div className={twMerge('ml-10 flex', className)}>
+    <div className={twMerge('flex', className)}>
       <button className='border border-gray-200 h-8 p-2 flex items-center justify-center'>
         <FiMinus size={18} className='text-gray-500' onClick={handleDescrease} />
       </button>

@@ -10,6 +10,9 @@ const PurchaseApi = {
   },
   getPurchases: (params: { status: PurchasesStatus }) => {
     return HttpUtil.get<SuccessResponse<Purchase[]>>(`${pathname}`, { params })
+  },
+  updatePurchase: (body: { product_id: string; buy_count: number }) => {
+    return HttpUtil.put<SuccessResponse<Purchase>>(`${pathname}/update-purchase`, body)
   }
 }
 
