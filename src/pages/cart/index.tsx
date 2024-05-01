@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -16,15 +16,25 @@ export default function Cart() {
   const [extendedPurchases, setExtendedPurchases] = useImmer<ExtendedPurchase[]>([])
   const [totalPurchases, setTotalPurchases] = useState(0)
 
-  const { data: purchasesIncartData } = useQuery({
+  const { data: purchasesIncartData, refetch } = useQuery({
     queryKey: ['purchases', { status: PurchaseConstant.inCart }],
     queryFn: () => PurchaseApi.getPurchases({ status: PurchaseConstant.inCart })
   })
-  const purchasesIncart = useMemo(() => purchasesIncartData?.data?.data || [], [purchasesIncartData])
+  const purchasesIncart = purchasesIncartData?.data?.data || []
 
   const updatePurchaseMutation = useMutation({
-    mutationFn: (body: { product_id: string; buy_count: number }) => PurchaseApi.updatePurchase(body)
+    mutationFn: (body: { product_id: string; buy_count: number }) => PurchaseApi.updatePurchase(body),
+    onSuccess: () => {
+      refetch()
+    }
   })
+
+  const updatePurchase = (product_id: string, buy_count: number, index: number) => {
+    setExtendedPurchases((prev) => {
+      prev[index].isDisabled = true
+    })
+    updatePurchaseMutation.mutate({ product_id, buy_count })
+  }
 
   const isCheckAll = extendedPurchases.every((purchase) => purchase.isChecked)
 
@@ -42,21 +52,24 @@ export default function Cart() {
   }
 
   useEffect(() => {
-    setExtendedPurchases(
-      purchasesIncart?.map((purchase) => ({
-        ...purchase,
-        isDisabled: false,
-        isChecked: false
-      })) || []
-    )
-    setTotalPurchases(() => {
-      let totalExtendedPurchases = 0
-      extendedPurchases.forEach((purchase) => {
-        totalExtendedPurchases += purchase.price * purchase.buy_count
-      })
-      return totalExtendedPurchases
+    setExtendedPurchases((prev) => {
+      return (
+        purchasesIncart?.map((purchase, index) => ({
+          ...purchase,
+          isDisabled: false,
+          isChecked: Boolean(prev[index]?.isChecked)
+        })) || []
+      )
     })
-  }, [extendedPurchases, purchasesIncart, setExtendedPurchases])
+
+    setTotalPurchases(() => {
+      let totalPurchasesTemp = 0
+      purchasesIncart.forEach((purchase) => {
+        totalPurchasesTemp += purchase.price * purchase.buy_count
+      })
+      return totalPurchasesTemp
+    })
+  }, [purchasesIncart])
 
   return (
     <main>
@@ -88,8 +101,8 @@ export default function Cart() {
       <div className='mt-4'>
         <div className='container'>
           {extendedPurchases?.map((purchase, index) => (
-            <>
-              <section key={purchase._id}>
+            <React.Fragment key={purchase._id}>
+              <section>
                 <div className='grid grid-cols-12 bg-white px-8 py-4 rounded-sm after:w-full'>
                   <div className='col-span-5 hover:text-primaryColor flex items-center gap-x-4'>
                     <div>
@@ -120,7 +133,12 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className='col-span-2 flex justify-center'>
-                      <QuantityController buyCount={purchase.buy_count} maxQuantity={purchase.product.quantity} />
+                      <QuantityController
+                        buyCount={purchase.buy_count}
+                        maxQuantity={purchase.product.quantity}
+                        onChangeQuantity={(quantity) => updatePurchase(purchase.product._id, quantity, index)}
+                        disabled={purchase.isDisabled}
+                      />
                     </div>
                     <div className='text-primaryColor flex items-start col-span-1 justify-center'>
                       <span className='text-xs leading-tight'>đ</span>
@@ -133,7 +151,7 @@ export default function Cart() {
                 </div>
               </section>
               {index < purchasesIncart.length - 1 && <div className='w-full h-px bg-gray-200' />}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </div>

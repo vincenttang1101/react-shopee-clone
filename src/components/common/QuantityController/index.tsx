@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { InputHTMLAttributes, useState } from 'react'
 import { FiMinus, FiPlus } from 'react-icons/fi'
 
+import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 import { InputField } from '@/components/common'
@@ -9,40 +10,59 @@ type QuantityControllerProps = {
   buyCount: number
   maxQuantity: number
   onChangeQuantity?: (value: number) => void
-  className?: string
-}
+  disabled?: boolean
+} & InputHTMLAttributes<HTMLInputElement>
 
 export default function QuantityController({
   buyCount,
   maxQuantity,
   onChangeQuantity,
-  className
+  className,
+  disabled,
+  ...rest
 }: QuantityControllerProps) {
   const [quantity, setQuantity] = useState(buyCount)
 
+  const onChangeQuantityExists = (value: number) => {
+    onChangeQuantity && onChangeQuantity(value)
+  }
+
   const handleDescrease = () => {
-    if (quantity > 1) setQuantity(quantity - 1)
+    if (quantity > 1) {
+      setQuantity(quantity - 1)
+      onChangeQuantityExists(quantity - 1)
+    }
   }
 
   const handleIncrease = () => {
     if (quantity > maxQuantity) setQuantity(maxQuantity)
-    else setQuantity(quantity + 1)
+    else {
+      setQuantity(quantity + 1)
+      onChangeQuantityExists(quantity + 1)
+    }
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value)
-    if (value > maxQuantity) setQuantity(maxQuantity)
-    else if (value < 1) setQuantity(1)
-    else setQuantity(value)
+    if (value > maxQuantity) {
+      setQuantity(maxQuantity)
+      onChangeQuantityExists(maxQuantity)
+    } else if (value < 1) {
+      setQuantity(1)
+      onChangeQuantityExists(1)
+    } else {
+      setQuantity(value)
+      onChangeQuantityExists(value)
+    }
   }
-
-  useEffect(() => {
-    onChangeQuantity && onChangeQuantity(quantity)
-  }, [onChangeQuantity, quantity])
 
   return (
     <div className={twMerge('flex', className)}>
-      <button className='border border-gray-200 h-8 p-2 flex items-center justify-center'>
+      <button
+        className={clsx('border border-gray-200 h-8 p-2 flex items-center justify-center', {
+          'cursor-not-allowed': disabled
+        })}
+      >
         <FiMinus size={18} className='text-gray-500' onClick={handleDescrease} />
       </button>
       <InputField
@@ -52,8 +72,13 @@ export default function QuantityController({
         isErrorMessage={false}
         value={quantity.toString()}
         onChange={handleChange}
+        {...rest}
       />
-      <button className='border border-gray-200 h-8 p-2 flex items-center justify-center'>
+      <button
+        className={clsx('border border-gray-200 h-8 p-2 flex items-center justify-center', {
+          'cursor-not-allowed': disabled
+        })}
+      >
         <FiPlus size={18} className='text-gray-500' onClick={handleIncrease} />
       </button>
     </div>
