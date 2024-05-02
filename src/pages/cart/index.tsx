@@ -36,6 +36,20 @@ export default function Cart() {
     updatePurchaseMutation.mutate({ product_id, buy_count })
   }
 
+  const buyPurchasesMutation = useMutation({
+    mutationFn: (body: { product_id: string; buy_count: number }[]) => PurchaseApi.buyPurchases(body),
+    onSuccess: () => {
+      refetch()
+    }
+  })
+
+  const deletePurchasesMutation = useMutation({
+    mutationFn: (purchaseIds: string[]) => PurchaseApi.deletePurchase(purchaseIds),
+    onSuccess: () => {
+      refetch()
+    }
+  })
+
   const isCheckAll = extendedPurchases.every((purchase) => purchase.isChecked)
 
   const handleCheck = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +63,10 @@ export default function Cart() {
 
   const handleCheckAll = () => {
     setExtendedPurchases(extendedPurchases.map((purchase) => ({ ...purchase, isChecked: !isCheckAll })))
+  }
+
+  const handleDelete = (purchase_id: string) => {
+    deletePurchasesMutation.mutate([purchase_id])
   }
 
   useEffect(() => {
@@ -145,7 +163,7 @@ export default function Cart() {
                       <span className='leading-none'>{Util.formatCurrency(purchase.price * purchase.buy_count)}</span>
                     </div>
                     <div className='col-span-1 text-center'>
-                      <button>Xoá</button>
+                      <button onClick={() => handleDelete(purchase._id)}>Xoá</button>
                     </div>
                   </div>
                 </div>

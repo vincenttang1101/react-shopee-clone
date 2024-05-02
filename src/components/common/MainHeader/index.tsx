@@ -195,9 +195,12 @@ export default function MainHeader() {
                             {purchasesIncart.length - MAX_PURCHASES} Thêm hàng vào giỏ
                           </span>
                         )}
-                        <button className='ml-auto rounded-sm bg-primaryColor px-4 py-2 capitalize text-white hover:opacity-90'>
+                        <Link
+                          to='/cart'
+                          className='ml-auto rounded-sm bg-primaryColor px-4 py-2 capitalize text-white hover:opacity-90'
+                        >
                           Xem giỏ hàng
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   ) : (

@@ -13,6 +13,12 @@ const PurchaseApi = {
   },
   updatePurchase: (body: { product_id: string; buy_count: number }) => {
     return HttpUtil.put<SuccessResponse<Purchase>>(`${pathname}/update-purchase`, body)
+  },
+  buyPurchases: (body: { product_id: string; buy_count: number }[]) => {
+    return HttpUtil.put<SuccessResponse<Purchase[]>>(`${pathname}/buy-products`, body)
+  },
+  deletePurchase: (purchaseIds: string[]) => {
+    return HttpUtil.delete<SuccessResponse<{ deleted_count: number }>>(`${pathname}`, { data: purchaseIds })
   }
 }
 
