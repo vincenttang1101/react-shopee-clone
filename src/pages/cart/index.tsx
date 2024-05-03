@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -14,13 +14,20 @@ type ExtendedPurchase = Purchase & { isDisabled: boolean; isChecked: boolean }
 
 export default function Cart() {
   const [extendedPurchases, setExtendedPurchases] = useImmer<ExtendedPurchase[]>([])
-  const [totalPurchases, setTotalPurchases] = useState(0)
 
   const { data: purchasesIncartData, refetch } = useQuery({
     queryKey: ['purchases', { status: PurchaseConstant.inCart }],
     queryFn: () => PurchaseApi.getPurchases({ status: PurchaseConstant.inCart })
   })
+
   const purchasesIncart = purchasesIncartData?.data?.data || []
+  const checkedPurchases = extendedPurchases.filter((purchase) => purchase.isChecked)
+  const checkedPurchasesLength = checkedPurchases.length
+  const totalPurchases = checkedPurchases.reduce((total, purchase) => total + purchase.buy_count * purchase.price, 0)
+  const totalPurchasesSavingPrice = checkedPurchases.reduce(
+    (total, purchase) => total + purchase.buy_count * (purchase.price - purchase.price_before_discount),
+    0
+  )
 
   const updatePurchaseMutation = useMutation({
     mutationFn: (body: { product_id: string; buy_count: number }) => PurchaseApi.updatePurchase(body),
@@ -44,7 +51,7 @@ export default function Cart() {
   })
 
   const deletePurchasesMutation = useMutation({
-    mutationFn: (purchaseIds: string[]) => PurchaseApi.deletePurchase(purchaseIds),
+    mutationFn: (purchaseIds: string[]) => PurchaseApi.deletePurchases(purchaseIds),
     onSuccess: () => {
       refetch()
     }
@@ -65,8 +72,21 @@ export default function Cart() {
     setExtendedPurchases(extendedPurchases.map((purchase) => ({ ...purchase, isChecked: !isCheckAll })))
   }
 
-  const handleDelete = (purchase_id: string) => {
+  const handleDeletePurchase = (purchase_id: string) => {
     deletePurchasesMutation.mutate([purchase_id])
+  }
+
+  const handleDeletePurchases = () => {
+    const purchasesIds = checkedPurchases.map((purchase) => purchase._id)
+    deletePurchasesMutation.mutate(purchasesIds)
+  }
+
+  const buyPurchases = () => {
+    const purchases = checkedPurchases.map((purchase) => ({
+      product_id: purchase.product._id,
+      buy_count: purchase.buy_count
+    }))
+    buyPurchasesMutation.mutate(purchases)
   }
 
   useEffect(() => {
@@ -78,14 +98,6 @@ export default function Cart() {
           isChecked: Boolean(prev[index]?.isChecked)
         })) || []
       )
-    })
-
-    setTotalPurchases(() => {
-      let totalPurchasesTemp = 0
-      purchasesIncart.forEach((purchase) => {
-        totalPurchasesTemp += purchase.price * purchase.buy_count
-      })
-      return totalPurchasesTemp
     })
   }, [purchasesIncart])
 
@@ -163,7 +175,7 @@ export default function Cart() {
                       <span className='leading-none'>{Util.formatCurrency(purchase.price * purchase.buy_count)}</span>
                     </div>
                     <div className='col-span-1 text-center'>
-                      <button onClick={() => handleDelete(purchase._id)}>Xoá</button>
+                      <button onClick={() => handleDeletePurchase(purchase._id)}>Xoá</button>
                     </div>
                   </div>
                 </div>
@@ -185,20 +197,35 @@ export default function Cart() {
                 onChange={handleCheckAll}
               />
               <label htmlFor='check_all_2' className='capitalize text-lg cursor-pointer'>
-                Chọn tất cả ({extendedPurchases.length})
+                Chọn tất cả ({checkedPurchasesLength})
               </label>
+              <button className='text-lg hover:text-primaryColor' onClick={handleDeletePurchases}>
+                Xoá
+              </button>
             </div>
-            <div className='col-span-7 flex items-center justify-end gap-x-3'>
-              <div className='text-lg flex items-center gap-x-2'>
-                Tổng thanh toán ():
-                <div className='flex items-start text-primaryColor'>
-                  <u className='text-lg leading-tight'>đ</u>
-                  <span className='text-[25px]'>{Util.formatCurrency(totalPurchases)}</span>
+            <div className='col-span-7 flex justify-end flex-col'>
+              <div className='flex items-center gap-x-3'>
+                <div className='text-lg flex items-center gap-x-2'>
+                  Tổng thanh toán ({checkedPurchasesLength}):
+                  <div className='flex items-start text-primaryColor'>
+                    <u className='text-lg leading-tight'>đ</u>
+                    <span className='text-[25px]'>{Util.formatCurrency(totalPurchases)}</span>
+                  </div>
+                </div>
+                <Button
+                  className='capitalize text-white min-w-[210px] h-[40px] px-4 bg-primaryColor rounded-sm'
+                  onClick={buyPurchases}
+                >
+                  Mua hàng
+                </Button>
+              </div>
+              <div className='flex'>
+                <span>Tiết kiệm</span>
+                <div className='text-primaryColor'>
+                  <span className='text-xs leading-tight'>đ</span>
+                  <span className='leading-none'>{Util.formatCurrency(totalPurchasesSavingPrice)}</span>
                 </div>
               </div>
-              <Button className='capitalize text-white min-w-[210px] h-[40px] px-4 bg-primaryColor rounded-sm'>
-                Mua hàng
-              </Button>
             </div>
           </div>
         </div>
