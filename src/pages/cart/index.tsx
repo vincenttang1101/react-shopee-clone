@@ -25,7 +25,7 @@ export default function Cart() {
   const checkedPurchasesLength = checkedPurchases.length
   const totalPurchases = checkedPurchases.reduce((total, purchase) => total + purchase.buy_count * purchase.price, 0)
   const totalPurchasesSavingPrice = checkedPurchases.reduce(
-    (total, purchase) => total + purchase.buy_count * (purchase.price - purchase.price_before_discount),
+    (total, purchase) => total + purchase.buy_count * (purchase.price_before_discount - purchase.price),
     0
   )
 
@@ -203,28 +203,32 @@ export default function Cart() {
                 Xoá
               </button>
             </div>
-            <div className='col-span-7 flex justify-end flex-col'>
-              <div className='flex items-center gap-x-3'>
-                <div className='text-lg flex items-center gap-x-2'>
-                  Tổng thanh toán ({checkedPurchasesLength}):
-                  <div className='flex items-start text-primaryColor'>
-                    <u className='text-lg leading-tight'>đ</u>
-                    <span className='text-[25px]'>{Util.formatCurrency(totalPurchases)}</span>
+            <div className='col-span-7 flex justify-end gap-x-5 items-center'>
+              <div className='flex flex-col'>
+                <div className='flex justify-between gap-x-3'>
+                  <div className='text-lg flex items-center gap-x-2'>
+                    Tổng thanh toán ({checkedPurchasesLength}):
+                    <div className='flex items-start text-primaryColor'>
+                      <u className='text-lg leading-tight'>đ</u>
+                      <span className='text-[25px]'>{Util.formatCurrency(totalPurchases)}</span>
+                    </div>
                   </div>
                 </div>
+                <div className='flex justify-between text-lg'>
+                  <span>Tiết kiệm</span>
+                  <div className='text-primaryColor'>
+                    <span className='text-xs leading-tight'>đ</span>
+                    <span className='leading-none'>{Util.formatCurrency(totalPurchasesSavingPrice)}</span>
+                  </div>
+                </div>
+              </div>
+              <div>
                 <Button
-                  className='capitalize text-white min-w-[210px] h-[40px] px-4 bg-primaryColor rounded-sm'
+                  className='capitalize text-white min-w-[210px] h-[40px] px-4 bg-primaryColor rounded-sm hover:opacity-90'
                   onClick={buyPurchases}
                 >
                   Mua hàng
                 </Button>
-              </div>
-              <div className='flex'>
-                <span>Tiết kiệm</span>
-                <div className='text-primaryColor'>
-                  <span className='text-xs leading-tight'>đ</span>
-                  <span className='leading-none'>{Util.formatCurrency(totalPurchasesSavingPrice)}</span>
-                </div>
               </div>
             </div>
           </div>
