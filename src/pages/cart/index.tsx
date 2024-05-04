@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useImmer } from 'use-immer'
@@ -45,8 +46,12 @@ export default function Cart() {
 
   const buyPurchasesMutation = useMutation({
     mutationFn: (body: { product_id: string; buy_count: number }[]) => PurchaseApi.buyPurchases(body),
-    onSuccess: () => {
+    onSuccess: (data) => {
       refetch()
+      toast.success(data.data.message, {
+        position: 'top-center',
+        autoClose: 1000
+      })
     }
   })
 
@@ -197,7 +202,7 @@ export default function Cart() {
                 onChange={handleCheckAll}
               />
               <label htmlFor='check_all_2' className='capitalize text-lg cursor-pointer'>
-                Chọn tất cả ({checkedPurchasesLength})
+                Chọn tất cả ({extendedPurchases.length})
               </label>
               <button className='text-lg hover:text-primaryColor' onClick={handleDeletePurchases}>
                 Xoá
