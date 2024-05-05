@@ -3,7 +3,7 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 
 import PathConstant from '@/constants/path.constant'
 import { AppContext } from '@/contexts'
-import { AuthLayout, MainLayout } from '@/layouts'
+import { AuthLayout, CartLayout, MainLayout } from '@/layouts'
 import { Cart, Home, Login, ProductDetails, Profile, Register } from '@/pages'
 
 export default function useRouteElements() {
@@ -18,40 +18,6 @@ export default function useRouteElements() {
   }
 
   const routeElements = useRoutes([
-    {
-      path: '',
-      element: (
-        <MainLayout>
-          <Outlet />
-        </MainLayout>
-      ),
-      children: [
-        {
-          path: '/',
-          element: <Home />
-        },
-        {
-          path: '/:nameId',
-          element: <ProductDetails />
-        },
-        {
-          path: '/profile',
-          element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          )
-        },
-        {
-          path: '/cart',
-          element: (
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          )
-        }
-      ]
-    },
     {
       path: '',
       element: (
@@ -71,6 +37,43 @@ export default function useRouteElements() {
           element: <Login />
         }
       ]
+    },
+    {
+      path: '',
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [
+        {
+          path: '/',
+          index: true,
+          element: <Home />
+        },
+        {
+          path: '/:nameId',
+          element: <ProductDetails />
+        },
+        {
+          path: '/profile',
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          )
+        }
+      ]
+    },
+    {
+      path: '/cart',
+      element: (
+        <CartLayout>
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        </CartLayout>
+      )
     }
   ])
   return routeElements

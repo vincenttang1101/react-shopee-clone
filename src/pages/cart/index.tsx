@@ -107,7 +107,7 @@ export default function Cart() {
   }, [purchasesIncart])
 
   return (
-    <main>
+    <main className='bg-gray-200 py-10'>
       <div>
         <div className='container'>
           <div className='grid grid-cols-12 bg-white px-8 py-4 rounded-sm'>
