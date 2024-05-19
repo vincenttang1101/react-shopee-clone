@@ -1,33 +1,23 @@
 import { useContext } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { IoSearch } from 'react-icons/io5'
 import { PiShoppingCartSimpleBold } from 'react-icons/pi'
-import { Link, createSearchParams, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { useQuery } from '@tanstack/react-query'
 
 import { PurchaseApi } from '@/apis'
 import NoProductInCart from '@/assets/icons/no-cart.webp'
 import { NavHeader, Popover } from '@/components/common'
-import PathConstant from '@/constants/path.constant'
 import PurchaseConstant from '@/constants/purchase.constant'
 import { AppContext } from '@/contexts'
-import useQueryConfig from '@/hooks/useQueryConfig'
+import useSearchProducts from '@/hooks/useSearchProduct'
 import { Util } from '@/utils'
 
 const MAX_PURCHASES = 5
 export default function MainHeader() {
   const { isAuthenticated } = useContext(AppContext)
 
-  const queryConfig = useQueryConfig()
-
-  const navigate = useNavigate()
-
-  const { control, handleSubmit } = useForm({
-    defaultValues: {
-      name: ''
-    }
-  })
+  const { onSubmitSearch, register } = useSearchProducts()
 
   /**
    * Khi chúng ta chuyển trang thì Header chỉ bị re-render
@@ -43,16 +33,6 @@ export default function MainHeader() {
 
   const purchasesIncart = purchasesIncartData?.data.data || []
 
-  const onSubmit: SubmitHandler<{ name: string }> = (data) => {
-    navigate({
-      pathname: PathConstant.home,
-      search: createSearchParams({
-        ...queryConfig,
-        name: data.name
-      }).toString()
-    })
-  }
-
   return (
     <header className='bg-primaryColor'>
       <div className='container'>
@@ -67,18 +47,12 @@ export default function MainHeader() {
               </svg>
             </Link>
 
-            <form onSubmit={handleSubmit(onSubmit)} className='col-span-9 flex items-center rounded-sm bg-white'>
-              <Controller
-                name='name'
-                control={control}
-                render={({ field }) => (
-                  <input
-                    type='text'
-                    className='h-[45px] w-full bg-transparent px-4 text-lg text-gray-600 outline-none'
-                    placeholder='Shopee bao ship 0Đ - Đăng ký ngay!'
-                    {...field}
-                  />
-                )}
+            <form onSubmit={onSubmitSearch} className='col-span-9 flex items-center rounded-sm bg-white'>
+              <input
+                type='text'
+                className='h-[45px] w-full bg-transparent px-4 text-lg text-gray-600 outline-none'
+                placeholder='Shopee bao ship 0Đ - Đăng ký ngay!'
+                {...register('name')}
               />
 
               <button className='mr-1 flex h-10 w-20 items-center justify-center rounded-sm bg-primaryColor hover:opacity-90'>

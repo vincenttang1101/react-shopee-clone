@@ -7,14 +7,18 @@ import { useMutation } from '@tanstack/react-query'
 
 import { AuthApi } from '@/apis'
 import Popover from '@/components/common/Popover'
+import PurchaseConstant from '@/constants/purchase.constant'
 import { AppContext } from '@/contexts'
+import { queryClient } from '@/main'
 
 export default function NavHeader() {
-  const { isAuthenticated, setIsAuthenticated, profile } = useContext(AppContext)
+  const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext)
   const logoutMutation = useMutation({
     mutationFn: AuthApi.logout,
     onSuccess: () => {
       setIsAuthenticated(false)
+      setProfile(null)
+      queryClient.removeQueries({ queryKey: ['purchases', { status: PurchaseConstant.inCart }] })
     }
   })
 
