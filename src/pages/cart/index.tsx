@@ -1,27 +1,29 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useImmer } from 'use-immer'
 
 import { PurchaseApi } from '@/apis'
 import { Button, QuantityController } from '@/components/common'
 import PurchaseConstant from '@/constants/purchase.constant'
-import { Purchase } from '@/types/purchase.type'
+import { AppContext } from '@/contexts'
+import { ExtendedPurchase } from '@/types/purchase.type'
 import { Util } from '@/utils'
 
-type ExtendedPurchase = Purchase & { isDisabled: boolean; isChecked: boolean }
-
 export default function Cart() {
-  const [extendedPurchases, setExtendedPurchases] = useImmer<ExtendedPurchase[]>([])
+  const location = useLocation()
+  const choosenPurchaseIdFromLocation = (location.state as { purchaseId: string } | null)?.purchaseId
+
+  const { extendedPurchases, setExtendedPurchases } = useContext(AppContext)
+  // const [extendedPurchases, setExtendedPurchases] = useState<ExtendedPurchase[]>([])
 
   const { data: purchasesIncartData, refetch } = useQuery({
     queryKey: ['purchases', { status: PurchaseConstant.inCart }],
     queryFn: () => PurchaseApi.getPurchases({ status: PurchaseConstant.inCart })
   })
 
-  const purchasesIncart = purchasesIncartData?.data?.data || []
+  const purchasesIncart = useMemo(() => purchasesIncartData?.data?.data || [], [purchasesIncartData?.data?.data])
   const checkedPurchases = extendedPurchases.filter((purchase) => purchase.isChecked)
   const checkedPurchasesLength = checkedPurchases.length
   const totalPurchases = checkedPurchases.reduce((total, purchase) => total + purchase.buy_count * purchase.price, 0)
@@ -38,9 +40,9 @@ export default function Cart() {
   })
 
   const updatePurchase = (product_id: string, buy_count: number, index: number) => {
-    setExtendedPurchases((prev) => {
-      prev[index].isDisabled = true
-    })
+    extendedPurchases[index] = { ...extendedPurchases[index], isDisabled: true }
+    setExtendedPurchases([...extendedPurchases])
+
     updatePurchaseMutation.mutate({ product_id, buy_count })
   }
 
@@ -65,12 +67,8 @@ export default function Cart() {
   const isCheckAll = extendedPurchases.every((purchase) => purchase.isChecked)
 
   const handleCheck = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    // extendedPurchases[index] = { ...extendedPurchases[index], isChecked: event.target.checked }
-    // setExtendedPurchases([...extendedPurchases])
-
-    setExtendedPurchases((draft) => {
-      draft[index].isChecked = event.target.checked
-    })
+    extendedPurchases[index] = { ...extendedPurchases[index], isChecked: event.target.checked }
+    setExtendedPurchases([...extendedPurchases])
   }
 
   const handleCheckAll = () => {
@@ -97,14 +95,24 @@ export default function Cart() {
   useEffect(() => {
     setExtendedPurchases((prev) => {
       return (
-        purchasesIncart?.map((purchase, index) => ({
-          ...purchase,
-          isDisabled: false,
-          isChecked: Boolean(prev[index]?.isChecked)
-        })) || []
+        purchasesIncart?.map((purchase, index) => {
+          const isChoosenPurchaseFromLocation = choosenPurchaseIdFromLocation === purchase._id
+
+          return {
+            ...purchase,
+            isDisabled: false,
+            isChecked: isChoosenPurchaseFromLocation || Boolean(prev[index]?.isChecked)
+          }
+        }) || []
       )
     })
-  }, [purchasesIncart])
+  }, [choosenPurchaseIdFromLocation, purchasesIncart])
+
+  useEffect(() => {
+    return () => {
+      history.replaceState(null, '')
+    }
+  }, [])
 
   return (
     <main className='bg-gray-200 py-10'>

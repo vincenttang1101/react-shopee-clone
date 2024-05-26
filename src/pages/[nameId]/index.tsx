@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { BsCartPlus } from 'react-icons/bs'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -11,6 +11,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import { ProductApi, PurchaseApi } from '@/apis'
 import { QuantityController } from '@/components/common'
 import { ProductItem, ProductRating } from '@/components/pages/home'
+import PathConstant from '@/constants/path.constant'
 import PurchaseConstant from '@/constants/purchase.constant'
 import { queryClient } from '@/main'
 import { ProductsConfig } from '@/types/product.type'
@@ -80,6 +81,24 @@ export default function ProductDetails() {
 
   const addToCart = () => {
     addToCartMutation.mutate({ product_id: product?._id as string, buy_count: quantity })
+  }
+
+  const navigate = useNavigate()
+
+  const buyNow = () => {
+    addToCartMutation.mutate(
+      { product_id: product?._id as string, buy_count: quantity },
+      {
+        onSuccess: (data) => {
+          const purchase = data.data.data
+          navigate(PathConstant.cart, {
+            state: {
+              purchaseId: purchase._id
+            }
+          })
+        }
+      }
+    )
   }
 
   useEffect(() => {
@@ -188,8 +207,11 @@ export default function ProductDetails() {
                   <BsCartPlus className='w-6 h-6' />
                   <span className='capitalize'>Thêm vào giỏ hàng</span>
                 </button>
-                <button className='px-12 py-3 flex items-center text-white gap-x-3 border border-primaryColor bg-primaryColor rounded-sm hover:opacity-90 transition-opacity'>
-                  <span className='capitalize'>Mua ngay</span>
+                <button
+                  className='px-12 py-3 capitalize flex items-center text-white gap-x-3 border border-primaryColor bg-primaryColor rounded-sm hover:opacity-90 transition-opacity'
+                  onClick={buyNow}
+                >
+                  Mua ngay
                 </button>
               </div>
             </div>
