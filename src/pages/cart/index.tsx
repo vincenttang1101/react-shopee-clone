@@ -8,7 +8,6 @@ import { PurchaseApi } from '@/apis'
 import { Button, QuantityController } from '@/components/common'
 import PurchaseConstant from '@/constants/purchase.constant'
 import { AppContext } from '@/contexts'
-import { ExtendedPurchase } from '@/types/purchase.type'
 import { Util } from '@/utils'
 
 export default function Cart() {
@@ -16,7 +15,6 @@ export default function Cart() {
   const choosenPurchaseIdFromLocation = (location.state as { purchaseId: string } | null)?.purchaseId
 
   const { extendedPurchases, setExtendedPurchases } = useContext(AppContext)
-  // const [extendedPurchases, setExtendedPurchases] = useState<ExtendedPurchase[]>([])
 
   const { data: purchasesIncartData, refetch } = useQuery({
     queryKey: ['purchases', { status: PurchaseConstant.inCart }],

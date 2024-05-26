@@ -6,17 +6,17 @@ import { AppContext } from '@/contexts'
 import { AuthLayout, CartLayout, MainLayout } from '@/layouts'
 import { Cart, Home, Login, ProductDetails, Profile, Register } from '@/pages'
 
-export default function useRouteElements() {
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useContext(AppContext)
+  return isAuthenticated ? children : <Navigate to={PathConstant.login} />
+}
 
-  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-    return isAuthenticated ? children : <Navigate to={PathConstant.login} />
-  }
+const RejectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated } = useContext(AppContext)
+  return !isAuthenticated ? children : <Navigate to={PathConstant.home} />
+}
 
-  const RejectedRoute = ({ children }: { children: React.ReactNode }) => {
-    return !isAuthenticated ? children : <Navigate to={PathConstant.home} />
-  }
-
+export default function useRouteElements() {
   const routeElements = useRoutes([
     {
       path: '',

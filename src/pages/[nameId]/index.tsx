@@ -4,7 +4,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import DOMPurify from 'dompurify'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
@@ -13,7 +13,6 @@ import { QuantityController } from '@/components/common'
 import { ProductItem, ProductRating } from '@/components/pages/home'
 import PathConstant from '@/constants/path.constant'
 import PurchaseConstant from '@/constants/purchase.constant'
-import { queryClient } from '@/main'
 import { ProductsConfig } from '@/types/product.type'
 import { Util } from '@/utils'
 
@@ -25,6 +24,7 @@ export default function ProductDetails() {
   const swiperRef = useRef<SwiperClass>()
   const imageRef = useRef<HTMLImageElement>(null)
   const [quantity, setQuantity] = useState(1)
+  const queryClient = useQueryClient()
 
   const id = Util.getIdFromNameId(nameId as string)
   const { data: productDetailsData } = useQuery({

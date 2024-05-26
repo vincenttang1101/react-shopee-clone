@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -8,12 +9,12 @@ function App() {
   const routeElements = useRouteElements()
   const scrollTopper = useScrollToTop()
 
+  scrollTopper
   return (
-    <>
+    <Fragment>
       {routeElements}
-      {scrollTopper}
       <ToastContainer />
-    </>
+    </Fragment>
   )
 }
 
