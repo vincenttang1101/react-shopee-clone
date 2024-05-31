@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-import axios, { AxiosError, type AxiosInstance } from 'axios'
+import axios, { AxiosError, type AxiosInstance, HttpStatusCode } from 'axios'
 
 import PathConstant from '@/constants/path.constant'
 import { AuthResponse, ErrorResponse } from '@/types/response.type'
@@ -57,10 +57,12 @@ class Http {
         return response
       },
       function (error: AxiosError) {
-        console.log(error)
         if (!AxiosErrorUtil.isAxiosUnprocessableEntityError<ErrorType>(error)) {
           const message = (error as AxiosError<ErrorType>).response?.data.message || error.message
           toast.error(message)
+        }
+        if (error.response?.status === HttpStatusCode.Unauthorized) {
+          AuthUtil.clearLS()
         }
         return Promise.reject(error)
       }
