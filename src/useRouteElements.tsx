@@ -4,76 +4,99 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import PathConstant from '@/constants/path.constant'
 import { AppContext } from '@/contexts'
 import { AuthLayout, CartLayout, MainLayout } from '@/layouts'
-import { Cart, Home, Login, ProductDetails, Profile, Register } from '@/pages'
+import UserLayout from '@/layouts/UserLayout'
+import { Cart, Home, Login, Password, ProductDetails, Profile, Register } from '@/pages'
+import Purchase from '@/pages/user/purchase'
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+const ProtectedRoute = () => {
   const { isAuthenticated } = useContext(AppContext)
-  return isAuthenticated ? children : <Navigate to={PathConstant.login} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={PathConstant.login} />
 }
 
-const RejectedRoute = ({ children }: { children: React.ReactNode }) => {
+const RejectedRoute = () => {
   const { isAuthenticated } = useContext(AppContext)
-  return !isAuthenticated ? children : <Navigate to={PathConstant.home} />
+  return !isAuthenticated ? <Outlet /> : <Navigate to={PathConstant.home} />
 }
 
 export default function useRouteElements() {
   const routeElements = useRoutes([
     {
       path: '',
-      element: (
-        <AuthLayout>
-          <RejectedRoute>
-            <Outlet />
-          </RejectedRoute>
-        </AuthLayout>
-      ),
+      element: <RejectedRoute />,
       children: [
         {
-          path: '/register',
-          element: <Register />
-        },
-        {
-          path: '/login',
-          element: <Login />
+          path: '',
+          element: <AuthLayout />,
+          children: [
+            {
+              path: PathConstant.register,
+              element: <Register />
+            },
+            {
+              path: PathConstant.login,
+              element: <Login />
+            }
+          ]
         }
       ]
     },
     {
       path: '',
-      element: (
-        <MainLayout>
-          <Outlet />
-        </MainLayout>
-      ),
+      element: <MainLayout />,
       children: [
         {
-          path: '/',
+          path: PathConstant.home,
           index: true,
           element: <Home />
         },
         {
-          path: '/:nameId',
+          path: PathConstant.productDetails,
           element: <ProductDetails />
-        },
-        {
-          path: '/profile',
-          element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          )
         }
       ]
     },
     {
-      path: '/cart',
-      element: (
-        <CartLayout>
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
-        </CartLayout>
-      )
+      path: '',
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: PathConstant.cart,
+          element: (
+            <CartLayout>
+              <Cart />
+            </CartLayout>
+          )
+        },
+        {
+          path: PathConstant.user,
+          element: <MainLayout />,
+          children: [
+            {
+              path: '',
+              element: <UserLayout />,
+              children: [
+                {
+                  path: PathConstant.account,
+                  children: [
+                    {
+                      path: PathConstant.profile,
+                      element: <Profile />
+                    },
+                    {
+                      path: '/user/account/password',
+                      element: <Password />
+                    }
+                  ]
+                },
+                {
+                  path: PathConstant.purchase,
+                  element: <Purchase />
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ])
   return routeElements

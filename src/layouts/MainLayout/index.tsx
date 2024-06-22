@@ -1,14 +1,14 @@
+import { Outlet } from 'react-router-dom'
+
 import { Footer, MainHeader } from '@/components/common'
 
-interface IMainLayout {
-  children: React.ReactNode
-}
-
-export default function MainLayout({ children }: IMainLayout) {
+export default function MainLayout() {
   return (
     <>
       <MainHeader />
-      <main className='bg-gray-200 py-9'>{children}</main>
+      <main className='bg-gray-200 py-9'>
+        <Outlet />
+      </main>
       <Footer />
     </>
   )

@@ -46,8 +46,8 @@ class Http {
         if (url === PathConstant.register || url === PathConstant.login) {
           const result = response.data as AuthResponse
           this.accessToken = result.data.access_token
-          AuthUtil.setAccessTokenToLS(this.accessToken)
           this.profile = result.data.user
+          AuthUtil.setAccessTokenToLS(this.accessToken)
           AuthUtil.setProfileToLS(this.profile)
         } else if (url === PathConstant.logout) {
           this.accessToken = null

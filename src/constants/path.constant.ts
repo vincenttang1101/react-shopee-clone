@@ -3,7 +3,11 @@ enum PathConstant {
   register = '/register',
   login = '/login',
   logout = '/logout',
-  profile = '/profile',
+  user = '/user',
+  account = '/user/account',
+  profile = '/user/account/profile',
+  password = '/user/account/password',
+  purchase = '/user/purchase',
   productDetails = '/:nameId',
   cart = '/cart'
 }

@@ -1,14 +1,12 @@
+import { Outlet } from 'react-router-dom'
+
 import { AuthHeader, Footer } from '@/components/common'
 
-type Layout = {
-  children: React.ReactNode
-}
-
-export default function AuthLayout({ children }: Layout) {
+export default function AuthLayout() {
   return (
     <div>
       <AuthHeader />
-      {children}
+      <Outlet />
       <Footer />
     </div>
   )

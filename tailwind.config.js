@@ -9,6 +9,9 @@ export default {
   },
   theme: {
     extend: {
+      fontFamily: {
+        helvetica: ['Helvetica Neue', 'Helvetica', 'Arial']
+      },
       colors: {
         primaryColor: '#ee4d2d'
       },

@@ -21,6 +21,7 @@ function App() {
   }, [reset])
 
   scrollTopper
+
   return (
     <Fragment>
       {routeElements}
